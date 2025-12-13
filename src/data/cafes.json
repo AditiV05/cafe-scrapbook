@@ -1,0 +1,44 @@
+[
+  {
+    "id": "cafe-01",
+    "name": "Pastel & Beans",
+    "area": "C-Scheme",
+    "price_band": "₹₹",
+    "veg_nonveg": "Both",
+    "seating": ["indoor", "rooftop"],
+    "vibe_tags": ["Rooftop", "Pastel", "Photogenic", "Work-friendly"],
+    "menu-highlights": ["Pistachio Croissant", "Affogato"],
+    "hours": "Daily 10:00-22:00",
+    "authenticity": "trendy",
+    "images": [],
+    "description": "Soft colors, sunlit corners, and great coffee for photos & study."
+  },
+  {
+    "id": "cafe-02",
+    "name": "Heritage Chai Room",
+    "area": "MI Road",
+    "price_band": "₹",
+    "veg_nonveg": "veg",
+    "seating": ["indoor", "outdoor"],
+    "vibe_tags": ["Heritage", "Calm", "Authentic"],
+    "menu_highlights": ["Masala Chai", "Paneer Kathi Roll"],
+    "hours": "Mon–Sat 09:00–21:00",
+    "authenticity": "heritage",
+    "images": [],
+    "description": "Old-world charm and classic snacks—quiet, cozy, and budget-friendly."
+  },
+  {
+    "id": "cafe-03",
+    "name": "Boho Bites",
+    "area": "Malviya Nagar",
+    "price_band": "₹₹₹",
+    "veg_nonveg": "both",
+    "seating": ["indoor"],
+    "vibe_tags": ["Boho", "Dessert-first", "Date-night"],
+    "menu_highlights": ["Tiramisu", "Signature Latte"],
+    "hours": "Daily 11:00–23:00",
+    "authenticity": "fusion",
+    "images": [],
+    "description": "Fairy lights, patterned cushions, and indulgent desserts for the gram."
+  }
+]
