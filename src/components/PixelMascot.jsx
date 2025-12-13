@@ -1,3 +1,5 @@
+import barista from "../assets/barista.png";
+
 const MOOD_GLOW = {
   default: "bg-amber-100/60",
   cosy: "bg-amber-100/60",
@@ -43,7 +45,7 @@ export default function PixelMascot({
       />
 
       <img
-        src="/src/assets/barista.png"
+        src={barista}
         alt="Pixel barista mascot"
         className={`pixelated animate-bounce-slow object-contain ${avatarSize}`}
         draggable="false"
