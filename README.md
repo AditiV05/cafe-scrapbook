@@ -7,7 +7,8 @@ This project focuses on **product logic, usability, and clarity** before visual 
 ---
 
 ## 🚀 Live Demo
-> _(Add link once deployed)_
+
+https://cafe-scrapbook.vercel.app
 
 ---
 
