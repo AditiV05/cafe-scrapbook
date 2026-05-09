@@ -6,7 +6,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white)
 
-> A modern café discovery web app that helps users find cafés based on **vibe, location, and budget** — built with a focus on product logic, usability, and clarity over visual decoration.
+> A modern café discovery web app for Jaipur — find cafés by **vibe, budget, and area**, guided by a pixel barista mascot. Built with a focus on product logic, usability, and clarity over visual decoration.
 
 ---
 
@@ -41,6 +41,9 @@ Each café has a dedicated page with description, menu highlights, seating optio
 
 ### 🎲 "Surprise Me" Interaction
 Randomly highlights a café from the current filter set and scrolls it into view — a lightweight discovery aid for indecisive users.
+
+### 🐱 Pixel Barista Mascot
+A custom pixel-art barista that follows you across the experience as a recurring "café guide." Built as a reusable component with `mood` and `size` props — the mascot's glow halo adapts to context (cosy, chill, playful, night). Adds personality and product polish without compromising usability. Small detail, big difference.
 
 ### 🧭 Clean Routing
 SPA navigation via React Router with clean URLs (`/cafe/:id`) and natural back-navigation.
