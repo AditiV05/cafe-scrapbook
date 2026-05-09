@@ -8,8 +8,6 @@
 
 > A modern café discovery web app that helps users find cafés based on **vibe, location, and budget** — built with a focus on product logic, usability, and clarity over visual decoration.
 
-![Cafe Finder Hero](./screenshots/hero.png)
-
 ---
 
 ## 🌐 Live Demo
@@ -71,18 +69,6 @@ Visual polish is layered *only after* product logic is sound. The UI is designed
 | Routing | React Router DOM |
 | Data | JSON-based mock dataset |
 | Deployment | Vercel |
-
----
-
-## 📸 Screenshots
-
-| Discover | Filters |
-|:--------:|:-------:|
-| ![Discover](./screenshots/discover.png) | ![Filters](./screenshots/filters.png) |
-
-| Café Detail | Surprise Me |
-|:-----------:|:-----------:|
-| ![Detail](./screenshots/detail.png) | ![Surprise](./screenshots/surprise.png) |
 
 ---
 
