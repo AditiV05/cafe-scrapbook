@@ -1,14 +1,12 @@
 # ☕ Cafe Finder
 
-<video src="https://github.com/user-attachments/assets/09856ffe-36af-4b47-8281-3ae44b5bc93d" controls width="100%"></video>
+[![Live Demo](https://img.shields.io/badge/Live-cafe--scrapbook.vercel.app-2ea44f?style=for-the-badge)](https://cafe-scrapbook.vercel.app)
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
 ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white)
 
 > A modern café discovery web app for Jaipur — find cafés by **vibe, budget, and area**, guided by a pixel barista mascot. Built with a focus on product logic, usability, and clarity over visual decoration.
-
-https://github.com/user-attachments/assets/09856ffe-36af-4b47-8281-3ae44b5bc93d
 
 ---
 
