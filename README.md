@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/09856ffe-36af-4b47-8281-3ae44b5bc93d
+
 # ☕ Cafe Finder
 
 [![Live Demo](https://img.shields.io/badge/Live-cafe--scrapbook.vercel.app-2ea44f?style=for-the-badge)](https://cafe-scrapbook.vercel.app)
