@@ -1,7 +1,3 @@
-
-
-https://github.com/user-attachments/assets/09856ffe-36af-4b47-8281-3ae44b5bc93d
-
 # ☕ Cafe Finder
 
 [![Live Demo](https://img.shields.io/badge/Live-cafe--scrapbook.vercel.app-2ea44f?style=for-the-badge)](https://cafe-scrapbook.vercel.app)
@@ -11,6 +7,8 @@ https://github.com/user-attachments/assets/09856ffe-36af-4b47-8281-3ae44b5bc93d
 ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white)
 
 > A modern café discovery web app for Jaipur — find cafés by **vibe, budget, and area**, guided by a pixel barista mascot. Built with a focus on product logic, usability, and clarity over visual decoration.
+
+https://github.com/user-attachments/assets/09856ffe-36af-4b47-8281-3ae44b5bc93d
 
 ---
 
@@ -47,7 +45,7 @@ Each café has a dedicated page with description, menu highlights, seating optio
 Randomly highlights a café from the current filter set and scrolls it into view — a lightweight discovery aid for indecisive users.
 
 ### 🐱 Pixel Barista Mascot
-A custom pixel-art barista that follows you across the experience as a recurring "café guide." Built as a reusable component with `mood` and `size` props — the mascot's glow halo adapts to context (cosy, chill, playful, night). Adds personality and product polish without compromising usability. Small detail, big difference.
+A custom pixel-art barista that follows you across the experience as a recurring "café guide." Built as a reusable component with `mood` and `size` props — the mascot's glow halo adapts to context (cosy, chill, playful, night). Adds personality and product polish without compromising usability.
 
 ### 🧭 Clean Routing
 SPA navigation via React Router with clean URLs (`/cafe/:id`) and natural back-navigation.
@@ -92,4 +90,4 @@ npm run dev
 
 ## 👤 Author
 
-**Aditi Vashishtha** — [GitHub](https://github.com/AditiV05) 
+**Aditi Vashishtha** — [GitHub](https://github.com/AditiV05)
