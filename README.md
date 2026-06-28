@@ -4,150 +4,51 @@
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white)
 
-> A modern café discovery web app for Jaipur — find cafés by **vibe, budget, and area**, guided by a pixel barista mascot. Built with a focus on product logic, usability, and clarity over visual decoration.
-
----
+> Discover Jaipur's most-loved cafés — ranked by real ratings and thousands of reviews, searchable in plain English, guided by a pixel barista mascot.
 
 ## 🌐 Live Demo
 
 **[cafe-scrapbook.vercel.app](https://cafe-scrapbook.vercel.app)**
 
----
-
 ## 🎯 The Problem
 
-Finding a café that actually fits your mood — work-friendly, calm, aesthetic, on-budget — is harder than it should be. Most platforms:
-
-<<<<<<< HEAD
-Most platforms:
-
-- Overwhelm users with irrelevant data
-- Don’t allow intuitive filtering
-- Focus more on visuals than decision-making
-
-**Cafe Finder** is built to solve that gap by offering:
-
-- Fast discovery
-- Meaningful filters
-- A calm, focused browsing experience
-=======
-- Overwhelm users with irrelevant data
-- Don't allow intuitive filtering
-- Focus on visuals over decision-making
-
-**Cafe Finder** solves this with fast discovery, meaningful filters, and a calm, focused browsing experience.
->>>>>>> 75aa024da50c2e439fc6165085ac40d23925b988
-
----
+Picking a café is a _mood_ decision — "somewhere cheap to work," "a nice place for a date" — but most platforms bury that under noise and rank by paid promotion, not by where people actually go. Cafe Finder answers one question well: **which cafés do people in Jaipur genuinely love, and which fits what I want right now?**
 
 ## ✨ Features
 
-### 🔍 Smart Search & Filters
-<<<<<<< HEAD
+### ⭐ Real popularity ranking
 
-- Search cafés by name, description, or vibe
-- Filter by:
-  - Budget
-  - Area
-  - Vibe (e.g. Calm, Rooftop, Work-friendly)
+Cafés are ranked by a **Bayesian weighted rating** — a café's star rating weighted by its review volume — so a 4.9 backed by 3,000 reviews outranks a 5.0 with three. This is the "where people actually go" signal, not raw stars.
 
-### 🗂 Café Cards
+### 🔍 Natural-language search
 
-- Clean, scannable cards
-- Shows essential info at a glance:
-  - Name
-  - Area
-  - Price band
-  - Vibe tags
-- Entire card is clickable for better UX
+Type a plain sentence like _"cheap continental place in C Scheme"_ and an LLM translates it into structured filters (area, type, budget). The model is constrained to the app's real filter vocabulary, so it can't invent options that don't exist.
 
-### 📄 Café Details Page
+### 🗂 Scannable café cards & detail pages
 
-Each café has a dedicated details page with:
+Clean cards show rating, review count, area, price band, and tags at a glance. Each café has a detail page with an embedded map and a "view on Zomato" link. Missing data is handled gracefully.
 
-- Description
-- Menu highlights
-- Seating options
-- Operating hours
-- Location section (static / placeholder)
-- Graceful handling of missing data
+### 🎲 "Surprise Me" + 🐱 pixel barista mascot
 
-### 🎲 “Surprise Me” Interaction
+A lightweight discovery aid for the indecisive, and a reusable mascot component (with `mood` and `size` props) that reacts to search state — adding personality without clutter.
 
-- Randomly highlights a café from the current filter set
-- Scrolls it into view
-- Designed as a lightweight discovery aid
+## 🏗 Architecture
 
-### 🧭 Routing & Navigation
-
-- SPA navigation using React Router
-- Clean URLs: `/cafe/:id`
-- Natural back navigation
-=======
-Search cafés by name, description, or vibe. Filter by **budget**, **area**, and **vibe** (calm, rooftop, work-friendly, etc.).
-
-### 🗂 Scannable Café Cards
-Clean cards showing essentials at a glance — name, area, price band, vibe tags. Entire card is clickable for better UX.
-
-### 📄 Café Details Page
-Each café has a dedicated page with description, menu highlights, seating options, hours, and location. Gracefully handles missing data.
-
-### 🎲 "Surprise Me" Interaction
-Randomly highlights a café from the current filter set and scrolls it into view — a lightweight discovery aid for indecisive users.
-
-### 🐱 Pixel Barista Mascot
-A custom pixel-art barista that follows you across the experience as a recurring "café guide." Built as a reusable component with `mood` and `size` props — the mascot's glow halo adapts to context (cosy, chill, playful, night). Adds personality and product polish without compromising usability.
-
-### 🧭 Clean Routing
-SPA navigation via React Router with clean URLs (`/cafe/:id`) and natural back-navigation.
->>>>>>> 75aa024da50c2e439fc6165085ac40d23925b988
-
----
-
-## 🧠 Design Philosophy
-
-This project intentionally avoids over-decoration. The principles I followed:
-
-<<<<<<< HEAD
-Principles followed:
-
-=======
->>>>>>> 75aa024da50c2e439fc6165085ac40d23925b988
-- **Clarity over aesthetics**
-- **Restraint over novelty**
-- **Consistency over creativity**
-- **Usability before visual delight**
-
-<<<<<<< HEAD
-The UI is designed to feel:
-
-- Calm
-- Trustworthy
-- Modern
-- Scalable
-
-Visual polish is layered **only after** product logic is sound.
-=======
-Visual polish is layered *only after* product logic is sound. The UI is designed to feel calm, trustworthy, modern, and scalable.
->>>>>>> 75aa024da50c2e439fc6165085ac40d23925b988
-
----
+- **Frontend** (`src/`) — React + Vite SPA, Tailwind styling, React Router.
+- **Data pipeline** (`scripts/build_cafes.py`) — ingests a ~4,700-row public Zomato Jaipur dataset, filters to cafés that offer dining and have real ratings, ranks them by weighted popularity, and emits the curated `cafes.json` the app reads.
+- **Serverless API** (`api/parse-search.js`) — a Vercel Function that proxies the natural-language search to the Gemini API, so the API key stays server-side and never reaches the browser.
 
 ## 🛠 Tech Stack
 
-| Layer | Tool |
-|-------|------|
-| Framework | React 18 + Vite |
-| Styling | Tailwind CSS |
-| Routing | React Router DOM |
-| Data | JSON-based mock dataset |
-| Deployment | Vercel |
-
----
-<<<<<<< HEAD
-=======
+| Layer      | Tool                                                                     |
+| ---------- | ------------------------------------------------------------------------ |
+| Framework  | React 19 + Vite                                                          |
+| Styling    | Tailwind CSS                                                             |
+| Routing    | React Router DOM                                                         |
+| Data       | Curated from public Zomato Jaipur dataset (Kaggle) via a Python pipeline |
+| AI         | Google Gemini (natural-language search)                                  |
+| Deployment | Vercel (static frontend + serverless functions)                          |
 
 ## 🚀 Run Locally
 
@@ -158,9 +59,6 @@ npm install
 npm run dev
 ```
 
----
-
 ## 👤 Author
 
 **Aditi Vashishtha** — [GitHub](https://github.com/AditiV05)
->>>>>>> 75aa024da50c2e439fc6165085ac40d23925b988
