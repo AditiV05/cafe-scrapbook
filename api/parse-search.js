@@ -3,6 +3,18 @@
 // Vercel serverless function: turns a natural-language café search
 // into structured filters { budget, area, type } using Gemini.
 
+// ── Simple in-memory cache ──
+// Remembers recent query→result pairs so repeated searches skip the Gemini
+// call (and don't burn through the rate limit). Note: serverless functions
+// reset when idle, so this helps within an active session, not forever —
+// which is exactly the "searched a few things quickly" case we care about.
+const cache = new Map();
+const CACHE_MAX = 100; // cap entries so memory can't grow unbounded
+
+function cacheKey(query) {
+  return query.trim().toLowerCase();
+}
+
 export default async function handler(req, res) {
   // Only allow POST
   if (req.method !== "POST") {
@@ -13,6 +25,12 @@ export default async function handler(req, res) {
 
   if (!query || typeof query !== "string") {
     return res.status(400).json({ error: "Missing query" });
+  }
+
+  // ── Cache check: same sentence? return the saved answer, skip Gemini ──
+  const key = cacheKey(query);
+  if (cache.has(key)) {
+    return res.status(200).json(cache.get(key));
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
@@ -70,6 +88,13 @@ Return JSON shaped exactly like: {"area": string|null, "type": string|null, "bud
     } catch {
       return res.status(502).json({ error: "Bad JSON from model", raw: text });
     }
+
+    // ── Save to cache before returning ──
+    if (cache.size >= CACHE_MAX) {
+      // drop the oldest entry to keep size bounded
+      cache.delete(cache.keys().next().value);
+    }
+    cache.set(key, parsed);
 
     return res.status(200).json(parsed);
   } catch (err) {
