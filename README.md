@@ -1,21 +1,26 @@
 # ☕ Cafe Finder
 
-A modern café discovery web application that helps users find cafés based on **vibe, location, and budget**, with a clean UI and thoughtful interaction design.
+[![Live Demo](https://img.shields.io/badge/Live-cafe--scrapbook.vercel.app-2ea44f?style=for-the-badge)](https://cafe-scrapbook.vercel.app)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=reactrouter&logoColor=white)
 
-This project focuses on **product logic, usability, and clarity** before visual decoration — prioritizing real-world usefulness over gimmicks.
-
----
-
-## 🚀 Live Demo
-
-https://cafe-scrapbook.vercel.app
+> A modern café discovery web app for Jaipur — find cafés by **vibe, budget, and area**, guided by a pixel barista mascot. Built with a focus on product logic, usability, and clarity over visual decoration.
 
 ---
 
-## 🎯 Problem Statement
+## 🌐 Live Demo
 
-Finding a café that actually fits your mood (work-friendly, calm, aesthetic, budget, etc.) is harder than it should be.
+**[cafe-scrapbook.vercel.app](https://cafe-scrapbook.vercel.app)**
 
+---
+
+## 🎯 The Problem
+
+Finding a café that actually fits your mood — work-friendly, calm, aesthetic, on-budget — is harder than it should be. Most platforms:
+
+<<<<<<< HEAD
 Most platforms:
 
 - Overwhelm users with irrelevant data
@@ -27,12 +32,20 @@ Most platforms:
 - Fast discovery
 - Meaningful filters
 - A calm, focused browsing experience
+=======
+- Overwhelm users with irrelevant data
+- Don't allow intuitive filtering
+- Focus on visuals over decision-making
+
+**Cafe Finder** solves this with fast discovery, meaningful filters, and a calm, focused browsing experience.
+>>>>>>> 75aa024da50c2e439fc6165085ac40d23925b988
 
 ---
 
-## ✨ Key Features
+## ✨ Features
 
 ### 🔍 Smart Search & Filters
+<<<<<<< HEAD
 
 - Search cafés by name, description, or vibe
 - Filter by:
@@ -72,20 +85,42 @@ Each café has a dedicated details page with:
 - SPA navigation using React Router
 - Clean URLs: `/cafe/:id`
 - Natural back navigation
+=======
+Search cafés by name, description, or vibe. Filter by **budget**, **area**, and **vibe** (calm, rooftop, work-friendly, etc.).
+
+### 🗂 Scannable Café Cards
+Clean cards showing essentials at a glance — name, area, price band, vibe tags. Entire card is clickable for better UX.
+
+### 📄 Café Details Page
+Each café has a dedicated page with description, menu highlights, seating options, hours, and location. Gracefully handles missing data.
+
+### 🎲 "Surprise Me" Interaction
+Randomly highlights a café from the current filter set and scrolls it into view — a lightweight discovery aid for indecisive users.
+
+### 🐱 Pixel Barista Mascot
+A custom pixel-art barista that follows you across the experience as a recurring "café guide." Built as a reusable component with `mood` and `size` props — the mascot's glow halo adapts to context (cosy, chill, playful, night). Adds personality and product polish without compromising usability.
+
+### 🧭 Clean Routing
+SPA navigation via React Router with clean URLs (`/cafe/:id`) and natural back-navigation.
+>>>>>>> 75aa024da50c2e439fc6165085ac40d23925b988
 
 ---
 
 ## 🧠 Design Philosophy
 
-This project intentionally avoids over-decoration.
+This project intentionally avoids over-decoration. The principles I followed:
 
+<<<<<<< HEAD
 Principles followed:
 
+=======
+>>>>>>> 75aa024da50c2e439fc6165085ac40d23925b988
 - **Clarity over aesthetics**
 - **Restraint over novelty**
 - **Consistency over creativity**
 - **Usability before visual delight**
 
+<<<<<<< HEAD
 The UI is designed to feel:
 
 - Calm
@@ -94,15 +129,38 @@ The UI is designed to feel:
 - Scalable
 
 Visual polish is layered **only after** product logic is sound.
+=======
+Visual polish is layered *only after* product logic is sound. The UI is designed to feel calm, trustworthy, modern, and scalable.
+>>>>>>> 75aa024da50c2e439fc6165085ac40d23925b988
 
 ---
 
 ## 🛠 Tech Stack
 
-- **React (Vite)**
-- **React Router DOM**
-- **Tailwind CSS**
-- **JSON-based mock data**
-- **Modern CSS utilities & transitions**
+| Layer | Tool |
+|-------|------|
+| Framework | React 18 + Vite |
+| Styling | Tailwind CSS |
+| Routing | React Router DOM |
+| Data | JSON-based mock dataset |
+| Deployment | Vercel |
 
 ---
+<<<<<<< HEAD
+=======
+
+## 🚀 Run Locally
+
+```bash
+git clone https://github.com/AditiV05/cafe-scrapbook.git
+cd cafe-scrapbook
+npm install
+npm run dev
+```
+
+---
+
+## 👤 Author
+
+**Aditi Vashishtha** — [GitHub](https://github.com/AditiV05)
+>>>>>>> 75aa024da50c2e439fc6165085ac40d23925b988
