@@ -372,6 +372,13 @@ function InfoBox({ icon, label, value }) {
 }
 
 function CafeMascotNote({ cafe }) {
+  if (cafe.mascot_note) {
+    return (
+      <div className="mt-10 flex justify-end">
+        <PixelMascot subtitle={cafe.mascot_note} mood="playful" />
+      </div>
+    );
+  }
   const tags = (Array.isArray(cafe.vibe_tags) ? cafe.vibe_tags : []).map((v) =>
     v.toLowerCase(),
   );
