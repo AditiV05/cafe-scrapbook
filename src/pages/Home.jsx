@@ -13,6 +13,8 @@ export default function App() {
   const [text, setText] = useState(""); // live input
   const [highlightedId, setHightlightedId] = useState("");
   const [focusedCafe, setFocusedCafe] = useState(null);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState("");
 
   useEffect(() => {
     const id = setTimeout(() => setQuery(text), 200);
@@ -78,6 +80,9 @@ export default function App() {
     const hasFilters = !!(selectedBudget || selectedArea || selectedVibe);
     const count = filteredCafes.length;
 
+    if (aiLoading) return { subtitle: "Reading your request…", mood: "chill" };
+    if (aiError) return { subtitle: aiError, mood: "night" };
+
     let subtitle =
       "Filter by budget, area, or type and I'll help you pick a spot.";
     let mood = "default";
@@ -126,7 +131,53 @@ export default function App() {
     }
 
     return { subtitle, mood };
-  }, [text, selectedBudget, selectedArea, selectedVibe, filteredCafes.length]);
+  }, [
+    text,
+    selectedBudget,
+    selectedArea,
+    selectedVibe,
+    filteredCafes.length,
+    aiLoading,
+    aiError,
+  ]);
+
+  // Natural-language search → calls the serverless function → fills the filters
+  const runAiSearch = async () => {
+    const q = text.trim();
+    if (!q) return;
+
+    setAiLoading(true);
+    setAiError("");
+
+    try {
+      const res = await fetch("/api/parse-search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: q, areas, types: vibes, budgets }),
+      });
+      if (!res.ok) throw new Error("AI request failed");
+      const data = await res.json();
+
+      // Only accept values that actually exist in our filter lists
+      const inList = (val, list) =>
+        (val &&
+          list.find((x) => x.toLowerCase() === String(val).toLowerCase())) ||
+        "";
+
+      // Apply parsed filters; clear free-text so it doesn't double-filter
+      setSelectedArea(inList(data.area, areas));
+      setSelectedVibe(inList(data.type, vibes));
+      setSelectedBudget(inList(data.budget, budgets));
+      setText("");
+      setQuery("");
+    } catch {
+      setAiError(
+        "AI search is unavailable right now — try the filters or a keyword.",
+      );
+    } finally {
+      setAiLoading(false);
+    }
+  };
 
   const handleSurprise = () => {
     const pool = filteredCafes.length ? filteredCafes : cafes;
@@ -216,9 +267,19 @@ export default function App() {
               type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Search by name, cuisine, or area..."
+              onKeyDown={(e) => {
+                if (e.key === "Enter") runAiSearch();
+              }}
+              placeholder="Try: cheap continental place in C Scheme — then press Enter"
               className="flex-1 px-4 py-3 rounded-xl border border-[--border-muted] bg-white/70 backdrop-blur-md shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-[--border-muted]"
             />
+            <button
+              onClick={runAiSearch}
+              disabled={aiLoading || !text.trim()}
+              className="px-4 py-3 rounded-xl text-sm font-semibold bg-[--accent-yellow] text-[--color-deep] shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {aiLoading ? "Thinking…" : "✨ Ask"}
+            </button>
             <button
               onClick={() => {
                 setText("");
@@ -226,6 +287,7 @@ export default function App() {
                 setSelectedBudget("");
                 setSelectedArea("");
                 setSelectedVibe("");
+                setAiError("");
               }}
               className="px-4 py-3 rounded-xl border border-[--border-muted] bg-white/70 backdrop-blur-md shadow-sm hover:shadow-md transition text-[--color-deep] opacity-80"
               aria-label="Clear filters"
