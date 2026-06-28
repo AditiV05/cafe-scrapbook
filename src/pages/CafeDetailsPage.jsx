@@ -372,48 +372,48 @@ function InfoBox({ icon, label, value }) {
 }
 
 function CafeMascotNote({ cafe }) {
-  const price = cafe.price_band || "";
-  const vibes = (Array.isArray(cafe.vibe_tags) ? cafe.vibe_tags : []).map((v) =>
+  const tags = (Array.isArray(cafe.vibe_tags) ? cafe.vibe_tags : []).map((v) =>
     v.toLowerCase(),
   );
-  const seatingArr = Array.isArray(cafe.seating) ? cafe.seating : [];
-  const hasRooftop = seatingArr.some((s) =>
-    s.toLowerCase().includes("rooftop"),
-  );
-  const hasOutdoor = seatingArr.some((s) =>
-    s.toLowerCase().includes("outdoor"),
-  );
+  const rating = cafe.rating || 0;
+  const has = (t) => tags.some((x) => x.includes(t));
 
-  let line = "I'll help you understand this cafe better.";
+  let line = "A solid pick if you're exploring the area.";
   let mood = "default";
 
-  if (price === "₹") {
-    line = "Budget-friendly and cosy — a good everyday chai run.";
-    mood = "cosy";
-  } else if (price === "₹₹") {
-    line = "Nice balance of comfort and treat-yourself energy.";
-    mood = "chill";
-  } else if (price === "₹₹₹") {
-    line = "A little fancy, a lot of vibes — maybe dress cute for this one.";
+  // Cuisine-driven personality (matches the real data)
+  if (has("italian")) {
+    line = "Pasta, pizza and good coffee — come hungry.";
     mood = "playful";
+  } else if (has("continental")) {
+    line = "Continental plates and a relaxed sit-down vibe.";
+    mood = "chill";
+  } else if (has("fast food") || has("street food")) {
+    line = "Quick bites and easy cravings — casual and fuss-free.";
+    mood = "cosy";
+  } else if (has("desserts") || has("bakery")) {
+    line = "Save room for something sweet here.";
+    mood = "playful";
+  } else if (has("beverages") || has("cafe")) {
+    line = "Coffee-first kind of place — great for a slow catch-up.";
+    mood = "chill";
+  } else if (has("chinese") || has("thai") || has("asian")) {
+    line = "Asian flavours done right — bring friends and share.";
+    mood = "playful";
+  } else if (has("north indian") || has("south indian")) {
+    line = "Hearty desi comfort food — proper full-meal energy.";
+    mood = "cosy";
+  } else if (has("bar")) {
+    line = "Drinks and a livelier evening crowd.";
+    mood = "night";
   }
 
-  if (vibes.some((v) => v.includes("work"))) {
-    line = "Laptop-friendly and calm — ideal for deep-focus days.";
-    mood = "chill";
-  } else if (vibes.some((v) => v.includes("date"))) {
-    line = "Soft lights and pretty corners — this one screams date night.";
-    mood = "playful";
-  } else if (vibes.some((v) => v.includes("heritage"))) {
-    line = "Old-world charm and chai — feels like time slows down here.";
-    mood = "cosy";
-  } else if (vibes.some((v) => v.includes("calm"))) {
-    line = "Quiet and gentle — perfect for when your brain needs softness.";
-    mood = "chill";
+  // Rating-driven add-on (varies it further, café to café)
+  if (rating >= 4.7) {
+    line += " And the crowd clearly adores it.";
+  } else if (rating >= 4.3) {
+    line += " A well-loved local favourite.";
   }
-
-  if (hasRooftop) line += " Don't miss the rooftop seats.";
-  else if (hasOutdoor) line += " Grab a spot outside if the weather's nice.";
 
   return (
     <div className="mt-10 flex justify-end">
