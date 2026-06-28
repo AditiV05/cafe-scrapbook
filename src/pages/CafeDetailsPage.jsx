@@ -4,6 +4,153 @@ import Tag from "../components/Tag";
 import HighlightTag from "../components/HighlightTag";
 import PixelMascot from "../components/PixelMascot";
 
+const VIBE_HUES = {
+  "Fast Food": {
+    bg: "#FBF3E4",
+    monoBg: "#EBD3A8",
+    monoText: "#5C4318",
+    tagBg: "#F2E2C4",
+    tagText: "#5C4318",
+  },
+  "Street Food": {
+    bg: "#FBF3E4",
+    monoBg: "#EBD3A8",
+    monoText: "#5C4318",
+    tagBg: "#F2E2C4",
+    tagText: "#5C4318",
+  },
+  Continental: {
+    bg: "#F1F0FA",
+    monoBg: "#D5D2EC",
+    monoText: "#3D3866",
+    tagBg: "#E3E1F4",
+    tagText: "#3D3866",
+  },
+  Italian: {
+    bg: "#FAF0EB",
+    monoBg: "#EBCABB",
+    monoText: "#6B3825",
+    tagBg: "#F2DACE",
+    tagText: "#6B3825",
+  },
+  Asian: {
+    bg: "#FBEFF3",
+    monoBg: "#EBC6D2",
+    monoText: "#6B2E42",
+    tagBg: "#F2D7DF",
+    tagText: "#6B2E42",
+  },
+  Thai: {
+    bg: "#FBEFF3",
+    monoBg: "#EBC6D2",
+    monoText: "#6B2E42",
+    tagBg: "#F2D7DF",
+    tagText: "#6B2E42",
+  },
+  Beverages: {
+    bg: "#EAF5F0",
+    monoBg: "#BEE0D2",
+    monoText: "#1F4A3E",
+    tagBg: "#D4EBE1",
+    tagText: "#1F4A3E",
+  },
+  Cafe: {
+    bg: "#EAF5F0",
+    monoBg: "#BEE0D2",
+    monoText: "#1F4A3E",
+    tagBg: "#D4EBE1",
+    tagText: "#1F4A3E",
+  },
+  Bar: {
+    bg: "#F1F0FA",
+    monoBg: "#D5D2EC",
+    monoText: "#3D3866",
+    tagBg: "#E3E1F4",
+    tagText: "#3D3866",
+  },
+  Desserts: {
+    bg: "#FBEFF3",
+    monoBg: "#EBC6D2",
+    monoText: "#6B2E42",
+    tagBg: "#F2D7DF",
+    tagText: "#6B2E42",
+  },
+  Pizza: {
+    bg: "#FAF0EB",
+    monoBg: "#EBCABB",
+    monoText: "#6B3825",
+    tagBg: "#F2DACE",
+    tagText: "#6B3825",
+  },
+  Bakery: {
+    bg: "#FBF3E4",
+    monoBg: "#EBD3A8",
+    monoText: "#5C4318",
+    tagBg: "#F2E2C4",
+    tagText: "#5C4318",
+  },
+  "North Indian": {
+    bg: "#FBF3E4",
+    monoBg: "#EBD3A8",
+    monoText: "#5C4318",
+    tagBg: "#F2E2C4",
+    tagText: "#5C4318",
+  },
+  "South Indian": {
+    bg: "#EAF5F0",
+    monoBg: "#BEE0D2",
+    monoText: "#1F4A3E",
+    tagBg: "#D4EBE1",
+    tagText: "#1F4A3E",
+  },
+  Chinese: {
+    bg: "#FBEFF3",
+    monoBg: "#EBC6D2",
+    monoText: "#6B2E42",
+    tagBg: "#F2D7DF",
+    tagText: "#6B2E42",
+  },
+  Mexican: {
+    bg: "#FAF0EB",
+    monoBg: "#EBCABB",
+    monoText: "#6B3825",
+    tagBg: "#F2DACE",
+    tagText: "#6B3825",
+  },
+  "Highly Rated": {
+    bg: "#EAF5F0",
+    monoBg: "#BEE0D2",
+    monoText: "#1F4A3E",
+    tagBg: "#D4EBE1",
+    tagText: "#1F4A3E",
+  },
+  "Pure Veg": {
+    bg: "#EAF5F0",
+    monoBg: "#BEE0D2",
+    monoText: "#1F4A3E",
+    tagBg: "#D4EBE1",
+    tagText: "#1F4A3E",
+  },
+};
+
+const DEFAULT_HUE = {
+  bg: "#F4F2EC",
+  monoBg: "#DEDBD0",
+  monoText: "#4A483F",
+  tagBg: "#E8E5DC",
+  tagText: "#4A483F",
+};
+
+function getHue(vibeTags = []) {
+  for (const tag of vibeTags) {
+    const match = Object.keys(VIBE_HUES).find(
+      (k) => k.toLowerCase() === tag.toLowerCase(),
+    );
+    if (match) return VIBE_HUES[match];
+  }
+  return DEFAULT_HUE;
+}
+
 export default function CafeDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -40,69 +187,88 @@ export default function CafeDetailsPage() {
         </button>
 
         {/* Hero */}
-        <section className="relative rounded-3xl overflow-hidden border border-white/50 bg-white/50 backdrop-blur-xl shadow-[0_18px_50px_rgba(0,0,0,0.12)] px-6 py-6 md:px-8 md:py-8">
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[--bg-cream] via-[--bg-blush] to-[--bg-sage] opacity-60" />
-          <div className="pointer-events-none absolute -left-10 -top-8 h-32 w-32 rounded-full bg-[--bg-blush] opacity-60 blur-3xl" />
-          <div className="pointer-events-none absolute right-[-16px] bottom-0 h-40 w-40 rounded-full bg-[--bg-sage] opacity-60 blur-3xl" />
-
-          <div className="relative flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
-            <div className="flex-1 space-y-3">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 border border-white/70 text-[11px] uppercase tracking-wide text-[--color-deep] opacity-80">
-                <span>Jaipur Cafe</span>
-                {cafe.authenticity && (
-                  <>
-                    <span className="h-1 w-1 rounded-full bg-[--color-deep]/30" />
-                    <span>{cafe.authenticity}</span>
-                  </>
-                )}
-              </div>
-
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-[--color-deep] drop-shadow-sm">
-                {cafe.name}
-              </h1>
-
-              <p className="text-sm md:text-base text-[--color-deep] opacity-75">
-                {cafe.area} • {cafe.price_band}
-              </p>
-
-              {cafe.rating && (
-                <div className="flex items-center gap-1.5 text-sm text-[--color-deep]">
-                  <span className="text-amber-500">★</span>
-                  <span className="font-semibold">{cafe.rating}</span>
-                  {cafe.review_count ? (
-                    <span className="opacity-60">
-                      · {cafe.review_count.toLocaleString()} reviews on Zomato
-                    </span>
-                  ) : null}
+        {(() => {
+          const hue = getHue(cafe.vibe_tags);
+          const initial =
+            (cafe.name || "").trim().charAt(0).toUpperCase() || "☕";
+          return (
+            <section
+              style={{ background: hue.bg }}
+              className="rounded-3xl border border-white/50 shadow-[0_18px_50px_rgba(0,0,0,0.08)] px-6 py-7 md:px-8 md:py-8"
+            >
+              <div className="flex items-start gap-4 md:gap-5">
+                {/* Monogram */}
+                <div
+                  style={{
+                    background: hue.monoBg,
+                    color: hue.monoText,
+                    width: 64,
+                    height: 64,
+                    borderRadius: 14,
+                  }}
+                  className="flex items-center justify-center text-2xl font-semibold flex-shrink-0"
+                >
+                  {initial}
                 </div>
-              )}
 
-              {Array.isArray(cafe.vibe_tags) && cafe.vibe_tags.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {cafe.vibe_tags.map((v) => (
-                    <Tag key={v}>{v}</Tag>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <div className="flex-1 w-full md:max-w-sm">
-              <div className="rounded-2xl overflow-hidden border border-white/70 bg-white/50 backdrop-blur-md shadow-soft">
-                {cafe.images?.length ? (
-                  <img
-                    src={cafe.images[0]}
-                    alt={cafe.name}
-                    className="w-full h-52 md:h-64 object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-52 md:h-64 flex items-center justify-center bg-gradient-to-br from-[--color-blush] to-[--color-sage] text-[--color-deep]/60 text-sm italic">
-                    No image yet
+                {/* Name + meta */}
+                <div className="flex-1 min-w-0 space-y-2">
+                  <div
+                    className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 border border-white/70 text-[11px] uppercase tracking-wide"
+                    style={{ color: hue.monoText }}
+                  >
+                    <span>Jaipur Cafe</span>
+                    {cafe.authenticity && (
+                      <>
+                        <span className="h-1 w-1 rounded-full bg-current opacity-30" />
+                        <span>{cafe.authenticity}</span>
+                      </>
+                    )}
                   </div>
-                )}
+
+                  <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-[--color-deep] leading-tight">
+                    {cafe.name}
+                  </h1>
+
+                  <p className="text-sm md:text-base text-[--color-deep] opacity-75">
+                    {cafe.area} • {cafe.price_band}
+                  </p>
+
+                  {cafe.rating && (
+                    <div className="flex items-center gap-1.5 text-sm text-[--color-deep]">
+                      <span style={{ color: "#BA7517" }}>★</span>
+                      <span className="font-semibold">{cafe.rating}</span>
+                      {cafe.review_count ? (
+                        <span className="opacity-60">
+                          · {cafe.review_count.toLocaleString()} reviews on
+                          Zomato
+                        </span>
+                      ) : null}
+                    </div>
+                  )}
+
+                  {Array.isArray(cafe.vibe_tags) &&
+                    cafe.vibe_tags.length > 0 && (
+                      <div className="flex flex-wrap gap-1.5 pt-1">
+                        {cafe.vibe_tags.map((v) => (
+                          <span
+                            key={v}
+                            style={{
+                              background: hue.tagBg,
+                              color: hue.tagText,
+                            }}
+                            className="text-[11px] font-medium px-2.5 py-1 rounded-md"
+                          >
+                            {v}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                </div>
               </div>
-            </div>
-          </div>
-        </section>
+            </section>
+          );
+        })()}
 
         {/* About */}
         <section>
