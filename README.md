@@ -17,11 +17,13 @@ https://cafe-scrapbook.vercel.app
 Finding a café that actually fits your mood (work-friendly, calm, aesthetic, budget, etc.) is harder than it should be.
 
 Most platforms:
-- Overwhelm users with irrelevant data  
-- Don’t allow intuitive filtering  
-- Focus more on visuals than decision-making  
+
+- Overwhelm users with irrelevant data
+- Don’t allow intuitive filtering
+- Focus more on visuals than decision-making
 
 **Cafe Finder** is built to solve that gap by offering:
+
 - Fast discovery
 - Meaningful filters
 - A calm, focused browsing experience
@@ -31,6 +33,7 @@ Most platforms:
 ## ✨ Key Features
 
 ### 🔍 Smart Search & Filters
+
 - Search cafés by name, description, or vibe
 - Filter by:
   - Budget
@@ -38,6 +41,7 @@ Most platforms:
   - Vibe (e.g. Calm, Rooftop, Work-friendly)
 
 ### 🗂 Café Cards
+
 - Clean, scannable cards
 - Shows essential info at a glance:
   - Name
@@ -47,7 +51,9 @@ Most platforms:
 - Entire card is clickable for better UX
 
 ### 📄 Café Details Page
+
 Each café has a dedicated details page with:
+
 - Description
 - Menu highlights
 - Seating options
@@ -56,11 +62,13 @@ Each café has a dedicated details page with:
 - Graceful handling of missing data
 
 ### 🎲 “Surprise Me” Interaction
+
 - Randomly highlights a café from the current filter set
 - Scrolls it into view
 - Designed as a lightweight discovery aid
 
 ### 🧭 Routing & Navigation
+
 - SPA navigation using React Router
 - Clean URLs: `/cafe/:id`
 - Natural back navigation
@@ -72,12 +80,14 @@ Each café has a dedicated details page with:
 This project intentionally avoids over-decoration.
 
 Principles followed:
+
 - **Clarity over aesthetics**
 - **Restraint over novelty**
 - **Consistency over creativity**
 - **Usability before visual delight**
 
 The UI is designed to feel:
+
 - Calm
 - Trustworthy
 - Modern
@@ -96,6 +106,3 @@ Visual polish is layered **only after** product logic is sound.
 - **Modern CSS utilities & transitions**
 
 ---
-
-## 📁 Project Structure
-

@@ -22,29 +22,29 @@ export default function App() {
   const budgets = useMemo(
     () =>
       [...new Set(cafes.map((c) => c.price_band))].sort((a, b) =>
-        a.localeCompare(b)
+        a.localeCompare(b),
       ),
-    []
+    [],
   );
 
   const areas = useMemo(
     () =>
       [...new Set(cafes.map((c) => c.area))].sort((a, b) => a.localeCompare(b)),
-    []
+    [],
   );
 
   const vibes = useMemo(
     () =>
       [...new Set(cafes.flatMap((c) => c.vibe_tags || []))].sort((a, b) =>
-        a.localeCompare(b)
+        a.localeCompare(b),
       ),
-    []
+    [],
   );
 
   const filteredCafes = useMemo(() => {
     const q = query.trim().toLowerCase();
 
-    return cafes.filter((cafe) => {
+    const result = cafes.filter((cafe) => {
       const matchesSearch =
         !q ||
         cafe.name.toLowerCase().includes(q) ||
@@ -60,12 +60,17 @@ export default function App() {
 
       const matchVibe = selectedVibe
         ? (cafe.vibe_tags || []).some(
-            (t) => t.toLowerCase() === selectedVibe.toLowerCase()
+            (t) => t.toLowerCase() === selectedVibe.toLowerCase(),
           )
         : true;
 
       return matchesSearch && matchBudget && matchArea && matchVibe;
     });
+
+    // Best-loved cafés first (popularity_rank: 1 = most loved)
+    return result.sort(
+      (a, b) => (a.popularity_rank ?? 999) - (b.popularity_rank ?? 999),
+    );
   }, [query, selectedBudget, selectedArea, selectedVibe]);
 
   const mascotState = useMemo(() => {
@@ -74,13 +79,13 @@ export default function App() {
     const count = filteredCafes.length;
 
     let subtitle =
-      "Filter by vibe, budget or area and I'll help you pick a spto.";
+      "Filter by budget, area, or type and I'll help you pick a spot.";
     let mood = "default";
 
     // No search, no filters → gentle nudge
     if (!trimmed && !hasFilters) {
       subtitle =
-        "Start with a vibe, area, or a keyword like “chai” or “rooftop”.";
+        "Start with an area, or a cuisine like “Continental” or “Fast Food”.";
       mood = "default";
       return { subtitle, mood };
     }
@@ -116,7 +121,7 @@ export default function App() {
 
     // Vibe-specific override when there are results and no search text
     if (selectedVibe && count > 0 && !trimmed) {
-      subtitle = `Chasing a "${selectedVibe}" vibe today? I approve.`;
+      subtitle = `Craving "${selectedVibe}"? Solid choice.`;
       mood = "playful";
     }
 
@@ -179,8 +184,8 @@ export default function App() {
                 Cafe Finder
               </h1>
               <p className="mt-3 text-[--color-deep] opacity-70 text-sm md:text-base leading-relaxed">
-                Pinterest-worthy cafés in Jaipur — discover by vibe, budget, and
-                mood.
+                Jaipur's most-loved cafés — ranked by real ratings and thousands
+                of reviews.
               </p>
 
               <button
@@ -211,7 +216,7 @@ export default function App() {
               type="text"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Search by name, vibe, or description..."
+              placeholder="Search by name, cuisine, or area..."
               className="flex-1 px-4 py-3 rounded-xl border border-[--border-muted] bg-white/70 backdrop-blur-md shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-[--border-muted]"
             />
             <button
@@ -262,13 +267,13 @@ export default function App() {
             />
 
             <FilterPill
-              label="Vibe"
+              label="Type"
               icon="✨"
               id="vibe"
               value={selectedVibe}
               onChange={setSelectedVibe}
               options={vibes}
-              placeholder="All Vibes"
+              placeholder="All Types"
             />
           </div>
         </section>
