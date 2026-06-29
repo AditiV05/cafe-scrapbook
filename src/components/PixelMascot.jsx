@@ -18,6 +18,7 @@ export default function PixelMascot({
   subtitle = "your pixel café guide",
   mood = "default",
   size = "md",
+  glowColor = null, // optional: a CSS color that overrides the mood glow
 }) {
   const glowClass = MOOD_GLOW[mood] || MOOD_GLOW.default;
   const avatarSize = SIZE_MAP[size] || SIZE_MAP.md;
@@ -32,16 +33,17 @@ export default function PixelMascot({
         px-4 py-3
       "
     >
-      {/* soft glow halo behind card */}
+      {/* soft glow halo behind card — uses glowColor if given, else the mood class */}
       <div
         className={`
           pointer-events-none absolute inset-0 
           rounded-2xl
-          ${glowClass}
+          ${glowColor ? "" : glowClass}
           opacity-60 
           blur-md
           -z-10
         `}
+        style={glowColor ? { backgroundColor: glowColor } : undefined}
       />
 
       <img

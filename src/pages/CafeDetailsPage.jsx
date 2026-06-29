@@ -372,10 +372,16 @@ function InfoBox({ icon, label, value }) {
 }
 
 function CafeMascotNote({ cafe }) {
+  const hue = getHue(cafe.vibe_tags);
+
   if (cafe.mascot_note) {
     return (
       <div className="mt-10 flex justify-end">
-        <PixelMascot subtitle={cafe.mascot_note} mood="playful" />
+        <PixelMascot
+          subtitle={cafe.mascot_note}
+          mood="playful"
+          glowColor={hue.monoBg}
+        />
       </div>
     );
   }
@@ -424,7 +430,7 @@ function CafeMascotNote({ cafe }) {
 
   return (
     <div className="mt-10 flex justify-end">
-      <PixelMascot subtitle={line} mood={mood} />
+      <PixelMascot subtitle={line} mood={mood} glowColor={hue.monoBg} />
     </div>
   );
 }
