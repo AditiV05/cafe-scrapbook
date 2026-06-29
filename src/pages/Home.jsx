@@ -83,51 +83,39 @@ export default function App() {
     if (aiLoading) return { subtitle: "Reading your request…", mood: "chill" };
     if (aiError) return { subtitle: aiError, mood: "night" };
 
+    // Someone is typing a sentence but hasn't searched yet → nudge, don't judge.
+    if (trimmed) {
+      return {
+        subtitle: "Press Ask and I'll find that for you.",
+        mood: "default",
+      };
+    }
+
     let subtitle =
       "Filter by budget, area, or type and I'll help you pick a spot.";
     let mood = "default";
 
-    // No search, no filters → gentle nudge
-    if (!trimmed && !hasFilters) {
+    // No search text, no filters → gentle nudge
+    if (!hasFilters) {
       subtitle =
         "Start with an area, or a cuisine like “Continental” or “Fast Food”.";
       mood = "default";
       return { subtitle, mood };
     }
 
-    // Filters only
-    if (!trimmed && hasFilters) {
-      if (count === 0) {
-        subtitle =
-          "Your Filters are a bit too picky - try relaxing one or two.";
-        mood = "night";
-      } else {
-        subtitle =
-          count === 1
-            ? "One cosy option with these filters. Quality over quantity."
-            : `Showing ${count} cafes that match your filters. Nice picks`;
-        mood = "chill";
-      }
-      return { subtitle, mood };
-    }
-
-    if (trimmed) {
-      if (count === 0) {
-        subtitle = `Nothing matches "${trimmed}" yet - try a different vibe or area.`;
-        mood = "night";
-      } else {
-        subtitle =
-          count === 1
-            ? `I found cafe for "${trimmed}".`
-            : `I found ${count} cafes for "${trimmed}".`;
-        mood = "chill";
-      }
-    }
-
-    // Vibe-specific override when there are results and no search text
-    if (selectedVibe && count > 0 && !trimmed) {
+    // Filters applied (set by the AI or by hand)
+    if (count === 0) {
+      subtitle = "Your filters are a bit too picky — try relaxing one or two.";
+      mood = "night";
+    } else if (selectedVibe) {
       subtitle = `Craving "${selectedVibe}"? Solid choice.`;
       mood = "playful";
+    } else {
+      subtitle =
+        count === 1
+          ? "One cosy option with these filters. Quality over quantity."
+          : `Showing ${count} cafés that match your filters. Nice picks!`;
+      mood = "chill";
     }
 
     return { subtitle, mood };
