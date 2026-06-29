@@ -15,6 +15,7 @@ export default function App() {
   const [focusedCafe, setFocusedCafe] = useState(null);
   const [aiLoading, setAiLoading] = useState(false);
   const [aiError, setAiError] = useState("");
+  const [lastSearch, setLastSearch] = useState(""); // the sentence the user last asked
 
   useEffect(() => {
     const id = setTimeout(() => setQuery(text), 200);
@@ -156,6 +157,7 @@ export default function App() {
       setSelectedArea(inList(data.area, areas));
       setSelectedVibe(inList(data.type, vibes));
       setSelectedBudget(inList(data.budget, budgets));
+      setLastSearch(q); // remember what they asked, to show it
       setText("");
       setQuery("");
     } catch {
@@ -276,6 +278,7 @@ export default function App() {
                 setSelectedArea("");
                 setSelectedVibe("");
                 setAiError("");
+                setLastSearch("");
               }}
               className="px-4 py-3 rounded-xl border border-[--border-muted] bg-white/70 backdrop-blur-md shadow-sm hover:shadow-md transition text-[--color-deep] opacity-80"
               aria-label="Clear filters"
@@ -333,6 +336,11 @@ export default function App() {
           <p className="text-sm text-[--color-deep] opacity-70">
             Showing {filteredCafes.length} cafés
           </p>
+          {lastSearch && (
+            <p className="text-xs text-[--color-deep] opacity-50 mt-1">
+              Results for: “{lastSearch}”
+            </p>
+          )}
         </section>
 
         {/* Mascot reacting to search + filters */}
