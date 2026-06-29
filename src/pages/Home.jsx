@@ -263,7 +263,7 @@ export default function App() {
                   if (text.trim() && !aiLoading) runAiSearch();
                 }
               }}
-              placeholder="Try: cheap continental place in C Scheme — then press Enter"
+              placeholder="Try: somewhere fancy in Pink City"
               className="flex-1 px-4 py-3 rounded-xl border border-[--border-muted] bg-white/70 backdrop-blur-md shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-[--border-muted]"
             />
             <button
