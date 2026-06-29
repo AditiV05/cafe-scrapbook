@@ -340,7 +340,7 @@ export default function App() {
             Showing {filteredCafes.length} cafés
           </p>
           {lastSearch && (
-            <p className="text-xs text-[--color-deep] opacity-70 mt-1">
+            <p className="text-xs text-[--color-deep] opacity-90 mt-1">
               Results for: “{lastSearch}”
             </p>
           )}
