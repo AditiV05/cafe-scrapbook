@@ -15,7 +15,8 @@ export default function App() {
   const [focusedCafe, setFocusedCafe] = useState(null);
   const [aiLoading, setAiLoading] = useState(false);
   const [aiError, setAiError] = useState("");
-  const [lastSearch, setLastSearch] = useState(""); // the sentence the user last asked
+  const [lastSearch, setLastSearch] = useState("");
+  const [baristaReply, setBaristaReply] = useState("");
 
   useEffect(() => {
     const id = setTimeout(() => setQuery(text), 200);
@@ -84,6 +85,9 @@ export default function App() {
     if (aiLoading) return { subtitle: "Reading your request…", mood: "chill" };
     if (aiError) return { subtitle: aiError, mood: "night" };
 
+    // The barista answered a question / off-topic input → reply in character.
+    if (baristaReply) return { subtitle: baristaReply, mood: "playful" };
+
     // Someone is typing a sentence but hasn't searched yet → nudge, don't judge.
     if (trimmed) {
       return {
@@ -128,6 +132,7 @@ export default function App() {
     filteredCafes.length,
     aiLoading,
     aiError,
+    baristaReply,
   ]);
 
   // Natural-language search → calls the serverless function → fills the filters
@@ -146,6 +151,16 @@ export default function App() {
       });
       if (!res.ok) throw new Error("AI request failed");
       const data = await res.json();
+
+      // If the barista answered a question (who are you / what do you do / off-topic),
+      // show that reply and don't touch the filters.
+      if (data.reply && !data.area && !data.type && !data.budget) {
+        setBaristaReply(data.reply);
+        setText("");
+        setQuery("");
+        return;
+      }
+      setBaristaReply("");
 
       // Only accept values that actually exist in our filter lists
       const inList = (val, list) =>
@@ -282,6 +297,7 @@ export default function App() {
                 setSelectedVibe("");
                 setAiError("");
                 setLastSearch("");
+                setBaristaReply("");
               }}
               className="px-4 py-3 rounded-xl border border-[--border-muted] bg-white/70 backdrop-blur-md shadow-sm hover:shadow-md transition text-[--color-deep] opacity-80"
               aria-label="Clear filters"
