@@ -337,7 +337,7 @@ export default function App() {
             Showing {filteredCafes.length} cafés
           </p>
           {lastSearch && (
-            <p className="text-xs text-[--color-deep] opacity-50 mt-1">
+            <p className="text-xs text-[--color-deep] opacity-70 mt-1">
               Results for: “{lastSearch}”
             </p>
           )}
@@ -365,8 +365,9 @@ export default function App() {
               ))
             ) : (
               <div className="col-span-full rounded-card border border-white/40 bg-white/50 backdrop-blur-md shadow-soft p-6 text-center text-[--color-deep] opacity-70">
-                No cafés match your filters. Try clearing or adjusting the
-                vibe/budget.
+                {text.trim()
+                  ? "Press Ask and I'll find that for you."
+                  : "No cafés match your filters. Try clearing or adjusting the vibe/budget."}
               </div>
             )}
           </div>
