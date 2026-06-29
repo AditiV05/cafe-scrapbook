@@ -258,7 +258,10 @@ export default function App() {
               value={text}
               onChange={(e) => setText(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") runAiSearch();
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  if (text.trim() && !aiLoading) runAiSearch();
+                }
               }}
               placeholder="Try: cheap continental place in C Scheme — then press Enter"
               className="flex-1 px-4 py-3 rounded-xl border border-[--border-muted] bg-white/70 backdrop-blur-md shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-[--border-muted]"
