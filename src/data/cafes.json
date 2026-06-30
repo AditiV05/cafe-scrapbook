@@ -916,5 +916,25 @@
     "seating": [],
     "menu_highlights": [],
     "images": []
+  },
+  {
+    "id": "once-upon-a-time-at-the-bagh-agra-road",
+    "name": "Once Upon A Time At The Bagh",
+    "area": "Agra Road",
+    "price_band": "₹₹₹",
+    "veg_nonveg": "Both",
+    "cuisines": ["North Indian", "Mughlai", "Sushi", "Pizza", "Desserts"],
+    "vibe_tags": ["North Indian", "Mughlai", "Highly Rated"],
+    "rating": 4.3,
+    "review_count": 3988,
+    "popularity_rank": 14,
+    "url": "https://www.zomato.com/jaipur/once-upon-a-time-at-the-bagh-agra-road",
+    "authenticity": "Fine Dining",
+    "description": "A fine-dining spot on Agra Road known for North Indian, Mughlai and global plates. Rated 4.3/5 across 3,988+ dining reviews.",
+    "mascot_note": "Grand, ornate and built to impress — this is a dress-up, special-occasion kind of place.",
+    "hours": "",
+    "seating": [],
+    "menu_highlights": [],
+    "images": []
   }
 ]
