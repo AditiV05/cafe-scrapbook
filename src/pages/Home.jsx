@@ -3,6 +3,7 @@ import cafes from "../data/cafes.json";
 import CafeCard from "../components/CafeCard";
 import PixelMascot from "../components/PixelMascot";
 import SpotlightCard from "../components/SpotlightCard";
+import HeroBanner from "../components/HeroBanner";
 
 export default function Home() {
   const [selectedBudget, setSelectedBudget] = useState("");
@@ -241,61 +242,40 @@ export default function Home() {
   return (
     <main className="min-h-screen px-4 py-8 md:py-10">
       <div className="mx-auto max-w-6xl space-y-8">
-        {/* ── HERO ── */}
-        <section className="relative overflow-hidden rounded-[2rem] border border-edge bg-gradient-to-br from-blush via-cream to-sage px-6 py-10 shadow-lift md:px-10 md:py-12">
-          {/* Warm light blobs — now that the colour tokens exist, these actually render */}
-          <div className="pointer-events-none absolute -left-20 -top-16 h-56 w-56 rounded-full bg-honey/25 blur-3xl" />
-          <div className="pointer-events-none absolute -right-16 top-0 h-52 w-52 rounded-full bg-terracotta/20 blur-3xl" />
-          <div className="pointer-events-none absolute bottom-[-4rem] left-1/3 h-56 w-56 rounded-full bg-sage/60 blur-3xl" />
+        {/* ── HERO BANNER ── */}
+        <HeroBanner>
+          <div className="max-w-xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-amber-100 backdrop-blur-sm">
+              ☕ Jaipur · {stats.count} cafés
+            </span>
 
-          <div className="relative flex flex-col items-center gap-8 md:flex-row md:items-center">
-            {/* LEFT — copy */}
-            <div className="flex-1 text-center md:text-left">
-              <span className="inline-flex items-center gap-2 rounded-full border border-honey-deep/30 bg-surface px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-cocoa shadow-soft">
-                ☕ Jaipur · {stats.count} cafés
+            <h1 className="mt-3 font-display text-[2rem] font-bold leading-[1.08] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:text-5xl lg:text-6xl">
+              Find where Jaipur
+              <br />
+              <span className="text-amber-200">actually drinks</span>
+            </h1>
+
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-white/90 drop-shadow-[0_1px_6px_rgba(0,0,0,0.6)] sm:text-[15px]">
+              Ranked by real ratings and{" "}
+              <strong className="font-bold text-white">
+                {stats.reviews.toLocaleString()}
+              </strong>{" "}
+              reviews — not ads. Ask in plain English, or filter by hand.
+            </p>
+
+            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3">
+              <button
+                onClick={handleSurprise}
+                className="btn-primary rounded-full px-6 py-3 text-sm font-bold"
+              >
+                🎲 Surprise me
+              </button>
+              <span className="text-xs font-semibold text-white/85">
+                {stats.areas} areas · up to {stats.top}★
               </span>
-
-              <h1 className="mt-4 font-display text-4xl font-bold leading-[1.1] text-deep md:text-6xl">
-                Find where Jaipur
-                <br className="hidden md:block" />{" "}
-                <span className="relative inline-block">
-                  <span className="relative z-10">actually drinks</span>
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-x-0 bottom-1 z-0 h-3 -rotate-1 rounded-sm bg-honey/50"
-                  />
-                </span>
-              </h1>
-
-              <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-muted md:mx-0">
-                Ranked by real ratings and{" "}
-                <strong className="font-bold text-deep">
-                  {stats.reviews.toLocaleString()}
-                </strong>{" "}
-                reviews — not ads. Ask in plain English, or filter by hand.
-              </p>
-
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-3 md:justify-start">
-                <button
-                  onClick={handleSurprise}
-                  className="btn-primary rounded-full px-6 py-2.5 text-sm font-bold"
-                >
-                  🎲 Surprise me
-                </button>
-                <span className="text-xs font-semibold text-subtle">
-                  {stats.areas} areas · up to {stats.top}★
-                </span>
-              </div>
-            </div>
-
-            {/* RIGHT — mascot */}
-            <div className="flex flex-1 justify-center md:justify-end">
-              <div className="animate-float-soft">
-                <PixelMascot size="lg" subtitle="your pixel café guide" />
-              </div>
             </div>
           </div>
-        </section>
+        </HeroBanner>
 
         {/* ── SEARCH ── */}
         <section className="mx-auto max-w-4xl">
