@@ -1,6 +1,6 @@
 export default function Tag({ children }) {
   return (
-    <span className="inline-block rounded-full px-3 py-1 text-xs font-medium bg-cream border border-black/5 text-deep/80 shadow-sm mr-2 mb-2">
+    <span className="mb-1 mr-1 inline-block rounded-full border border-edge bg-cream px-2.5 py-0.5 text-[11px] font-semibold text-cocoa">
       {children}
     </span>
   );

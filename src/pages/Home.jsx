@@ -1,17 +1,16 @@
-import { Routes, Route } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
 import cafes from "../data/cafes.json";
 import CafeCard from "../components/CafeCard";
 import PixelMascot from "../components/PixelMascot";
 import SpotlightCard from "../components/SpotlightCard";
 
-export default function App() {
+export default function Home() {
   const [selectedBudget, setSelectedBudget] = useState("");
   const [selectedArea, setSelectedArea] = useState("");
   const [selectedVibe, setSelectedVibe] = useState("");
   const [query, setQuery] = useState(""); // debounced value
   const [text, setText] = useState(""); // live input
-  const [highlightedId, setHightlightedId] = useState("");
+  const [highlightedId, setHighlightedId] = useState("");
   const [focusedCafe, setFocusedCafe] = useState(null);
   const [aiLoading, setAiLoading] = useState(false);
   const [aiError, setAiError] = useState("");
@@ -45,6 +44,14 @@ export default function App() {
     [],
   );
 
+  // Headline numbers for the hero — derived, never hard-coded.
+  const stats = useMemo(() => {
+    const rated = cafes.filter((c) => c.rating);
+    const reviews = cafes.reduce((sum, c) => sum + (c.review_count || 0), 0);
+    const top = rated.reduce((m, c) => Math.max(m, c.rating), 0);
+    return { count: cafes.length, areas: areas.length, reviews, top };
+  }, [areas.length]);
+
   const filteredCafes = useMemo(() => {
     const q = query.trim().toLowerCase();
 
@@ -76,6 +83,33 @@ export default function App() {
       (a, b) => (a.popularity_rank ?? 999) - (b.popularity_rank ?? 999),
     );
   }, [query, selectedBudget, selectedArea, selectedVibe]);
+
+  const activeFilters = useMemo(
+    () =>
+      [
+        selectedArea && { key: "area", label: selectedArea, icon: "📍" },
+        selectedVibe && { key: "vibe", label: selectedVibe, icon: "✨" },
+        selectedBudget && { key: "budget", label: selectedBudget, icon: "💸" },
+      ].filter(Boolean),
+    [selectedArea, selectedVibe, selectedBudget],
+  );
+
+  const clearFilter = (key) => {
+    if (key === "area") setSelectedArea("");
+    if (key === "vibe") setSelectedVibe("");
+    if (key === "budget") setSelectedBudget("");
+  };
+
+  const resetAll = () => {
+    setText("");
+    setQuery("");
+    setSelectedBudget("");
+    setSelectedArea("");
+    setSelectedVibe("");
+    setAiError("");
+    setLastSearch("");
+    setBaristaReply("");
+  };
 
   const mascotState = useMemo(() => {
     const trimmed = text.trim();
@@ -190,134 +224,129 @@ export default function App() {
 
     const randomCafe = pool[Math.floor(Math.random() * pool.length)];
 
-    setHightlightedId(randomCafe.id);
+    setHighlightedId(randomCafe.id);
 
-    //Scroll that card into view
+    // Scroll that card into view
     const el = document.getElementById(randomCafe.id);
     if (el) {
-      el.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
     setFocusedCafe(randomCafe);
 
-    //remove highlight after a short moment
-    setTimeout(() => {
-      setHightlightedId("");
-    }, 1500);
+    // Remove highlight after a short moment
+    setTimeout(() => setHighlightedId(""), 1500);
   };
 
   return (
-    <main className="min-h-screen px-4 py-10">
-      {/* One central column for everything */}
-      <div className="max-w-6xl mx-auto space-y-8">
-        {/* Hero */}
-        {/* HERO SECTION — Pastel × Pixel Hybrid */}
-        <section className="relative px-6 pt-10 pb-8 overflow-visible">
-          {/* Soft pastel gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[--bg-cream] via-[--bg-blush] to-[--bg-sage] opacity-40 pointer-events-none" />
+    <main className="min-h-screen px-4 py-8 md:py-10">
+      <div className="mx-auto max-w-6xl space-y-8">
+        {/* ── HERO ── */}
+        <section className="relative overflow-hidden rounded-[2rem] border border-edge bg-gradient-to-br from-blush via-cream to-sage px-6 py-10 shadow-lift md:px-10 md:py-12">
+          {/* Warm light blobs — now that the colour tokens exist, these actually render */}
+          <div className="pointer-events-none absolute -left-20 -top-16 h-56 w-56 rounded-full bg-honey/25 blur-3xl" />
+          <div className="pointer-events-none absolute -right-16 top-0 h-52 w-52 rounded-full bg-terracotta/20 blur-3xl" />
+          <div className="pointer-events-none absolute bottom-[-4rem] left-1/3 h-56 w-56 rounded-full bg-sage/60 blur-3xl" />
 
-          {/*floating pastel blobs*/}
-          <div className="pointer-events-none absolute -left-16 -top-10 h-40 w-40 rounded-full bg-[--bg-blush] opacity-60 blur-3xl" />
-          <div className="pointer-events-none absolute right-[-12px] top-6 h-36 w-36 rounded-full bg-[--bg-sage] opacity-70 blur-3xl" />
-
-          {/* Center container */}
-          <div
-            className="
-            relative max-w-5xl mx-auto 
-            flex flex-col md:flex-row items-center gap-6 
-            rounded-3xl border border-white/40 bg-white/45 backdrop-blur-lg 
-            shadow-[0_16px_50px_rgba(0,0,0,0.12)] 
-            px-8 py-10
-            animate-float-soft
-            "
-          >
-            {/* LEFT — Text block */}
+          <div className="relative flex flex-col items-center gap-8 md:flex-row md:items-center">
+            {/* LEFT — copy */}
             <div className="flex-1 text-center md:text-left">
-              <h1 className="font-display text-4xl md:text-5xl text-[--color-deep] drop-shadow-sm">
-                Cafe Finder
+              <span className="inline-flex items-center gap-2 rounded-full border border-honey-deep/30 bg-surface px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-cocoa shadow-soft">
+                ☕ Jaipur · {stats.count} cafés
+              </span>
+
+              <h1 className="mt-4 font-display text-4xl font-bold leading-[1.1] text-deep md:text-6xl">
+                Find where Jaipur
+                <br className="hidden md:block" />{" "}
+                <span className="relative inline-block">
+                  <span className="relative z-10">actually drinks</span>
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 bottom-1 z-0 h-3 -rotate-1 rounded-sm bg-honey/50"
+                  />
+                </span>
               </h1>
-              <p className="mt-3 text-[--color-deep] opacity-70 text-sm md:text-base leading-relaxed">
-                Jaipur's most-loved cafés — ranked by real ratings and thousands
-                of reviews.
+
+              <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-muted md:mx-0">
+                Ranked by real ratings and{" "}
+                <strong className="font-bold text-deep">
+                  {stats.reviews.toLocaleString()}
+                </strong>{" "}
+                reviews — not ads. Ask in plain English, or filter by hand.
               </p>
 
-              <button
-                onClick={handleSurprise}
-                className="mt-6 px-6 py-2.5 rounded-full text-sm font-semibold
-                   bg-[--accent-yellow] text-[--color-deep]
-                   shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition-all duration-200"
-              >
-                🎲 Surprise me
-              </button>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3 md:justify-start">
+                <button
+                  onClick={handleSurprise}
+                  className="btn-primary rounded-full px-6 py-2.5 text-sm font-bold"
+                >
+                  🎲 Surprise me
+                </button>
+                <span className="text-xs font-semibold text-subtle">
+                  {stats.areas} areas · up to {stats.top}★
+                </span>
+              </div>
             </div>
 
-            {/* RIGHT — Pixel mascot */}
-            <div className="flex-1 flex justify-center md:justify-end">
-              <PixelMascot />
+            {/* RIGHT — mascot */}
+            <div className="flex flex-1 justify-center md:justify-end">
+              <div className="animate-float-soft">
+                <PixelMascot size="lg" subtitle="your pixel café guide" />
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Search */}
-        <section>
-          <div className="max-w-4xl mx-auto flex items-center gap-3">
+        {/* ── SEARCH ── */}
+        <section className="mx-auto max-w-4xl">
+          <div className="panel flex flex-col gap-3 rounded-2xl p-3 sm:flex-row sm:items-center">
             <label className="sr-only" htmlFor="search">
               Search cafés
             </label>
-            <input
-              id="search"
-              type="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  if (text.trim() && !aiLoading) runAiSearch();
-                }
-              }}
-              placeholder="Try: somewhere fancy in Pink City"
-              className="flex-1 px-4 py-3 rounded-xl border border-[--border-muted] bg-white/70 backdrop-blur-md shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-[--border-muted]"
-            />
-            <button
-              onClick={runAiSearch}
-              disabled={aiLoading || !text.trim()}
-              className="px-4 py-3 rounded-xl text-sm font-semibold bg-[--accent-yellow] text-[--color-deep] shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {aiLoading ? "Thinking…" : "✨ Ask"}
-            </button>
-            <button
-              onClick={() => {
-                setText("");
-                setQuery("");
-                setSelectedBudget("");
-                setSelectedArea("");
-                setSelectedVibe("");
-                setAiError("");
-                setLastSearch("");
-                setBaristaReply("");
-              }}
-              className="px-4 py-3 rounded-xl border border-[--border-muted] bg-white/70 backdrop-blur-md shadow-sm hover:shadow-md transition text-[--color-deep] opacity-80"
-              aria-label="Clear filters"
-            >
-              Clear
-            </button>
+            <div className="relative flex-1">
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-base"
+              >
+                🔎
+              </span>
+              <input
+                id="search"
+                type="text"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    if (text.trim() && !aiLoading) runAiSearch();
+                  }
+                }}
+                placeholder="Try: somewhere fancy in C Scheme"
+                className="w-full rounded-xl border border-edge bg-white py-3 pl-10 pr-3 text-[15px] text-deep placeholder:text-subtle focus-visible:border-honey-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-honey/50"
+              />
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={runAiSearch}
+                disabled={aiLoading || !text.trim()}
+                className="btn-primary flex-1 rounded-xl px-5 py-3 text-sm font-bold sm:flex-none"
+              >
+                {aiLoading ? "Thinking…" : "✨ Ask"}
+              </button>
+              <button
+                onClick={resetAll}
+                className="btn-ghost rounded-xl px-4 py-3 text-sm font-semibold"
+                aria-label="Clear search and filters"
+              >
+                Clear
+              </button>
+            </div>
           </div>
         </section>
 
-        {/* Filter Bar */}
-        <section>
-          <div
-            className="
-      max-w-4xl mx-auto
-      rounded-2xl border border-white/60
-      bg-white/55 backdrop-blur-xl
-      shadow-soft px-4 py-3
-      flex flex-wrap items-center justify-center gap-3
-    "
-          >
+        {/* ── FILTER BAR ── */}
+        <section className="mx-auto max-w-4xl">
+          <div className="panel flex flex-wrap items-center justify-center gap-3 rounded-2xl px-4 py-3">
             <FilterPill
               label="Budget"
               icon="💸"
@@ -327,7 +356,6 @@ export default function App() {
               options={budgets}
               placeholder="All Budgets"
             />
-
             <FilterPill
               label="Area"
               icon="📍"
@@ -337,7 +365,6 @@ export default function App() {
               options={areas}
               placeholder="All Areas"
             />
-
             <FilterPill
               label="Type"
               icon="✨"
@@ -350,20 +377,47 @@ export default function App() {
           </div>
         </section>
 
-        {/* Results count (nice touch) */}
-        <section className="max-w-6xl mx-auto">
-          <p className="text-sm text-[--color-deep] opacity-70">
-            Showing {filteredCafes.length} cafés
-          </p>
-          {lastSearch && (
-            <p className="text-xs text-[--color-deep] opacity-90 mt-1">
-              Results for: “{lastSearch}”
-            </p>
-          )}
-        </section>
+        {/* ── RESULTS HEADER ── */}
+        <section className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="font-display text-2xl font-bold text-deep">
+              {filteredCafes.length}{" "}
+              {filteredCafes.length === 1 ? "café" : "cafés"}
+            </h2>
+            {lastSearch ? (
+              <p className="mt-1 text-sm text-muted">
+                for “<span className="font-semibold text-deep">{lastSearch}</span>
+                ”
+              </p>
+            ) : (
+              <p className="mt-1 text-sm text-muted">
+                Sorted by how loved they actually are
+              </p>
+            )}
 
-        {/* Mascot reacting to search + filters */}
-        <section className="max-w-6xl mx-auto flex justify-end">
+            {activeFilters.length > 0 && (
+              <div className="mt-3 flex flex-wrap gap-2">
+                {activeFilters.map((f) => (
+                  <button
+                    key={f.key}
+                    onClick={() => clearFilter(f.key)}
+                    className="group inline-flex items-center gap-1.5 rounded-full border border-honey-deep/40 bg-honey/20 px-3 py-1 text-xs font-bold text-cocoa transition hover:border-honey-deep hover:bg-honey/35"
+                  >
+                    <span aria-hidden="true">{f.icon}</span>
+                    {f.label}
+                    <span
+                      aria-hidden="true"
+                      className="text-sm leading-none text-cocoa/60 group-hover:text-cocoa"
+                    >
+                      ×
+                    </span>
+                    <span className="sr-only">Remove {f.label} filter</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
           <PixelMascot
             subtitle={mascotState.subtitle}
             mood={mascotState.mood}
@@ -371,9 +425,9 @@ export default function App() {
           />
         </section>
 
-        {/* Cafe Grid */}
+        {/* ── CAFÉ GRID ── */}
         <section>
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filteredCafes.length > 0 ? (
               filteredCafes.map((cafe) => (
                 <CafeCard
@@ -383,10 +437,26 @@ export default function App() {
                 />
               ))
             ) : (
-              <div className="col-span-full rounded-card border border-white/40 bg-white/50 backdrop-blur-md shadow-soft p-6 text-center text-[--color-deep] opacity-70">
-                {text.trim()
-                  ? "Press Ask and I'll find that for you."
-                  : "No cafés match your filters. Try clearing or adjusting the vibe/budget."}
+              <div className="col-span-full rounded-card border border-dashed border-edge-strong bg-surface p-10 text-center shadow-soft">
+                <div className="text-4xl" aria-hidden="true">
+                  {text.trim() ? "✨" : "🫖"}
+                </div>
+                <p className="mt-3 font-display text-xl font-bold text-deep">
+                  {text.trim() ? "Ready when you are" : "Nothing matches that"}
+                </p>
+                <p className="mx-auto mt-1 max-w-sm text-sm text-muted">
+                  {text.trim()
+                    ? "Press Ask and I'll turn that sentence into filters."
+                    : "Those filters are a little too narrow. Try loosening one."}
+                </p>
+                {!text.trim() && activeFilters.length > 0 && (
+                  <button
+                    onClick={resetAll}
+                    className="btn-primary mt-5 rounded-full px-5 py-2 text-sm font-bold"
+                  >
+                    Clear filters
+                  </button>
+                )}
               </div>
             )}
           </div>
@@ -412,34 +482,36 @@ function FilterPill({
   options,
   placeholder,
 }) {
+  const active = !!value;
+
   return (
     <label
       htmlFor={id}
-      className="
-        inline-flex items-center gap-2
-        rounded-full border border-white/80
-        bg-white/80
-        px-3 py-1.5
-        shadow-soft backdrop-blur-xl
-        text-xs text-[--color-deep]
-        cursor-pointer
-        transition-all duration-200
-        hover:shadow-lift hover:-translate-y-0.5
-      "
+      className={`
+        inline-flex cursor-pointer items-center gap-2
+        rounded-full border px-3.5 py-2
+        text-xs transition-all duration-200
+        hover:-translate-y-0.5 hover:shadow-soft
+        ${
+          active
+            ? "border-honey-deep bg-honey/25 text-cocoa shadow-soft"
+            : "border-edge bg-surface text-muted"
+        }
+      `}
     >
-      <span className="text-sm">{icon}</span>
-      <span className="font-medium">{label}</span>
+      <span className="text-sm" aria-hidden="true">
+        {icon}
+      </span>
+      <span className="font-bold">{label}</span>
       <select
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="
-          bg-transparent
-          border-none
-          text-[11px] font-normal text-[--color-deep]
-          focus:outline-none focus:ring-0
-          cursor-pointer
-        "
+        className={`
+          cursor-pointer border-none bg-transparent
+          text-[11px] focus:outline-none focus:ring-0
+          ${active ? "font-bold text-cocoa" : "font-normal text-muted"}
+        `}
       >
         <option value="">{placeholder}</option>
         {options.map((opt) => (

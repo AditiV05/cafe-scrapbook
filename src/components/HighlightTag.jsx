@@ -3,12 +3,10 @@ export default function HighlightTag({ children }) {
     <span
       className="
         inline-flex items-center gap-1
-        px-3 py-1
-        rounded-full
-        text-sm font-medium text-[--color-deep]
-        bg-white/75 backdrop-blur-md border border-white/60
-        shadow-soft hover:shadow-lift hover:-translate-y-0.5
-        transition-all duration-200
+        rounded-full border border-edge bg-surface
+        px-3 py-1 text-sm font-semibold text-deep
+        shadow-soft transition-all duration-200
+        hover:-translate-y-0.5 hover:border-edge-strong hover:shadow-lift
       "
     >
       {children}
