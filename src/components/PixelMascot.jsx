@@ -20,17 +20,19 @@ export default function PixelMascot({
   mood = "default",
   size = "md",
   glowColor = null, // optional: a CSS color that overrides the mood glow
+  wide = false, // the café detail page shows the note as a pull-quote
 }) {
   const glow = glowColor || MOOD_GLOW[mood] || MOOD_GLOW.default;
   const avatarSize = SIZE_MAP[size] || SIZE_MAP.md;
 
   return (
     <div
-      className="
-        relative flex w-full max-w-sm items-center gap-3
+      className={`
+        relative flex w-full items-center gap-3
         rounded-2xl border border-edge bg-surface
         px-4 py-3 shadow-soft
-      "
+        ${wide ? "max-w-2xl gap-4 px-5 py-4" : "max-w-sm"}
+      `}
     >
       {/* Soft glow halo behind the card */}
       <div
@@ -48,7 +50,7 @@ export default function PixelMascot({
         draggable="false"
       />
 
-      <span className="text-[13px] font-semibold leading-snug text-deep">
+      <span className={`font-semibold leading-snug text-deep ${wide ? "text-[15px]" : "text-[13px]"}`}>
         {subtitle}
       </span>
     </div>
