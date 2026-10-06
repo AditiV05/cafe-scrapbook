@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import defaultBanner from "../assets/hero-jaipur.svg";
 
 /**
- * Full-bleed banner with a depth treatment layered over the artwork.
+ * Hero banner set inside a mitred wooden frame.
  *
  * To use a real photograph instead of the illustrated default, drop the file in
  * src/assets/ and pass it in:
@@ -10,7 +10,7 @@ import defaultBanner from "../assets/hero-jaipur.svg";
  *   import hero from "../assets/hero.jpg";
  *   <HeroBanner image={hero} />
  *
- * Everything else — the scrim, the parallax, the vignette, the text scale —
+ * Everything else — the frame, the scrim, the parallax, the text scale —
  * works the same for a photo.
  */
 export default function HeroBanner({
@@ -51,40 +51,51 @@ export default function HeroBanner({
   }, []);
 
   return (
-    <section
+    <figure
       ref={ref}
-      className="relative isolate overflow-hidden rounded-[1.75rem] border border-edge shadow-lift"
+      className="wood-frame m-0"
+      /* The frame is decoration; the artwork inside carries the alt text. */
     >
-      {/* Artwork */}
-      <img
-        src={image}
-        alt={alt}
-        className="absolute inset-0 -z-20 h-[calc(100%+48px)] w-full object-cover"
-        style={{ objectPosition: focal, transform: `translateY(${offset}px)` }}
-        draggable="false"
-      />
+      <div aria-hidden="true" className="wood-frame__rail wood-frame__rail--top" />
+      <div aria-hidden="true" className="wood-frame__rail wood-frame__rail--bottom" />
+      <div aria-hidden="true" className="wood-frame__rail wood-frame__rail--left" />
+      <div aria-hidden="true" className="wood-frame__rail wood-frame__rail--right" />
+      <div aria-hidden="true" className="wood-frame__edges" />
+      <div aria-hidden="true" className="wood-frame__sheen" />
+      <div aria-hidden="true" className="wood-frame__mitres" />
 
-      {/* Scrim — holds the text column at AA contrast, then clears off the
-          artwork. Stops are measured against the rendered banner, not guessed. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(18,9,22,0.94) 0%, rgba(18,9,22,0.90) 30%," +
-            " rgba(18,9,22,0.78) 48%, rgba(18,9,22,0.42) 66%," +
-            " rgba(18,9,22,0.12) 84%, rgba(18,9,22,0) 100%)",
-        }}
-      />
-      {/* Bottom fade, so the banner settles into the page instead of stopping dead */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 -z-10 h-28 bg-gradient-to-t from-[#1C0F22]/60 to-transparent"
-      />
+      <section className="wood-frame__opening isolate">
+        {/* Artwork */}
+        <img
+          src={image}
+          alt={alt}
+          className="absolute inset-0 -z-20 h-[calc(100%+48px)] w-full object-cover"
+          style={{ objectPosition: focal, transform: `translateY(${offset}px)` }}
+          draggable="false"
+        />
 
-      <div className="relative px-5 py-10 sm:px-10 sm:py-14 md:py-16 lg:px-14 lg:py-20">
-        {children}
-      </div>
-    </section>
+        {/* Scrim — holds the text column at AA contrast, then clears off the
+            artwork. Stops are measured against the rendered banner, not guessed. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(18,9,22,0.94) 0%, rgba(18,9,22,0.90) 30%," +
+              " rgba(18,9,22,0.78) 48%, rgba(18,9,22,0.42) 66%," +
+              " rgba(18,9,22,0.12) 84%, rgba(18,9,22,0) 100%)",
+          }}
+        />
+        {/* Bottom fade, so the banner settles into the frame instead of stopping dead */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 -z-10 h-28 bg-gradient-to-t from-[#1C0F22]/60 to-transparent"
+        />
+
+        <div className="relative px-5 py-10 sm:px-10 sm:py-14 md:py-16 lg:px-14 lg:py-20">
+          {children}
+        </div>
+      </section>
+    </figure>
   );
 }
