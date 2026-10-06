@@ -240,8 +240,8 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen px-4 py-8 md:py-10">
-      <div className="mx-auto max-w-6xl space-y-8">
+    <main className="page-shell min-h-screen">
+      <div className="mx-auto max-w-6xl space-y-[clamp(1.5rem,3.4vw,2rem)]">
         {/* ── HERO BANNER ── */}
         <HeroBanner>
           <div className="max-w-xl">
@@ -249,13 +249,13 @@ export default function Home() {
               ☕ Jaipur · {stats.count} cafés
             </span>
 
-            <h1 className="mt-3 font-display text-[2rem] font-bold leading-[1.08] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)] sm:text-5xl lg:text-6xl">
+            <h1 className="banner-title mt-3 font-display font-bold text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.45)]">
               Find where Jaipur
               <br />
               <span className="text-amber-200">actually drinks</span>
             </h1>
 
-            <p className="mt-3 max-w-md text-sm leading-relaxed text-white/90 drop-shadow-[0_1px_6px_rgba(0,0,0,0.6)] sm:text-[15px]">
+            <p className="banner-sub mt-3 max-w-md leading-relaxed text-white/90 drop-shadow-[0_1px_6px_rgba(0,0,0,0.6)]">
               Ranked by real ratings and{" "}
               <strong className="font-bold text-white">
                 {stats.reviews.toLocaleString()}
@@ -279,11 +279,11 @@ export default function Home() {
 
         {/* ── SEARCH ── */}
         <section className="mx-auto max-w-4xl">
-          <div className="panel flex flex-col gap-3 rounded-2xl p-3 sm:flex-row sm:items-center">
+          <div className="panel search-grid rounded-2xl p-3">
             <label className="sr-only" htmlFor="search">
               Search cafés
             </label>
-            <div className="relative flex-1">
+            <div className="search-field relative">
               <span
                 aria-hidden="true"
                 className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-base"
@@ -301,32 +301,30 @@ export default function Home() {
                     if (text.trim() && !aiLoading) runAiSearch();
                   }
                 }}
-                placeholder="Try: somewhere fancy in C Scheme"
+                placeholder="Try: cheap café in C Scheme"
                 className="w-full rounded-xl border border-edge bg-white py-3 pl-10 pr-3 text-[15px] text-deep placeholder:text-subtle focus-visible:border-honey-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-honey/50"
               />
             </div>
-            <div className="flex gap-2">
-              <button
-                onClick={runAiSearch}
-                disabled={aiLoading || !text.trim()}
-                className="btn-primary flex-1 rounded-xl px-5 py-3 text-sm font-bold sm:flex-none"
-              >
-                {aiLoading ? "Thinking…" : "✨ Ask"}
-              </button>
-              <button
-                onClick={resetAll}
-                className="btn-ghost rounded-xl px-4 py-3 text-sm font-semibold"
-                aria-label="Clear search and filters"
-              >
-                Clear
-              </button>
-            </div>
+            <button
+              onClick={runAiSearch}
+              disabled={aiLoading || !text.trim()}
+              className="btn-primary rounded-xl px-5 py-3 text-sm font-bold"
+            >
+              {aiLoading ? "Thinking…" : "✨ Ask"}
+            </button>
+            <button
+              onClick={resetAll}
+              className="btn-ghost rounded-xl px-4 py-3 text-sm font-semibold"
+              aria-label="Clear search and filters"
+            >
+              Clear
+            </button>
           </div>
         </section>
 
         {/* ── FILTER BAR ── */}
         <section className="mx-auto max-w-4xl">
-          <div className="panel flex flex-wrap items-center justify-center gap-3 rounded-2xl px-4 py-3">
+          <div className="panel filter-grid rounded-2xl p-3">
             <FilterPill
               label="Budget"
               icon="💸"
@@ -358,7 +356,7 @@ export default function Home() {
         </section>
 
         {/* ── RESULTS HEADER ── */}
-        <section className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <section className="results-head">
           <div>
             <h2 className="font-display text-2xl font-bold text-deep">
               {filteredCafes.length}{" "}
@@ -398,16 +396,18 @@ export default function Home() {
             )}
           </div>
 
-          <PixelMascot
-            subtitle={mascotState.subtitle}
-            mood={mascotState.mood}
-            size="sm"
-          />
+          <div className="justify-self-stretch lg:justify-self-end">
+            <PixelMascot
+              subtitle={mascotState.subtitle}
+              mood={mascotState.mood}
+              size="sm"
+            />
+          </div>
         </section>
 
         {/* ── CAFÉ GRID ── */}
         <section>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="card-grid">
             {filteredCafes.length > 0 ? (
               filteredCafes.map((cafe) => (
                 <CafeCard
@@ -468,7 +468,7 @@ function FilterPill({
     <label
       htmlFor={id}
       className={`
-        inline-flex cursor-pointer items-center gap-2
+        flex w-full cursor-pointer items-center gap-2
         rounded-full border px-3.5 py-2
         text-xs transition-all duration-200
         hover:-translate-y-0.5 hover:shadow-soft
@@ -482,13 +482,13 @@ function FilterPill({
       <span className="text-sm" aria-hidden="true">
         {icon}
       </span>
-      <span className="font-bold">{label}</span>
+      <span className="shrink-0 font-bold">{label}</span>
       <select
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className={`
-          cursor-pointer border-none bg-transparent
+          min-w-0 flex-1 cursor-pointer border-none bg-transparent
           text-[11px] focus:outline-none focus:ring-0
           ${active ? "font-bold text-cocoa" : "font-normal text-muted"}
         `}

@@ -92,7 +92,7 @@ export default function HeroBanner({
           className="absolute inset-x-0 bottom-0 -z-10 h-28 bg-gradient-to-t from-[#1C0F22]/60 to-transparent"
         />
 
-        <div className="relative px-5 py-10 sm:px-10 sm:py-14 md:py-16 lg:px-14 lg:py-20">
+        <div className="banner-pad relative">
           {children}
         </div>
       </section>

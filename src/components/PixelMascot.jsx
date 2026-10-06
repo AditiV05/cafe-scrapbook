@@ -27,7 +27,7 @@ export default function PixelMascot({
   return (
     <div
       className="
-        relative inline-flex max-w-sm items-center gap-3
+        relative flex w-full max-w-sm items-center gap-3
         rounded-2xl border border-edge bg-surface
         px-4 py-3 shadow-soft
       "

@@ -30,8 +30,8 @@ export default function CafeDetailsPage() {
   const mapQuery = encodeURIComponent(`${cafe.name} ${cafe.area} Jaipur`);
 
   return (
-    <main className="min-h-screen px-4 py-10">
-      <div className="max-w-5xl mx-auto space-y-8">
+    <main className="page-shell min-h-screen">
+      <div className="mx-auto max-w-5xl space-y-[clamp(1.5rem,3.4vw,2rem)]">
         <button
           onClick={() => navigate(-1)}
           className="text-sm font-semibold text-muted hover:text-deep transition"
@@ -47,9 +47,9 @@ export default function CafeDetailsPage() {
           return (
             <section
               style={{ "--spine": hue.spine }}
-              className="paper-card rounded-3xl px-6 py-7 shadow-lift md:px-8 md:py-8"
+              className="paper-card rounded-3xl px-[clamp(1.1rem,3.6vw,2rem)] py-[clamp(1.3rem,3.4vw,2rem)] shadow-lift"
             >
-              <div className="flex items-start gap-4 md:gap-5">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
                 {/* Monogram */}
                 <div
                   style={{
@@ -81,7 +81,7 @@ export default function CafeDetailsPage() {
                     )}
                   </div>
 
-                  <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-deep leading-tight">
+                  <h1 className="font-display text-[clamp(1.6rem,5.4vw,3rem)] font-bold leading-[1.1] text-deep [text-wrap:balance]">
                     {cafe.name}
                   </h1>
 
@@ -117,13 +117,13 @@ export default function CafeDetailsPage() {
                     )}
 
                   {/* Primary actions — cafe.url is the Zomato listing */}
-                  <div className="flex flex-wrap items-center gap-2 pt-3">
+                  <div className="grid grid-cols-2 gap-2 pt-3 sm:flex sm:flex-wrap sm:items-center">
                     {cafe.url && (
                       <a
                         href={cafe.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-primary inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-bold"
+                        className="btn-primary inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-bold"
                       >
                         View on Zomato →
                       </a>
@@ -132,7 +132,7 @@ export default function CafeDetailsPage() {
                       href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-ghost inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold"
+                      className="btn-ghost inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold"
                     >
                       📍 Directions
                     </a>
@@ -145,7 +145,7 @@ export default function CafeDetailsPage() {
 
         {/* About */}
         <section>
-          <h2 className="font-display text-2xl font-bold text-deep mb-2">
+          <h2 className="mb-2 font-display text-[clamp(1.25rem,2.6vw,1.5rem)] font-bold text-deep">
             About this cafe
           </h2>
           <div className="rounded-2xl border border-edge bg-surface p-5 shadow-soft">
@@ -157,10 +157,10 @@ export default function CafeDetailsPage() {
 
         {/* Details */}
         <section>
-          <h2 className="font-display text-2xl font-bold text-deep mb-3">
+          <h2 className="mb-3 font-display text-[clamp(1.25rem,2.6vw,1.5rem)] font-bold text-deep">
             Details
           </h2>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr))]">
             {cafe.hours && (
               <InfoBox icon="⏰" label="Hours" value={cafe.hours} />
             )}
@@ -183,7 +183,7 @@ export default function CafeDetailsPage() {
         {/* Menu Highlights */}
         {Array.isArray(menuHighlights) && menuHighlights.length > 0 && (
           <section>
-            <h2 className="font-display text-2xl font-bold text-deep mb-2">
+            <h2 className="mb-2 font-display text-[clamp(1.25rem,2.6vw,1.5rem)] font-bold text-deep">
               Menu Highlights
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -196,11 +196,11 @@ export default function CafeDetailsPage() {
 
         {/* Location */}
         <section>
-          <h2 className="font-display text-2xl font-bold text-deep mb-3">
+          <h2 className="mb-3 font-display text-[clamp(1.25rem,2.6vw,1.5rem)] font-bold text-deep">
             Location
           </h2>
           <div className="rounded-2xl border border-edge bg-surface shadow-soft p-4 flex flex-col gap-3">
-            <div className="h-52 rounded-xl overflow-hidden border border-edge bg-cream">
+            <div className="aspect-[16/9] max-h-72 overflow-hidden rounded-xl border border-edge bg-cream">
               <iframe
                 title={`Map showing ${cafe.name}`}
                 src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
@@ -251,7 +251,7 @@ function CafeMascotNote({ cafe }) {
 
   if (cafe.mascot_note) {
     return (
-      <div className="mt-10 flex justify-end">
+      <div className="mt-10 flex justify-center sm:justify-end">
         <PixelMascot
           subtitle={cafe.mascot_note}
           mood="playful"
@@ -304,7 +304,7 @@ function CafeMascotNote({ cafe }) {
   }
 
   return (
-    <div className="mt-10 flex justify-end">
+    <div className="mt-10 flex justify-center sm:justify-end">
       <PixelMascot subtitle={line} mood={mood} glowColor={hue.tint} />
     </div>
   );
