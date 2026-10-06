@@ -2,10 +2,282 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ──────────────────────────────────────────────────────────────
+   DESIGN TOKENS
+   Every `[--token]` class in the JSX reads from here. Without these
+   definitions the browser drops the declaration entirely, which is
+   why the buttons, hero gradient and blobs used to render invisible.
+   ────────────────────────────────────────────────────────────── */
+:root {
+  /* Surfaces — the page is warm, cards are near-white so they lift off it */
+  --bg-cream: #f6e9d8;
+  --bg-blush: #f6dcd2;
+  --bg-sage: #dcebe2;
+  --bg-page: #f4e8da;
+  --surface: #fffdfa;
+  --surface-raised: #ffffff;
+
+  /* Ink — real colours, so we never dim text with opacity */
+  --color-deep: #1b2a26;
+  --color-muted: #566962;
+  --color-subtle: #5c6a63;
+  --color-sage: #5b8c7b;
+
+  /* Accents */
+  --accent-yellow: #f0ad33;
+  --accent-yellow-deep: #d9901a;
+  --accent-terracotta: #d2694a;
+  --accent-star: #c2731b;
+
+  /* Lines */
+  --border-muted: #e2cdb4;
+  --border-strong: #d2b795;
+  --border-hairline: rgba(27, 42, 38, 0.1);
+
+  /* Warm-tinted shadows: black shadows on a cream page read as grey haze */
+  --shadow-soft: 0 4px 14px rgba(94, 62, 30, 0.09);
+  --shadow-lift: 0 14px 32px rgba(94, 62, 30, 0.17);
+}
+
 body {
-  @apply bg-gradient-to-b from-cream to-linen text-deep;
+  background-color: var(--bg-page);
+  /* Layered warm light instead of a flat wash — gives the page depth */
+  background-image:
+    radial-gradient(
+      44rem 30rem at 12% -6%,
+      rgba(246, 220, 210, 0.75),
+      transparent 62%
+    ),
+    radial-gradient(
+      40rem 28rem at 92% 4%,
+      rgba(220, 235, 226, 0.8),
+      transparent 60%
+    ),
+    radial-gradient(
+      52rem 40rem at 50% 108%,
+      rgba(246, 233, 216, 0.9),
+      transparent 68%
+    );
+  background-attachment: fixed;
+  color: var(--color-deep);
   font-family: "Nunito", ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Text hierarchy by colour, not opacity ── */
+.text-ink {
+  color: var(--color-deep);
+}
+.text-muted {
+  color: var(--color-muted);
+}
+.text-subtle {
+  color: var(--color-subtle);
+}
+
+/* ── Frosted panel used by the hero, filter bar and search row ── */
+.panel {
+  background: rgba(255, 253, 250, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-muted);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ── Primary action ── */
+.btn-primary {
+  background: linear-gradient(
+    180deg,
+    var(--accent-yellow) 0%,
+    var(--accent-yellow-deep) 100%
+  );
+  color: #33240b;
+  border: 1px solid var(--accent-yellow-deep);
+  box-shadow: 0 4px 12px rgba(217, 144, 26, 0.32);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(217, 144, 26, 0.42);
+  filter: brightness(1.04);
+}
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(217, 144, 26, 0.3);
+}
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ── Secondary action ── */
+.btn-ghost {
+  background: var(--surface);
+  color: var(--color-muted);
+  border: 1px solid var(--border-muted);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, color 0.18s ease,
+    border-color 0.18s ease;
+}
+.btn-ghost:hover {
+  transform: translateY(-1px);
+  color: var(--color-deep);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ──────────────────────────────────────────────────────────────
+   WOODEN FRAME
+   A mitred picture frame around the hero. The depth cues, in the
+   order they matter:
+     1. mitred corners — the grain turns 90° at each joint, which is
+        what separates a real frame from four painted borders
+     2. grain is fractal noise stretched along each rail, not stripes;
+        striped gradients read as plastic at any opacity
+     3. one light source, upper-left: top and left rails catch it,
+        bottom and right fall away, and every bevel agrees
+     4. the opening is recessed, so the frame casts an inset shadow
+        down and right onto the artwork
+   ────────────────────────────────────────────────────────────── */
+.wood-frame {
+  --fw: 15px;                      /* rail width */
+  --wood-lit: #8A5E35;
+  --wood-base: #5B3A20;
+  --wood-mid: #472C16;
+  --wood-dark: #2E1B0D;
+  --wood-deep: #1D1107;
+  --grain-h: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='420'%20height='90'><filter%20id='g'><feTurbulence%20type='fractalNoise'%20baseFrequency='0.006%200.40'%20numOctaves='5'%20seed='7'/><feColorMatrix%20type='saturate'%20values='0'/></filter><rect%20width='100%25'%20height='100%25'%20filter='url%28%23g%29'%20opacity='0.62'/></svg>");
+  --grain-v: url("data:image/svg+xml,<svg%20xmlns='http://www.w3.org/2000/svg'%20width='90'%20height='420'><filter%20id='g'><feTurbulence%20type='fractalNoise'%20baseFrequency='0.40%200.006'%20numOctaves='5'%20seed='11'/><feColorMatrix%20type='saturate'%20values='0'/></filter><rect%20width='100%25'%20height='100%25'%20filter='url%28%23g%29'%20opacity='0.62'/></svg>");
+
+  position: relative;
+  isolation: isolate;
+  padding: var(--fw);
+  border-radius: 7px;
+  background: var(--wood-base);
+  box-shadow:
+    0 0 0 1px rgba(30, 16, 6, 0.75),
+    0 2px 3px rgba(40, 22, 7, 0.34),
+    0 12px 24px -8px rgba(40, 22, 7, 0.5),
+    0 28px 56px -18px rgba(40, 22, 7, 0.55);
+}
+
+@media (min-width: 640px) {
+  .wood-frame { --fw: 20px; }
+}
+@media (min-width: 1024px) {
+  .wood-frame { --fw: 26px; border-radius: 9px; }
+}
+
+/* Each rail is a full-bleed layer clipped to its mitred trapezoid. */
+.wood-frame__rail {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  background-blend-mode: soft-light, multiply, normal;
+}
+
+.wood-frame__rail--top {
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--fw)) var(--fw), var(--fw) var(--fw));
+  background-image: var(--grain-h), var(--grain-h),
+    linear-gradient(to bottom, var(--wood-lit) 0%, #714A29 26%,
+                    var(--wood-base) 62%, var(--wood-dark) 100%);
+  background-size: 420px 90px, 170px 37px, 100% 100%;
+}
+
+.wood-frame__rail--bottom {
+  clip-path: polygon(0 100%, var(--fw) calc(100% - var(--fw)),
+                     calc(100% - var(--fw)) calc(100% - var(--fw)), 100% 100%);
+  background-image: var(--grain-h), var(--grain-h),
+    linear-gradient(to bottom, var(--wood-deep) 0%, var(--wood-mid) 38%,
+                    var(--wood-base) 78%, #6B4426 100%);
+  background-size: 390px 84px, 150px 33px, 100% 100%;
+  background-position: 40px 0, 0 0, 0 0;
+}
+
+.wood-frame__rail--left {
+  clip-path: polygon(0 0, var(--fw) var(--fw), var(--fw) calc(100% - var(--fw)), 0 100%);
+  background-image: var(--grain-v), var(--grain-v),
+    linear-gradient(to right, var(--wood-lit) 0%, #714A29 28%,
+                    var(--wood-base) 64%, var(--wood-dark) 100%);
+  background-size: 90px 420px, 37px 170px, 100% 100%;
+}
+
+.wood-frame__rail--right {
+  clip-path: polygon(100% 0, 100% 100%, calc(100% - var(--fw)) calc(100% - var(--fw)),
+                     calc(100% - var(--fw)) var(--fw));
+  background-image: var(--grain-v), var(--grain-v),
+    linear-gradient(to right, var(--wood-deep) 0%, var(--wood-mid) 36%,
+                    var(--wood-base) 76%, #6B4426 100%);
+  background-size: 84px 390px, 33px 150px, 100% 100%;
+  background-position: 0 60px, 0 0, 0 0;
+}
+
+/* Crisp edges: a lit outer arris and a dark inner one, so each rail
+   reads as a solid section of timber rather than a painted band. */
+.wood-frame__edges {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 226, 190, 0.3),
+    inset 1px 0 0 rgba(255, 226, 190, 0.18),
+    inset -1px 0 0 rgba(26, 13, 4, 0.5),
+    inset 0 -1px 0 rgba(26, 13, 4, 0.55);
+}
+
+/* Hairline along each 45° mitre joint. */
+.wood-frame__sheen {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(118deg,
+    rgba(255, 233, 204, 0.16) 0%,
+    rgba(255, 233, 204, 0.05) 22%,
+    rgba(0, 0, 0, 0) 46%,
+    rgba(0, 0, 0, 0.1) 78%,
+    rgba(0, 0, 0, 0.18) 100%);
+}
+
+.wood-frame__mitres {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: inherit;
+  background-repeat: no-repeat;
+  background-size: var(--fw) var(--fw);
+  background-position: 0 0, 100% 0, 0 100%, 100% 100%;
+  background-image:
+    linear-gradient(to bottom right, transparent calc(50% - 0.6px),
+      rgba(22, 11, 3, 0.5) 50%, rgba(255, 224, 186, 0.1) calc(50% + 0.6px), transparent calc(50% + 1.4px)),
+    linear-gradient(to bottom left, transparent calc(50% - 0.6px),
+      rgba(22, 11, 3, 0.5) 50%, rgba(255, 224, 186, 0.1) calc(50% + 0.6px), transparent calc(50% + 1.4px)),
+    linear-gradient(to top right, transparent calc(50% - 0.6px),
+      rgba(22, 11, 3, 0.5) 50%, rgba(255, 224, 186, 0.1) calc(50% + 0.6px), transparent calc(50% + 1.4px)),
+    linear-gradient(to top left, transparent calc(50% - 0.6px),
+      rgba(22, 11, 3, 0.5) 50%, rgba(255, 224, 186, 0.1) calc(50% + 0.6px), transparent calc(50% + 1.4px));
+}
+
+/* The recessed opening: dark rebate, brass fillet, then the frame's
+   shadow falling down-and-right onto the artwork. */
+.wood-frame__opening {
+  position: relative;
+  z-index: 4;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow:
+    0 0 0 1px rgba(18, 9, 2, 0.95),
+    0 0 0 2px rgba(138, 94, 53, 0.35),
+    0 0 0 4px rgba(18, 9, 2, 0.6),
+    inset 6px 7px 16px -4px rgba(14, 7, 1, 0.8),
+    inset -3px -3px 10px -3px rgba(14, 7, 1, 0.45);
 }
 
 /* Pixel art helper */
@@ -28,7 +300,7 @@ body {
   animation: bounce-slow 2.8s infinite ease-in-out;
 }
 
-/* NEW: soft floating animation for hero panel*/
+/* Soft floating animation for hero panel */
 @keyframes float-soft {
   0%,
   100% {
@@ -43,7 +315,7 @@ body {
   animation: float-soft 6s ease-in-out infinite;
 }
 
-/* NEW: fade-in-up for cards / sections */
+/* Fade-in-up for cards / sections */
 @keyframes fade-in-up {
   0% {
     opacity: 0;
@@ -57,22 +329,22 @@ body {
 
 @keyframes highlight-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(251, 211, 141, 0.9);
+    box-shadow: 0 0 0 0 rgba(240, 173, 51, 0.85);
     transform: translateY(-2px) scale(1);
   }
   60% {
-    box-shadow: 0 0 0 14px rgba(251, 211, 141, 0);
+    box-shadow: 0 0 0 14px rgba(240, 173, 51, 0);
     transform: translateY(-4px) scale(1.02);
   }
   100% {
-    box-shadow: 0 10px 30px rbga(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-lift);
     transform: translateY(-2px) scale(1);
   }
 }
 
 .highlight-ring {
   animation: highlight-pulse 0.9s ease-out;
-  border-color: rgba(251, 211, 141, 0.9);
+  border-color: var(--accent-yellow) !important;
 }
 
 @keyframes spotlight-in {
@@ -88,4 +360,29 @@ body {
 
 .animate-spotlight-in {
   animation: spotlight-in 0.35s ease-out;
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-backdrop-in {
+  animation: backdrop-in 0.25s ease-out;
+}
+
+/* Respect users who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

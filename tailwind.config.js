@@ -8,17 +8,32 @@ export default {
         display: ["Playfair Display", "serif"],
       },
       colors: {
-        cream: "#FBF7F2",
-        linen: "#F6EFE8",
-        blush: "#F3E6E0",
-        sage: "#E8F1EF",
+        // Surfaces — warmer and with real chroma, so white cards lift off the page
+        cream: "#F6E9D8",
+        linen: "#F0E2D0",
+        blush: "#F6DCD2",
+        sage: "#DCEBE2",
+        surface: "#FFFDFA",
+        // Ink
+        deep: "#1B2A26",
+        muted: "#566962",
+        subtle: "#5C6A63",
+        // Warm neutrals
         mocha: "#C6A58A",
-        cocoa: "#8B6A52",
-        deep: "#20322F",
+        cocoa: "#755741",
+        // Accents
+        honey: "#F0AD33",
+        "honey-deep": "#D9901A",
+        terracotta: "#D2694A",
+        // Lines
+        edge: "#E2CDB4",
+        "edge-strong": "#D2B795",
       },
       boxShadow: {
-        soft: "0 6px 18px rgba(0, 0, 0, 0.06)",
-        lift: "0 10px 28px rgba(0, 0, 0, 0.12)",
+        // Warm-tinted rather than black — black haze is what reads as "pale"
+        soft: "0 4px 14px rgba(94, 62, 30, 0.09)",
+        lift: "0 14px 32px rgba(94, 62, 30, 0.17)",
+        glow: "0 8px 24px rgba(217, 144, 26, 0.28)",
       },
       borderRadius: {
         card: "1.25rem",

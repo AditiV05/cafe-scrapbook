@@ -1,17 +1,18 @@
 import barista from "../assets/barista.png";
 
+// Mood → glow colour behind the card. Real colours, not near-white washes.
 const MOOD_GLOW = {
-  default: "bg-amber-100/60",
-  cosy: "bg-amber-100/60",
-  chill: "bg-[--color-sage]/60",
-  playful: "bg-pink-100/60",
-  night: "bg-slate-500/60",
+  default: "rgba(240, 173, 51, 0.38)",
+  cosy: "rgba(210, 105, 74, 0.32)",
+  chill: "rgba(91, 140, 123, 0.34)",
+  playful: "rgba(192, 83, 114, 0.30)",
+  night: "rgba(61, 56, 102, 0.34)",
 };
 
 const SIZE_MAP = {
-  sm: "h-8 w-8",
-  md: "h-[48px] w-[48px]",
-  lg: "h-14 w-14",
+  sm: "h-9 w-9",
+  md: "h-12 w-12",
+  lg: "h-16 w-16",
 };
 
 export default function PixelMascot({
@@ -20,40 +21,34 @@ export default function PixelMascot({
   size = "md",
   glowColor = null, // optional: a CSS color that overrides the mood glow
 }) {
-  const glowClass = MOOD_GLOW[mood] || MOOD_GLOW.default;
+  const glow = glowColor || MOOD_GLOW[mood] || MOOD_GLOW.default;
   const avatarSize = SIZE_MAP[size] || SIZE_MAP.md;
 
   return (
     <div
       className="
-        relative inline-flex items-center gap-3 
-        bg-white/70 backdrop-blur-md
-        border border-black/10 
-        shadow-soft rounded-2xl 
-        px-4 py-3
+        relative inline-flex max-w-sm items-center gap-3
+        rounded-2xl border border-edge bg-surface
+        px-4 py-3 shadow-soft
       "
     >
-      {/* soft glow halo behind card — uses glowColor if given, else the mood class */}
+      {/* Soft glow halo behind the card */}
       <div
-        className={`
-          pointer-events-none absolute inset-0 
-          rounded-2xl
-          ${glowColor ? "" : glowClass}
-          opacity-60 
-          blur-md
-          -z-10
-        `}
-        style={glowColor ? { backgroundColor: glowColor } : undefined}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 rounded-2xl blur-md"
+        style={{ backgroundColor: glow }}
       />
 
       <img
         src={barista}
         alt="Pixel barista mascot"
-        className={`pixelated animate-bounce-slow object-contain ${avatarSize}`}
+        width="64"
+        height="64"
+        className={`pixelated animate-bounce-slow shrink-0 object-contain ${avatarSize}`}
         draggable="false"
       />
 
-      <span className="text-sm font-medium text-deep/80 leading-tight">
+      <span className="text-[13px] font-semibold leading-snug text-deep">
         {subtitle}
       </span>
     </div>

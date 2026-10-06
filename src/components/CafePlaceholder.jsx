@@ -5,12 +5,13 @@ export default function CafePlaceholder({ name = "", className = "" }) {
 
   return (
     <div
-      className={`relative w-full h-full flex flex-col items-center justify-center
-        bg-gradient-to-br from-[--bg-cream] via-[--bg-blush] to-[--bg-sage]
-        text-[--color-deep] ${className}`}
+      className={`relative flex h-full w-full flex-col items-center justify-center
+        bg-gradient-to-br from-blush via-cream to-sage text-deep ${className}`}
     >
-      <span className="text-3xl opacity-70">☕</span>
-      <span className="mt-1 text-2xl font-display opacity-30 leading-none">
+      <span className="text-3xl" aria-hidden="true">
+        ☕
+      </span>
+      <span className="mt-1 font-display text-2xl font-bold leading-none text-cocoa/40">
         {initial}
       </span>
     </div>

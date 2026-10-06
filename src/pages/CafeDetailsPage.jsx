@@ -3,153 +3,7 @@ import cafes from "../data/cafes.json";
 import Tag from "../components/Tag";
 import HighlightTag from "../components/HighlightTag";
 import PixelMascot from "../components/PixelMascot";
-
-const VIBE_HUES = {
-  "Fast Food": {
-    bg: "#FBF3E4",
-    monoBg: "#EBD3A8",
-    monoText: "#5C4318",
-    tagBg: "#F2E2C4",
-    tagText: "#5C4318",
-  },
-  "Street Food": {
-    bg: "#FBF3E4",
-    monoBg: "#EBD3A8",
-    monoText: "#5C4318",
-    tagBg: "#F2E2C4",
-    tagText: "#5C4318",
-  },
-  Continental: {
-    bg: "#F1F0FA",
-    monoBg: "#D5D2EC",
-    monoText: "#3D3866",
-    tagBg: "#E3E1F4",
-    tagText: "#3D3866",
-  },
-  Italian: {
-    bg: "#FAF0EB",
-    monoBg: "#EBCABB",
-    monoText: "#6B3825",
-    tagBg: "#F2DACE",
-    tagText: "#6B3825",
-  },
-  Asian: {
-    bg: "#FBEFF3",
-    monoBg: "#EBC6D2",
-    monoText: "#6B2E42",
-    tagBg: "#F2D7DF",
-    tagText: "#6B2E42",
-  },
-  Thai: {
-    bg: "#FBEFF3",
-    monoBg: "#EBC6D2",
-    monoText: "#6B2E42",
-    tagBg: "#F2D7DF",
-    tagText: "#6B2E42",
-  },
-  Beverages: {
-    bg: "#EAF5F0",
-    monoBg: "#BEE0D2",
-    monoText: "#1F4A3E",
-    tagBg: "#D4EBE1",
-    tagText: "#1F4A3E",
-  },
-  Cafe: {
-    bg: "#EAF5F0",
-    monoBg: "#BEE0D2",
-    monoText: "#1F4A3E",
-    tagBg: "#D4EBE1",
-    tagText: "#1F4A3E",
-  },
-  Bar: {
-    bg: "#F1F0FA",
-    monoBg: "#D5D2EC",
-    monoText: "#3D3866",
-    tagBg: "#E3E1F4",
-    tagText: "#3D3866",
-  },
-  Desserts: {
-    bg: "#FBEFF3",
-    monoBg: "#EBC6D2",
-    monoText: "#6B2E42",
-    tagBg: "#F2D7DF",
-    tagText: "#6B2E42",
-  },
-  Pizza: {
-    bg: "#FAF0EB",
-    monoBg: "#EBCABB",
-    monoText: "#6B3825",
-    tagBg: "#F2DACE",
-    tagText: "#6B3825",
-  },
-  Bakery: {
-    bg: "#FBF3E4",
-    monoBg: "#EBD3A8",
-    monoText: "#5C4318",
-    tagBg: "#F2E2C4",
-    tagText: "#5C4318",
-  },
-  "North Indian": {
-    bg: "#FBF3E4",
-    monoBg: "#EBD3A8",
-    monoText: "#5C4318",
-    tagBg: "#F2E2C4",
-    tagText: "#5C4318",
-  },
-  "South Indian": {
-    bg: "#EAF5F0",
-    monoBg: "#BEE0D2",
-    monoText: "#1F4A3E",
-    tagBg: "#D4EBE1",
-    tagText: "#1F4A3E",
-  },
-  Chinese: {
-    bg: "#FBEFF3",
-    monoBg: "#EBC6D2",
-    monoText: "#6B2E42",
-    tagBg: "#F2D7DF",
-    tagText: "#6B2E42",
-  },
-  Mexican: {
-    bg: "#FAF0EB",
-    monoBg: "#EBCABB",
-    monoText: "#6B3825",
-    tagBg: "#F2DACE",
-    tagText: "#6B3825",
-  },
-  "Highly Rated": {
-    bg: "#EAF5F0",
-    monoBg: "#BEE0D2",
-    monoText: "#1F4A3E",
-    tagBg: "#D4EBE1",
-    tagText: "#1F4A3E",
-  },
-  "Pure Veg": {
-    bg: "#EAF5F0",
-    monoBg: "#BEE0D2",
-    monoText: "#1F4A3E",
-    tagBg: "#D4EBE1",
-    tagText: "#1F4A3E",
-  },
-};
-
-const DEFAULT_HUE = {
-  bg: "#F4F2EC",
-  monoBg: "#DEDBD0",
-  monoText: "#4A483F",
-  tagBg: "#E8E5DC",
-  tagText: "#4A483F",
-};
-
-function getHue(vibeTags = []) {
-  for (const tag of vibeTags) {
-    const match = Object.keys(VIBE_HUES).find(
-      (k) => k.toLowerCase() === tag.toLowerCase(),
-    );
-    if (match) return VIBE_HUES[match];
-  }
-  return DEFAULT_HUE;
-}
+import { getHue } from "../lib/cuisineHues";
 
 export default function CafeDetailsPage() {
   const { id } = useParams();
@@ -160,11 +14,11 @@ export default function CafeDetailsPage() {
   if (!cafe) {
     return (
       <main className="min-h-screen flex items-center justify-center px-4">
-        <div className="rounded-2xl bg-white/70 border border-white/60 shadow-soft p-6 text-center">
-          <p className="text-[--color-deep] opacity-80 mb-3">Cafe not found.</p>
+        <div className="rounded-2xl bg-surface border border-edge shadow-soft p-6 text-center">
+          <p className="text-muted mb-3">Cafe not found.</p>
           <button
             onClick={() => navigate("/")}
-            className="px-4 py-2 rounded-full bg-[--accent-yellow] text-[--color-deep] text-sm font-semibold shadow-soft hover:shadow-lift transition-all"
+            className="btn-primary px-4 py-2 rounded-full text-sm font-semibold"
           >
             Go back home
           </button>
@@ -181,7 +35,7 @@ export default function CafeDetailsPage() {
       <div className="max-w-5xl mx-auto space-y-8">
         <button
           onClick={() => navigate(-1)}
-          className="text-sm text-[--color-deep] opacity-70 hover:opacity-100 transition"
+          className="text-sm font-semibold text-muted hover:text-deep transition"
         >
           ← Back to results
         </button>
@@ -193,8 +47,8 @@ export default function CafeDetailsPage() {
             (cafe.name || "").trim().charAt(0).toUpperCase() || "☕";
           return (
             <section
-              style={{ background: hue.bg }}
-              className="rounded-3xl border border-white/50 shadow-[0_18px_50px_rgba(0,0,0,0.08)] px-6 py-7 md:px-8 md:py-8"
+              style={{ background: hue.bg, borderTopColor: hue.accent }}
+              className="rounded-3xl border border-edge border-t-4 shadow-lift px-6 py-7 md:px-8 md:py-8"
             >
               <div className="flex items-start gap-4 md:gap-5">
                 {/* Monogram */}
@@ -214,7 +68,7 @@ export default function CafeDetailsPage() {
                 {/* Name + meta */}
                 <div className="flex-1 min-w-0 space-y-2">
                   <div
-                    className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 border border-white/70 text-[11px] uppercase tracking-wide"
+                    className="inline-flex items-center gap-2 rounded-full bg-surface px-3 py-1 border border-black/5 text-[11px] font-bold uppercase tracking-wide"
                     style={{ color: hue.monoText }}
                   >
                     <span>Jaipur Cafe</span>
@@ -226,20 +80,20 @@ export default function CafeDetailsPage() {
                     )}
                   </div>
 
-                  <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-[--color-deep] leading-tight">
+                  <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-deep leading-tight">
                     {cafe.name}
                   </h1>
 
-                  <p className="text-sm md:text-base text-[--color-deep] opacity-75">
+                  <p className="text-sm md:text-base font-semibold text-deep/70">
                     {cafe.area} • {cafe.price_band}
                   </p>
 
                   {cafe.rating && (
-                    <div className="flex items-center gap-1.5 text-sm text-[--color-deep]">
-                      <span style={{ color: "#BA7517" }}>★</span>
+                    <div className="flex items-center gap-1.5 text-sm text-deep">
+                      <span aria-hidden="true" style={{ color: "var(--accent-star)" }}>★</span>
                       <span className="font-semibold">{cafe.rating}</span>
                       {cafe.review_count ? (
-                        <span className="opacity-60">
+                        <span className="text-deep/60">
                           · {cafe.review_count.toLocaleString()} reviews on
                           Zomato
                         </span>
@@ -264,6 +118,28 @@ export default function CafeDetailsPage() {
                         ))}
                       </div>
                     )}
+
+                  {/* Primary actions — cafe.url is the Zomato listing */}
+                  <div className="flex flex-wrap items-center gap-2 pt-3">
+                    {cafe.url && (
+                      <a
+                        href={cafe.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-bold"
+                      >
+                        View on Zomato →
+                      </a>
+                    )}
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-ghost inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold"
+                    >
+                      📍 Directions
+                    </a>
+                  </div>
                 </div>
               </div>
             </section>
@@ -272,17 +148,19 @@ export default function CafeDetailsPage() {
 
         {/* About */}
         <section>
-          <h2 className="font-display text-xl text-[--color-deep] mb-2">
+          <h2 className="font-display text-2xl font-bold text-deep mb-2">
             About this cafe
           </h2>
-          <p className="text-[--color-deep] opacity-80 leading-relaxed text-base">
-            {cafe.description}
-          </p>
+          <div className="rounded-2xl border border-edge bg-surface p-5 shadow-soft">
+            <p className="text-muted leading-relaxed text-base">
+              {cafe.description}
+            </p>
+          </div>
         </section>
 
         {/* Details */}
         <section>
-          <h2 className="font-display text-xl text-[--color-deep] mb-3">
+          <h2 className="font-display text-2xl font-bold text-deep mb-3">
             Details
           </h2>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -308,7 +186,7 @@ export default function CafeDetailsPage() {
         {/* Menu Highlights */}
         {Array.isArray(menuHighlights) && menuHighlights.length > 0 && (
           <section>
-            <h2 className="font-display text-xl text-[--color-deep] mb-2">
+            <h2 className="font-display text-2xl font-bold text-deep mb-2">
               Menu Highlights
             </h2>
             <div className="flex flex-wrap gap-2">
@@ -321,11 +199,11 @@ export default function CafeDetailsPage() {
 
         {/* Location */}
         <section>
-          <h2 className="font-display text-xl text-[--color-deep] mb-3">
+          <h2 className="font-display text-2xl font-bold text-deep mb-3">
             Location
           </h2>
-          <div className="rounded-2xl border border-white/60 bg-white/60 backdrop-blur-md shadow-soft p-4 flex flex-col gap-3">
-            <div className="h-52 rounded-xl overflow-hidden border border-white/70 bg-white/70">
+          <div className="rounded-2xl border border-edge bg-surface shadow-soft p-4 flex flex-col gap-3">
+            <div className="h-52 rounded-xl overflow-hidden border border-edge bg-cream">
               <iframe
                 title={`Map showing ${cafe.name}`}
                 src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
@@ -338,14 +216,14 @@ export default function CafeDetailsPage() {
               />
             </div>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-              <p className="text-sm text-[--color-deep] opacity-80">
+              <p className="text-sm text-muted">
                 {cafe.name} · {cafe.area}, Jaipur
               </p>
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-3 py-1.5 rounded-full text-xs font-semibold bg-[--accent-yellow] text-[--color-deep] shadow-soft hover:shadow-lift hover:-translate-y-0.5 transition-all"
+                className="btn-primary inline-flex items-center justify-center px-3.5 py-1.5 rounded-full text-xs font-bold"
               >
                 Open in Google Maps →
               </a>
@@ -361,12 +239,12 @@ export default function CafeDetailsPage() {
 
 function InfoBox({ icon, label, value }) {
   return (
-    <div className="rounded-xl border border-white/70 bg-white/70 backdrop-blur-md shadow-soft p-3 flex flex-col gap-1 transition-all duration-200 hover:shadow-lift hover:-translate-y-0.5">
+    <div className="rounded-xl border border-edge bg-surface shadow-soft p-3 flex flex-col gap-1 transition-all duration-200 hover:border-edge-strong hover:shadow-lift hover:-translate-y-0.5">
       <div className="text-lg">{icon}</div>
-      <div className="text-[11px] uppercase tracking-wide opacity-60">
+      <div className="text-[11px] font-bold uppercase tracking-wide text-subtle">
         {label}
       </div>
-      <div className="text-sm font-semibold text-[--color-deep]">{value}</div>
+      <div className="text-sm font-bold text-deep">{value}</div>
     </div>
   );
 }
