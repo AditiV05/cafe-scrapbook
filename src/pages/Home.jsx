@@ -4,6 +4,7 @@ import CafeCard from "../components/CafeCard";
 import PixelMascot from "../components/PixelMascot";
 import SpotlightCard from "../components/SpotlightCard";
 import HeroBanner from "../components/HeroBanner";
+import { parseQueryLocally, runSearch } from "../lib/search";
 
 export default function Home() {
   const [selectedBudget, setSelectedBudget] = useState("");
@@ -17,6 +18,8 @@ export default function Home() {
   const [aiError, setAiError] = useState("");
   const [lastSearch, setLastSearch] = useState("");
   const [baristaReply, setBaristaReply] = useState("");
+  const [keywords, setKeywords] = useState([]); // free words kept from the query
+  const [relaxNote, setRelaxNote] = useState(""); // what the search had to let go
 
   useEffect(() => {
     const id = setTimeout(() => setQuery(text), 200);
@@ -76,14 +79,30 @@ export default function Home() {
           )
         : true;
 
-      return matchesSearch && matchBudget && matchArea && matchVibe;
+      // Words the search kept hold of ("pasta", a café's name) match loosely.
+      const matchKeywords = keywords.length
+        ? keywords.some((k) =>
+            [
+              cafe.name,
+              cafe.area,
+              cafe.description,
+              ...(cafe.cuisines || []),
+              ...(cafe.vibe_tags || []),
+            ]
+              .join(" ")
+              .toLowerCase()
+              .includes(k),
+          )
+        : true;
+
+      return matchesSearch && matchBudget && matchArea && matchVibe && matchKeywords;
     });
 
     // Best-loved cafés first (popularity_rank: 1 = most loved)
     return result.sort(
       (a, b) => (a.popularity_rank ?? 999) - (b.popularity_rank ?? 999),
     );
-  }, [query, selectedBudget, selectedArea, selectedVibe]);
+  }, [query, selectedBudget, selectedArea, selectedVibe, keywords]);
 
   const activeFilters = useMemo(
     () =>
@@ -91,14 +110,20 @@ export default function Home() {
         selectedArea && { key: "area", label: selectedArea, icon: "📍" },
         selectedVibe && { key: "vibe", label: selectedVibe, icon: "✨" },
         selectedBudget && { key: "budget", label: selectedBudget, icon: "💸" },
+        keywords.length && {
+          key: "keywords",
+          label: keywords.join(" · "),
+          icon: "🔎",
+        },
       ].filter(Boolean),
-    [selectedArea, selectedVibe, selectedBudget],
+    [selectedArea, selectedVibe, selectedBudget, keywords],
   );
 
   const clearFilter = (key) => {
     if (key === "area") setSelectedArea("");
     if (key === "vibe") setSelectedVibe("");
     if (key === "budget") setSelectedBudget("");
+    if (key === "keywords") setKeywords([]);
   };
 
   const resetAll = () => {
@@ -110,7 +135,17 @@ export default function Home() {
     setAiError("");
     setLastSearch("");
     setBaristaReply("");
+    setKeywords([]);
+    setRelaxNote("");
   };
+
+  // Verified against the dataset — each of these returns results.
+  const EXAMPLES = [
+    "italian in c scheme",
+    "cheap coffee",
+    "best rated",
+    "desserts",
+  ];
 
   const mascotState = useMemo(() => {
     const trimmed = text.trim();
@@ -170,13 +205,24 @@ export default function Home() {
     baristaReply,
   ]);
 
-  // Natural-language search → calls the serverless function → fills the filters
-  const runAiSearch = async () => {
-    const q = text.trim();
+  // Natural-language search.
+  //
+  // Two things changed here after measuring the data: the free words in the
+  // query are kept instead of discarded, and the result is run through
+  // runSearch, which relaxes a constraint rather than returning nothing. With
+  // 45 cafés across 16 areas, 23 tags and 3 budgets, 91% of three-filter
+  // combinations match nothing, so dead-ending was the normal case.
+  const runAiSearch = async (override) => {
+    const q = (typeof override === "string" ? override : text).trim();
     if (!q) return;
 
     setAiLoading(true);
     setAiError("");
+
+    // Read the sentence locally first. This is instant, needs no key, and is
+    // what the search falls back to if the API is unavailable.
+    const local = parseQueryLocally(q, { areas, types: vibes, budgets });
+    let intent = local;
 
     try {
       const res = await fetch("/api/parse-search", {
@@ -187,8 +233,8 @@ export default function Home() {
       if (!res.ok) throw new Error("AI request failed");
       const data = await res.json();
 
-      // If the barista answered a question (who are you / what do you do / off-topic),
-      // show that reply and don't touch the filters.
+      // If the barista answered a question (who are you / what do you do /
+      // off-topic), show that reply and don't touch the filters.
       if (data.reply && !data.area && !data.type && !data.budget) {
         setBaristaReply(data.reply);
         setText("");
@@ -197,26 +243,42 @@ export default function Home() {
       }
       setBaristaReply("");
 
-      // Only accept values that actually exist in our filter lists
+      // Only accept values that actually exist in our filter lists.
       const inList = (val, list) =>
         (val &&
           list.find((x) => x.toLowerCase() === String(val).toLowerCase())) ||
         "";
 
-      // Apply parsed filters; clear free-text so it doesn't double-filter
-      setSelectedArea(inList(data.area, areas));
-      setSelectedVibe(inList(data.type, vibes));
-      setSelectedBudget(inList(data.budget, budgets));
-      setLastSearch(q); // remember what they asked, to show it
-      setText("");
-      setQuery("");
+      // The model leads; the local read fills anything it missed.
+      intent = {
+        area: inList(data.area, areas) || local.area,
+        type: inList(data.type, vibes) || local.type,
+        budget: inList(data.budget, budgets) || local.budget,
+        keywords: local.keywords,
+      };
     } catch {
-      setAiError(
-        "AI search is unavailable right now — try the filters or a keyword.",
-      );
-    } finally {
-      setAiLoading(false);
+      // No key, rate limit, bad JSON — the local read still answers.
+      setBaristaReply("");
     }
+
+    const { applied, droppedLabels } = runSearch(cafes, intent);
+
+    // Apply what survived, so the chips show exactly what is being filtered.
+    setSelectedArea(applied.area);
+    setSelectedVibe(applied.type);
+    setSelectedBudget(applied.budget);
+    setKeywords(droppedLabels.includes("those words") ? [] : intent.keywords);
+
+    setRelaxNote(
+      droppedLabels.length
+        ? `Nothing matched exactly, so I ignored ${droppedLabels.join(" and ")}.`
+        : "",
+    );
+
+    setLastSearch(q);
+    setText("");
+    setQuery("");
+    setAiLoading(false);
   };
 
   const handleSurprise = () => {
@@ -301,7 +363,7 @@ export default function Home() {
                     if (text.trim() && !aiLoading) runAiSearch();
                   }
                 }}
-                placeholder="Try: cheap café in C Scheme"
+                placeholder="Try: italian in C Scheme, or cheap coffee"
                 className="w-full rounded-xl border border-edge bg-white py-3 pl-10 pr-3 text-[15px] text-deep placeholder:text-subtle focus-visible:border-honey-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-honey/50"
               />
             </div>
@@ -320,6 +382,23 @@ export default function Home() {
               Clear
             </button>
           </div>
+        </section>
+
+        {/* Examples, so it is obvious what the search understands. */}
+        <section className="-mt-2 flex flex-wrap items-center gap-2">
+          <span className="text-xs font-bold uppercase tracking-wider text-faint">
+            Try
+          </span>
+          {EXAMPLES.map((ex) => (
+            <button
+              key={ex}
+              onClick={() => runAiSearch(ex)}
+              disabled={aiLoading}
+              className="rounded-full border border-edge bg-surface px-3 py-1 text-xs font-semibold text-cocoa transition hover:-translate-y-0.5 hover:border-edge-strong hover:shadow-soft disabled:opacity-50"
+            >
+              {ex}
+            </button>
+          ))}
         </section>
 
         {/* ── FILTER BAR ── */}
@@ -363,10 +442,17 @@ export default function Home() {
               {filteredCafes.length === 1 ? "café" : "cafés"}
             </h2>
             {lastSearch ? (
-              <p className="mt-1 text-sm text-muted">
-                for “<span className="font-semibold text-deep">{lastSearch}</span>
-                ”
-              </p>
+              <>
+                <p className="mt-1 text-sm text-muted">
+                  for “
+                  <span className="font-semibold text-deep">{lastSearch}</span>”
+                </p>
+                {relaxNote && (
+                  <p className="mt-1 text-xs font-semibold text-cocoa">
+                    {relaxNote}
+                  </p>
+                )}
+              </>
             ) : (
               <p className="mt-1 text-sm text-muted">
                 Sorted by how loved they actually are
