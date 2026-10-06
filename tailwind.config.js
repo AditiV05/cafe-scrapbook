@@ -14,10 +14,13 @@ export default {
         blush: "#F6DCD2",
         sage: "#DCEBE2",
         surface: "#FFFDFA",
+        paper: "#FFFCF6",
         // Ink
         deep: "#1B2A26",
         muted: "#566962",
         subtle: "#5C6A63",
+        faint: "#7A6A57",
+        star: "#C2731B",
         // Warm neutrals
         mocha: "#C6A58A",
         cocoa: "#755741",
@@ -37,6 +40,7 @@ export default {
       },
       borderRadius: {
         card: "1.25rem",
+        paper: "14px",
       },
     },
   },

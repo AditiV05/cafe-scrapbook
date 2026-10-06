@@ -2,51 +2,21 @@
 // Shared by CafeCard and CafeDetailsPage so a café keeps the same identity
 // colour across the grid and its detail page.
 //
-// Five saturated families, each cuisine mapped to one. Previously the same
-// pastel object was copy-pasted per cuisine in two separate files, which is
-// how the two views drifted apart.
+// The cards are paper, not colour blocks, so each family is only three values:
+//
+//   spine  saturated enough to read as a 3px bar and as small-caps text
+//   tint   a pale wash, used behind the monogram letter only
+//   ink    dark, readable on `tint` and used for the letter itself
+//
+// Large tinted fields were the problem before: five pastel panels in one grid
+// read as fruit salad. Colour now identifies a café without colouring it in.
 
 export const HUE_FAMILIES = {
-  amber: {
-    bg: "#FAECD2",
-    monoBg: "#E8B860",
-    monoText: "#4A3410",
-    tagBg: "#F2DCAF",
-    tagText: "#5C4318",
-    accent: "#D9901A",
-  },
-  violet: {
-    bg: "#EDEBF8",
-    monoBg: "#B9B2E0",
-    monoText: "#322C5C",
-    tagBg: "#DDD9F0",
-    tagText: "#3D3866",
-    accent: "#6D62B8",
-  },
-  terracotta: {
-    bg: "#FAE4D9",
-    monoBg: "#E4A387",
-    monoText: "#5C2D18",
-    tagBg: "#F2CDBB",
-    tagText: "#6B3825",
-    accent: "#C4633C",
-  },
-  rose: {
-    bg: "#FAE2E9",
-    monoBg: "#E3A0B4",
-    monoText: "#5C2436",
-    tagBg: "#F2C9D5",
-    tagText: "#6B2E42",
-    accent: "#C05372",
-  },
-  green: {
-    bg: "#DEEFE6",
-    monoBg: "#8FC9AF",
-    monoText: "#14382C",
-    tagBg: "#C6E4D3",
-    tagText: "#1F4A3E",
-    accent: "#3F8A68",
-  },
+  amber: { spine: "#B07B25", tint: "#F6E7C8", ink: "#4A3410" },
+  violet: { spine: "#5F54A8", tint: "#E2DEF4", ink: "#322C5C" },
+  terracotta: { spine: "#B2593A", tint: "#F6DBCD", ink: "#5C2D18" },
+  rose: { spine: "#B04668", tint: "#F7D9E2", ink: "#5C2436" },
+  green: { spine: "#3F8A68", tint: "#D3EADD", ink: "#14382C" },
 };
 
 export const CUISINE_FAMILY = {

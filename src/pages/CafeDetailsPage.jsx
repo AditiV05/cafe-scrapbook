@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
 import cafes from "../data/cafes.json";
-import Tag from "../components/Tag";
 import HighlightTag from "../components/HighlightTag";
 import PixelMascot from "../components/PixelMascot";
 import { getHue } from "../lib/cuisineHues";
@@ -47,15 +46,15 @@ export default function CafeDetailsPage() {
             (cafe.name || "").trim().charAt(0).toUpperCase() || "☕";
           return (
             <section
-              style={{ background: hue.bg, borderTopColor: hue.accent }}
-              className="rounded-3xl border border-edge border-t-4 shadow-lift px-6 py-7 md:px-8 md:py-8"
+              style={{ "--spine": hue.spine }}
+              className="paper-card rounded-3xl px-6 py-7 shadow-lift md:px-8 md:py-8"
             >
               <div className="flex items-start gap-4 md:gap-5">
                 {/* Monogram */}
                 <div
                   style={{
-                    background: hue.monoBg,
-                    color: hue.monoText,
+                    background: hue.tint,
+                    color: hue.ink,
                     width: 64,
                     height: 64,
                     borderRadius: 14,
@@ -68,8 +67,10 @@ export default function CafeDetailsPage() {
                 {/* Name + meta */}
                 <div className="flex-1 min-w-0 space-y-2">
                   <div
-                    className="inline-flex items-center gap-2 rounded-full bg-surface px-3 py-1 border border-black/5 text-[11px] font-bold uppercase tracking-wide"
-                    style={{ color: hue.monoText }}
+                    className="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.17em]"
+                    /* ink, not spine: spine is tuned for a 3px bar (3:1) and
+                       amber/green fall short of 4.5:1 as 11px text. */
+                    style={{ color: hue.ink }}
                   >
                     <span>Jaipur Cafe</span>
                     {cafe.authenticity && (
@@ -84,7 +85,7 @@ export default function CafeDetailsPage() {
                     {cafe.name}
                   </h1>
 
-                  <p className="text-sm md:text-base font-semibold text-deep/70">
+                  <p className="text-sm font-semibold text-faint md:text-base">
                     {cafe.area} • {cafe.price_band}
                   </p>
 
@@ -93,7 +94,7 @@ export default function CafeDetailsPage() {
                       <span aria-hidden="true" style={{ color: "var(--accent-star)" }}>★</span>
                       <span className="font-semibold">{cafe.rating}</span>
                       {cafe.review_count ? (
-                        <span className="text-deep/60">
+                        <span className="text-faint">
                           · {cafe.review_count.toLocaleString()} reviews on
                           Zomato
                         </span>
@@ -107,11 +108,7 @@ export default function CafeDetailsPage() {
                         {cafe.vibe_tags.map((v) => (
                           <span
                             key={v}
-                            style={{
-                              background: hue.tagBg,
-                              color: hue.tagText,
-                            }}
-                            className="text-[11px] font-medium px-2.5 py-1 rounded-md"
+                            className="rounded-full border border-edge px-2.5 py-[3px] text-[10.5px] font-bold tracking-wide text-cocoa"
                           >
                             {v}
                           </span>
@@ -258,7 +255,7 @@ function CafeMascotNote({ cafe }) {
         <PixelMascot
           subtitle={cafe.mascot_note}
           mood="playful"
-          glowColor={hue.monoBg}
+          glowColor={hue.tint}
         />
       </div>
     );
@@ -308,7 +305,7 @@ function CafeMascotNote({ cafe }) {
 
   return (
     <div className="mt-10 flex justify-end">
-      <PixelMascot subtitle={line} mood={mood} glowColor={hue.monoBg} />
+      <PixelMascot subtitle={line} mood={mood} glowColor={hue.tint} />
     </div>
   );
 }

@@ -15,12 +15,14 @@
   --bg-sage: #dcebe2;
   --bg-page: #f4e8da;
   --surface: #fffdfa;
+  --surface-paper: #fffcf6;
   --surface-raised: #ffffff;
 
   /* Ink — real colours, so we never dim text with opacity */
   --color-deep: #1b2a26;
   --color-muted: #566962;
   --color-subtle: #5c6a63;
+  --color-faint: #7a6a57;
   --color-sage: #5b8c7b;
 
   /* Accents */
@@ -278,6 +280,33 @@ body {
     0 0 0 4px rgba(18, 9, 2, 0.6),
     inset 6px 7px 16px -4px rgba(14, 7, 1, 0.8),
     inset -3px -3px 10px -3px rgba(14, 7, 1, 0.45);
+}
+
+/* ──────────────────────────────────────────────────────────────
+   PAPER CARD
+   The grid used to fill ~40% of every card with a cuisine tint, and
+   five of those tints side by side read as fruit salad. Colour now
+   survives as a 3px spine and the monogram wash only; the card itself
+   is paper, which is what lets the wooden frame above it lead.
+   ────────────────────────────────────────────────────────────── */
+.paper-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--surface-paper);
+  border: 1px solid var(--border-muted);
+  box-shadow:
+    0 1px 2px rgba(94, 62, 30, 0.05),
+    0 7px 18px -8px rgba(94, 62, 30, 0.22);
+}
+
+/* The café's identity colour, reduced to a bound edge. */
+.paper-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--spine, var(--border-strong));
 }
 
 /* Pixel art helper */
