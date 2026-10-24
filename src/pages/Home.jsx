@@ -5,15 +5,9 @@ import ScrapNote from "../components/ScrapNote";
 import Board from "../components/Board";
 import FilterChips from "../components/FilterChips";
 import PixelMascot from "../components/PixelMascot";
-import { parseQueryLocally, runSearch } from "../lib/search";
+import { matchQuery, parseQueryLocally, runSearch } from "../lib/search";
 
 const TOTAL = cafes.length;
-
-const haystack = (c) =>
-  [c.name, c.area, c.description, c.mascot_note,
-   ...(c.cuisines || []), ...(c.vibe_tags || [])]
-    .join(" ")
-    .toLowerCase();
 
 export default function Home() {
   const [selected, setSelected] = useState({ area: "", type: "", budget: "" });
@@ -46,25 +40,44 @@ export default function Home() {
     [],
   );
 
-  const results = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return cafes
-      .filter((c) => {
-        if (selected.area && c.area !== selected.area) return false;
-        if (selected.budget && c.price_band !== selected.budget) return false;
-        if (
-          selected.type &&
-          !(c.vibe_tags || []).some(
-            (t) => t.toLowerCase() === selected.type.toLowerCase(),
-          )
+  // Typing and the chips do the same job from different ends: the chips narrow
+  // the list, the words rank what is left. If the two together leave nothing,
+  // the words win and the chips are reported as ignored — a typed query is a
+  // clearer statement of intent than a chip someone forgot they clicked.
+  const { results, searchNote } = useMemo(() => {
+    const chipped = cafes.filter((c) => {
+      if (selected.area && c.area !== selected.area) return false;
+      if (selected.budget && c.price_band !== selected.budget) return false;
+      if (
+        selected.type &&
+        !(c.vibe_tags || []).some(
+          (t) => t.toLowerCase() === selected.type.toLowerCase(),
         )
-          return false;
-        if (q && !haystack(c).includes(q)) return false;
-        if (keywords.length && !keywords.some((k) => haystack(c).includes(k)))
-          return false;
-        return true;
-      })
-      .sort((a, b) => (a.popularity_rank ?? 999) - (b.popularity_rank ?? 999));
+      )
+        return false;
+      return true;
+    });
+
+    const q = query.trim() || keywords.join(" ");
+    if (!q) {
+      return {
+        results: [...chipped].sort(
+          (a, b) => (a.popularity_rank ?? 999) - (b.popularity_rank ?? 999),
+        ),
+        searchNote: "",
+      };
+    }
+
+    const inChips = matchQuery(chipped, q);
+    if (inChips.results.length)
+      return { results: inChips.results, searchNote: inChips.note };
+
+    const everywhere = matchQuery(cafes, q);
+    if (!everywhere.results.length) return { results: [], searchNote: "" };
+    return {
+      results: everywhere.results,
+      searchNote: `Nothing fit that inside your filters, so I looked across all ${TOTAL}.`,
+    };
   }, [query, selected, keywords]);
 
   const reset = () => {
@@ -162,7 +175,7 @@ export default function Home() {
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && text.trim()) askAi();
                 }}
-                placeholder="look for something… italian? cheap coffee?"
+                placeholder="try breakfast, pasta, somewhere to work…"
                 className="handwritten min-w-0 flex-1 border-0 border-b-2 border-dashed border-edge-strong bg-transparent px-1 py-1.5 text-[19px] text-deep placeholder:text-[#A8977F] focus:outline-none focus-visible:border-honey-deep"
               />
               <button
@@ -207,9 +220,9 @@ export default function Home() {
                 clear
               </button>
             )}
-            {relaxNote && (
+            {(relaxNote || searchNote) && (
               <p className="basis-full text-xs font-semibold text-cocoa">
-                {relaxNote}
+                {relaxNote || searchNote}
               </p>
             )}
           </section>
