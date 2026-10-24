@@ -543,31 +543,55 @@ body {
   pointer-events: none;
 }
 
-/* Darker nicks at the torn ends. */
-.tape::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(90, 60, 25, 0.22) 0 2px, transparent 2px),
-    linear-gradient(270deg, rgba(90, 60, 25, 0.22) 0 2px, transparent 2px);
-}
-
+/* Translucent sepia tape, the sticker-pack kind: you read the card and the
+   paper grid straight through it, the ends are torn rather than cut, and a
+   diagonal sheen sits on top. Opaque kraft was the wrong reference — it hid
+   what it was holding down. */
 .tape--kraft {
-  /* Fibres run along the strip only. Gradients in both directions read as
-     plaid, not paper — three periods that do not divide into each other keep
-     the grain irregular instead of striped. */
   background:
+    /* gloss */
+    linear-gradient(104deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.42) 18%,
+      rgba(255, 255, 255, 0.06) 30%,
+      rgba(255, 255, 255, 0) 46%,
+      rgba(255, 255, 255, 0.16) 72%,
+      rgba(255, 255, 255, 0) 88%),
+    /* a few lengthwise crease lines */
     repeating-linear-gradient(0deg,
-      rgba(120, 82, 42, 0.09) 0 1px, transparent 1px 5px),
-    repeating-linear-gradient(0deg,
-      rgba(120, 82, 42, 0.06) 0 1px, transparent 1px 11px),
-    repeating-linear-gradient(0deg,
-      rgba(255, 246, 232, 0.08) 0 1px, transparent 1px 7px),
+      rgba(120, 78, 36, 0.07) 0 1px, transparent 1px 6px),
+    /* the sepia body — low alpha, so the card shows through */
     linear-gradient(180deg,
-      rgba(212, 174, 128, 0.94) 0%,
-      rgba(192, 150, 102, 0.94) 55%,
-      rgba(174, 132, 86, 0.94) 100%);
+      rgba(166, 115, 60, 0.56) 0%,
+      rgba(142, 94, 44, 0.62) 52%,
+      rgba(160, 112, 58, 0.54) 100%);
+  box-shadow:
+    0 1px 2px rgba(90, 60, 25, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  /* torn ends */
+  clip-path: polygon(
+    0% 0%, 100% 0%,
+    98.2% 11%, 100% 24%, 97.4% 39%, 99.6% 56%, 97.8% 72%, 100% 86%, 98.6% 100%,
+    1.6% 100%,
+    0.3% 88%, 2.8% 73%, 0.8% 57%, 2.4% 41%, 0% 26%, 1.9% 12%
+  );
+}
+/* Three tear profiles so no two strips are ripped the same way. */
+.tape--left.tape--kraft {
+  clip-path: polygon(
+    0% 0%, 100% 0%,
+    97.6% 9%, 99.8% 25%, 98% 42%, 100% 58%, 97.2% 74%, 99.4% 89%, 98% 100%,
+    1.2% 100%,
+    2.6% 84%, 0.4% 69%, 2.2% 52%, 0.2% 36%, 2.9% 21%, 0.6% 8%
+  );
+}
+.tape--mid.tape--kraft {
+  clip-path: polygon(
+    0% 0%, 100% 0%,
+    98.8% 13%, 96.9% 29%, 99.5% 45%, 97.6% 62%, 99.9% 78%, 97.9% 93%, 99.2% 100%,
+    1.8% 100%,
+    0.2% 86%, 2.1% 70%, 0.6% 54%, 3.1% 38%, 0.9% 23%, 2.4% 9%
+  );
 }
 
 /* Washi, kept for the cards that have earned a second look. */
