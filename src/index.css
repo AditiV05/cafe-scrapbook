@@ -428,6 +428,14 @@ body {
     0 24px 60px -18px rgba(90, 60, 25, 0.5);
 }
 
+/* Full-bleed: the notebook IS the page, so it drops the card treatment —
+   no rounded corners, no drop shadow, nothing to sit on. */
+.paper--full {
+  border-radius: 0;
+  box-shadow: none;
+  background-attachment: fixed; /* grid stays put instead of sliding on scroll */
+}
+
 /* Punched holes and the red margin rule. */
 .paper::before {
   content: "";
