@@ -235,7 +235,7 @@ export default function Home() {
             />
           ) : (
             <div className="note tilt-0 mx-auto max-w-sm text-center">
-              <span aria-hidden="true" className="tape tape--c" />
+              <span aria-hidden="true" className="tape tape--washi-c tape--mid" />
               <p className="handwritten text-[22px] text-[#3A3024]">
                 nothing matches that…
               </p>

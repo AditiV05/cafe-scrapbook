@@ -88,7 +88,7 @@ export default function CafeDetailsPage() {
           style={{ "--spine": hue.spine }}
           className="note tilt-0 relative ml-[clamp(1rem,2.4vw,2rem)] px-[clamp(1.1rem,3.6vw,2rem)] py-[clamp(1.3rem,3.4vw,2rem)]"
         >
-          <span aria-hidden="true" className="tape tape--a" />
+          <span aria-hidden="true" className="tape tape--kraft tape--left" />
           <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-start">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
               <div
@@ -178,7 +178,7 @@ export default function CafeDetailsPage() {
         {cafe.mascot_note && (
           <section className="ml-[clamp(1rem,2.4vw,2rem)] flex justify-center md:justify-start">
             <div className="note tilt-2 max-w-2xl">
-              <span aria-hidden="true" className="tape tape--c" />
+              <span aria-hidden="true" className="tape tape--washi-c tape--mid" />
               <p className="handwritten text-[clamp(1.15rem,2.6vw,1.45rem)] leading-snug text-[#3A3024]">
                 {cafe.mascot_note}
               </p>
