@@ -14,7 +14,9 @@ export default function ScrapNote({ cafe, index, isHighlighted }) {
     <Link
       to={`/cafe/${cafe.id}`}
       id={cafe.id}
-      className={`note ${d.tint} ${d.tilt} ${isHighlighted ? "note--flash" : ""}`}
+      className={`note ${d.tint} ${d.tilt} ${
+        d.sticker || d.badge ? "note--deco" : ""
+      } ${isHighlighted ? "note--flash" : ""}`}
     >
       <span aria-hidden="true" className={`tape ${d.tape}`} />
       {d.clip && <span aria-hidden="true" className="clip" />}
