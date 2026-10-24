@@ -74,11 +74,11 @@ export default function CafeDetailsPage() {
       : "You might also like";
 
   return (
-    <main className="page-shell min-h-screen">
-      <div className="mx-auto max-w-5xl space-y-[clamp(1.5rem,3.4vw,2rem)]">
+    <main className="desk page-shell min-h-screen">
+      <div className="paper mx-auto max-w-5xl space-y-[clamp(1.5rem,3.4vw,2rem)] px-[clamp(1rem,3vw,2rem)] pb-10 pt-[clamp(1rem,3vw,1.75rem)]">
         <button
           onClick={() => navigate(-1)}
-          className="text-sm font-semibold text-muted transition hover:text-deep"
+          className="ml-[clamp(1rem,2.4vw,2rem)] text-sm font-semibold text-muted transition hover:text-deep"
         >
           ← Back to results
         </button>
@@ -86,8 +86,9 @@ export default function CafeDetailsPage() {
         {/* ── HERO ── */}
         <section
           style={{ "--spine": hue.spine }}
-          className="paper-card rounded-3xl px-[clamp(1.1rem,3.6vw,2rem)] py-[clamp(1.3rem,3.4vw,2rem)] shadow-lift"
+          className="note tilt-0 relative ml-[clamp(1rem,2.4vw,2rem)] px-[clamp(1.1rem,3.6vw,2rem)] py-[clamp(1.3rem,3.4vw,2rem)]"
         >
+          <span aria-hidden="true" className="tape tape--a" />
           <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-start">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
               <div
@@ -106,7 +107,7 @@ export default function CafeDetailsPage() {
                 </p>
 
                 <h1 className="font-display text-[clamp(1.6rem,5.4vw,3rem)] font-bold leading-[1.1] text-deep [text-wrap:balance]">
-                  {cafe.name}
+                  <span className="marker">{cafe.name}</span>
                 </h1>
 
                 <p className="text-sm font-semibold text-faint md:text-base">
@@ -175,14 +176,13 @@ export default function CafeDetailsPage() {
             Hand-written per café, and the only non-generated prose in the
             dataset. It used to sit at the very bottom of the page. */}
         {cafe.mascot_note && (
-          <section className="flex justify-center md:justify-start">
-            <PixelMascot
-              subtitle={cafe.mascot_note}
-              mood="playful"
-              size="lg"
-              glowColor={hue.tint}
-              wide
-            />
+          <section className="ml-[clamp(1rem,2.4vw,2rem)] flex justify-center md:justify-start">
+            <div className="note tilt-2 max-w-2xl">
+              <span aria-hidden="true" className="tape tape--c" />
+              <p className="handwritten text-[clamp(1.15rem,2.6vw,1.45rem)] leading-snug text-[#3A3024]">
+                {cafe.mascot_note}
+              </p>
+            </div>
           </section>
         )}
 
@@ -191,10 +191,10 @@ export default function CafeDetailsPage() {
             highlights are empty in all 45 rows, so those boxes could only
             ever render two sparse tiles. */}
         <section>
-          <h2 className="mb-3 font-display text-[clamp(1.25rem,2.6vw,1.5rem)] font-bold text-deep">
+          <h2 className="mb-3 ml-[clamp(1rem,2.4vw,2rem)] font-display text-[clamp(1.25rem,2.6vw,1.5rem)] font-bold text-deep">
             At a glance
           </h2>
-          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-edge bg-edge shadow-soft sm:grid-cols-4">
+          <dl className="ml-[clamp(1rem,2.4vw,2rem)] grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-edge bg-edge shadow-soft sm:grid-cols-4">
             <div className="bg-surface p-4">
               <Stat label="Rating" hint="out of 5">
                 {cafe.rating ?? "—"}
@@ -220,10 +220,10 @@ export default function CafeDetailsPage() {
 
         {/* ── LOCATION ── */}
         <section>
-          <h2 className="mb-3 font-display text-[clamp(1.25rem,2.6vw,1.5rem)] font-bold text-deep">
+          <h2 className="mb-3 ml-[clamp(1rem,2.4vw,2rem)] font-display text-[clamp(1.25rem,2.6vw,1.5rem)] font-bold text-deep">
             Location
           </h2>
-          <div className="flex flex-col gap-3 rounded-2xl border border-edge bg-surface p-4 shadow-soft">
+          <div className="ml-[clamp(1rem,2.4vw,2rem)] flex flex-col gap-3 rounded-2xl border border-edge bg-surface p-4 shadow-soft">
             <div className="aspect-[16/9] max-h-72 overflow-hidden rounded-xl border border-edge bg-cream">
               <iframe
                 title={`Map showing ${cafe.name}`}
@@ -256,7 +256,7 @@ export default function CafeDetailsPage() {
             The page used to end here with nothing to do next. */}
         {related.length > 0 && (
           <section>
-            <div className="mb-3 flex items-baseline justify-between gap-3">
+            <div className="mb-3 ml-[clamp(1rem,2.4vw,2rem)] flex items-baseline justify-between gap-3">
               <h2 className="font-display text-[clamp(1.25rem,2.6vw,1.5rem)] font-bold text-deep">
                 {relatedLabel}
               </h2>
@@ -267,7 +267,7 @@ export default function CafeDetailsPage() {
                 See all {TOTAL} →
               </Link>
             </div>
-            <div className="card-grid">
+            <div className="ml-[clamp(1rem,2.4vw,2rem)] card-grid">
               {related.map((c) => (
                 <CafeCard key={c.id} cafe={c} />
               ))}

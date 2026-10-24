@@ -392,6 +392,272 @@ body {
   .results-head { grid-template-columns: 1fr auto; }
 }
 
+/* ──────────────────────────────────────────────────────────────
+   SCRAPBOOK
+   The project is called cafe-scrapbook, so the page is a notebook
+   page: graph paper, washi tape, marker, clips and stickers. The
+   hand-written mascot notes — the only prose in the dataset that
+   isn't generated — are set in a handwriting face, because that is
+   what they are.
+   ────────────────────────────────────────────────────────────── */
+
+/* The desk the book sits on. */
+.desk {
+  background-color: #d9c7ac;
+  background-image:
+    radial-gradient(60rem 40rem at 15% 0%, rgba(255, 248, 235, 0.55), transparent 60%),
+    radial-gradient(50rem 40rem at 90% 95%, rgba(150, 115, 75, 0.25), transparent 60%);
+  background-attachment: fixed;
+}
+
+/* The page. overflow-x:clip matters — stickers hang off the cards, and
+   without it the right-hand ones push the document sideways on a phone. */
+.paper {
+  position: relative;
+  overflow-x: clip;
+  border-radius: 2px;
+  background-color: #fdfbf3;
+  background-image:
+    linear-gradient(rgba(120, 150, 180, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 150, 180, 0.16) 1px, transparent 1px),
+    linear-gradient(rgba(120, 150, 180, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 150, 180, 0.07) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  box-shadow:
+    0 2px 4px rgba(90, 60, 25, 0.18),
+    0 24px 60px -18px rgba(90, 60, 25, 0.5);
+}
+
+/* Punched holes and the red margin rule. */
+.paper::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 30px;
+  border-right: 1px solid rgba(200, 90, 80, 0.3);
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 46px,
+    rgba(0, 0, 0, 0.055) 46px 62px,
+    transparent 62px 108px
+  );
+  pointer-events: none;
+}
+@media (min-width: 48rem) {
+  .paper::before { width: 52px; }
+}
+
+.handwritten { font-family: Caveat, "Segoe Script", cursive; }
+
+/* ── Highlighter ──
+   A skewed gradient with soft ends, multiplied into the paper, so it
+   reads as ink soaking in rather than a coloured rectangle. */
+.marker {
+  position: relative;
+  z-index: 0;
+  padding: 0 3px;
+}
+.marker::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -3px;
+  right: -3px;
+  top: 14%;
+  bottom: 6%;
+  border-radius: 3px 7px 4px 8px;
+  transform: rotate(-0.5deg);
+  mix-blend-mode: multiply;
+  background: linear-gradient(100deg,
+    rgba(255, 221, 92, 0) 0%, rgba(255, 221, 92, 0.85) 5%,
+    rgba(255, 221, 92, 0.85) 95%, rgba(255, 221, 92, 0) 100%);
+}
+.marker--mint::before {
+  background: linear-gradient(100deg,
+    rgba(150, 232, 186, 0) 0%, rgba(150, 232, 186, 0.8) 5%,
+    rgba(150, 232, 186, 0.8) 95%, rgba(150, 232, 186, 0) 100%);
+}
+.marker--rose::before {
+  background: linear-gradient(100deg,
+    rgba(255, 170, 180, 0) 0%, rgba(255, 170, 180, 0.75) 5%,
+    rgba(255, 170, 180, 0.75) 95%, rgba(255, 170, 180, 0) 100%);
+}
+
+/* ── A pinned-up note ── */
+.note {
+  position: relative;
+  display: block;
+  border-radius: 2px;
+  background: #fffdf5;
+  padding: 17px 17px 14px;
+  box-shadow:
+    0 1px 2px rgba(90, 60, 25, 0.16),
+    0 12px 26px -12px rgba(90, 60, 25, 0.55);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.note:hover {
+  transform: rotate(0deg) translateY(-3px) scale(1.012);
+  box-shadow:
+    0 2px 4px rgba(90, 60, 25, 0.2),
+    0 20px 38px -14px rgba(90, 60, 25, 0.6);
+  z-index: 3;
+}
+.note:focus-visible {
+  outline: 3px solid var(--accent-yellow-deep);
+  outline-offset: 3px;
+}
+.note--tintA { background: #fff9ea; }
+.note--tintB { background: #f4faf3; }
+.note--tintC { background: #fdf2f0; }
+
+@keyframes note-flash {
+  0% { box-shadow: 0 0 0 5px rgba(240, 173, 51, 0.9), 0 12px 26px -12px rgba(90, 60, 25, 0.55); }
+  100% { box-shadow: 0 0 0 0 rgba(240, 173, 51, 0), 0 12px 26px -12px rgba(90, 60, 25, 0.55); }
+}
+.note--flash { animation: note-flash 1.5s ease-out; }
+
+/* ── Washi tape ── */
+.tape {
+  position: absolute;
+  top: -12px;
+  height: 24px;
+  width: 84px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  pointer-events: none;
+}
+.tape--a {
+  left: 22px;
+  transform: rotate(-3deg);
+  background: repeating-linear-gradient(45deg,
+    rgba(226, 160, 120, 0.55) 0 6px, rgba(240, 196, 150, 0.55) 6px 12px);
+}
+.tape--b {
+  right: 18px;
+  transform: rotate(4deg);
+  background: repeating-linear-gradient(45deg,
+    rgba(150, 196, 170, 0.5) 0 6px, rgba(196, 226, 206, 0.5) 6px 12px);
+}
+.tape--c {
+  left: 50%;
+  width: 62px;
+  margin-left: -31px;
+  transform: rotate(1.5deg);
+  background: repeating-linear-gradient(45deg,
+    rgba(196, 170, 214, 0.45) 0 6px, rgba(222, 206, 236, 0.45) 6px 12px);
+}
+
+/* ── Paper clip ── */
+.clip {
+  position: absolute;
+  top: -14px;
+  left: -9px;
+  width: 18px;
+  height: 40px;
+  border: 3px solid #9aa6ae;
+  border-radius: 9px;
+  border-bottom-color: transparent;
+  transform: rotate(-13deg);
+  pointer-events: none;
+}
+
+/* ── Stickers: the ten mascot sprites that shipped unused ── */
+.sticker {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 3px 5px rgba(90, 60, 25, 0.42));
+  pointer-events: none;
+}
+.sticker--tr { top: -40px; right: -30px; transform: rotate(9deg); }
+.sticker--br { bottom: -36px; right: -30px; transform: rotate(-7deg); }
+.sticker--bl { bottom: -38px; left: -34px; transform: rotate(8deg); }
+
+.badge-pin {
+  position: absolute;
+  top: -13px;
+  right: -11px;
+  transform: rotate(8deg);
+  border-radius: 3px;
+  padding: 5px 9px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #fff3e2;
+  background: #c0392b;
+  box-shadow: 0 3px 7px rgba(140, 50, 30, 0.42);
+  pointer-events: none;
+}
+
+/* Hand-drawn ring round a name. Two gotchas, both hit in testing:
+   1. it needs a positioned wrapper — on a static parent it resolves against
+      the whole card and circles everything;
+   2. it must NOT be called `.ring`. Tailwind ships a `.ring` utility, so the
+      element got a blue box-shadow ring on top of this red border and
+      rendered as two offset ellipses. */
+.scribble-wrap { position: relative; display: inline-block; }
+.scribble {
+  position: absolute;
+  inset: -9px -13px;
+  border: 2.5px solid rgba(192, 57, 43, 0.5);
+  border-radius: 52% 48% 49% 51% / 46% 52% 48% 54%;
+  transform: rotate(-1.8deg);
+  pointer-events: none;
+}
+
+/* ── The board ──
+   CSS multi-column was the obvious choice and the wrong one: columns fill
+   top-to-bottom, so a ranked list reads 1, 14, 28 across the first row.
+   Flex columns fed round-robin keep rank order reading left to right while
+   still letting the cards stagger. */
+.board { display: flex; gap: 34px; align-items: flex-start; }
+.board__col { display: flex; min-width: 0; flex: 1 1 0; flex-direction: column; gap: 30px; }
+
+/* Rotation is the whole charm, but 45 tilted cards is seasickness. Only
+   the first dozen tilt, and less as you go. */
+.tilt-1 { transform: rotate(-1.05deg); }
+.tilt-2 { transform: rotate(0.75deg); }
+.tilt-3 { transform: rotate(-0.45deg); }
+.tilt-4 { transform: rotate(1.15deg); }
+.tilt-0 { transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .note, .tilt-1, .tilt-2, .tilt-3, .tilt-4 { transform: none !important; }
+}
+
+/* ── Filter chips, cut from the same paper ── */
+.chip {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 999px;
+  background: #fffdf6;
+  padding: 0.28rem 0.7rem;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b5a45;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.chip:hover { border-color: #a98f6b; color: var(--color-deep); }
+.chip--on {
+  background: #2c241a;
+  border-color: #2c241a;
+  color: #fff8e7;
+}
+.chip__n { font-size: 10px; font-weight: 800; color: #9a8569; }
+.chip--on .chip__n { color: #d9c08e; }
+
+/* Chips scroll sideways on a phone, wrap from tablet up — a chip clipped by
+   a desktop window reads as broken rather than as scrollable. */
+.chip-row { scrollbar-width: none; -ms-overflow-style: none; }
+.chip-row::-webkit-scrollbar { display: none; }
+@media (min-width: 48rem) {
+  .chip-row { flex-wrap: wrap; overflow-x: visible; }
+}
+
 /* Pixel art helper */
 .pixelated {
   image-rendering: pixelated;

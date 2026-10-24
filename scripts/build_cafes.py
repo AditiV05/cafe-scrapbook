@@ -20,7 +20,8 @@ import unicodedata
 
 CSV_PATH = "zom_jaipur.csv"
 OUT_PATH = "cafes.json"
-TOP_N = 40
+TOP_N = 40  # NOTE: cafés added by hand after this run must be re-ranked;
+            # see the duplicate ranks 12-14 that shipped before this was caught
 M = 100  # reviews needed before a café's own rating outweighs the city average
 
 # --- load (dataset is cp1252-encoded because of the "CAFÉ" accent) -----------
