@@ -144,8 +144,8 @@ export default function Home() {
   };
 
   return (
-    <main className="desk min-h-screen px-[clamp(0.6rem,2.5vw,1.6rem)] py-[clamp(0.6rem,2.5vw,1.6rem)]">
-      <div className="paper mx-auto max-w-[1120px] px-[clamp(1rem,3vw,1.9rem)] pb-11 pt-[clamp(1.25rem,3vw,1.9rem)]">
+    <main className="paper paper--full min-h-screen px-[clamp(1rem,3vw,1.9rem)] pb-11 pt-[clamp(1.25rem,3vw,1.9rem)]">
+      <div className="mx-auto max-w-[1120px]">
         <div className="pl-[clamp(1.4rem,2.6vw,2.5rem)]">
           <ScrapHeader count={TOTAL} reviews={totalReviews} />
 

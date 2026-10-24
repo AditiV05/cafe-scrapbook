@@ -74,8 +74,8 @@ export default function CafeDetailsPage() {
       : "You might also like";
 
   return (
-    <main className="desk page-shell min-h-screen">
-      <div className="paper mx-auto max-w-5xl space-y-[clamp(1.5rem,3.4vw,2rem)] px-[clamp(1rem,3vw,2rem)] pb-10 pt-[clamp(1rem,3vw,1.75rem)]">
+    <main className="paper paper--full page-shell min-h-screen">
+      <div className="mx-auto max-w-5xl space-y-[clamp(1.5rem,3.4vw,2rem)] pb-10">
         <button
           onClick={() => navigate(-1)}
           className="ml-[clamp(1rem,2.4vw,2rem)] text-sm font-semibold text-muted transition hover:text-deep"
