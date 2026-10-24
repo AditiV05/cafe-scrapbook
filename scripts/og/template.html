@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>OG card</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Nunito:wght@300;400;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- The site's own stylesheet, so the paper grid, tape, highlighter and
+         sticker here are literally the same rules the app renders. -->
+    <link rel="stylesheet" href="/src/index.css" />
+
+    <style>
+      html, body { margin: 0; padding: 0; background: #fff; }
+
+      /* Exactly the Open Graph frame. Nothing may reflow it. */
+      .og {
+        box-sizing: border-box;
+        width: 1200px;
+        height: 630px;
+        padding: 52px 56px;
+        display: flex;
+        align-items: center;
+        gap: 34px;
+        overflow: hidden;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .col { min-width: 0; }
+      .col--text { width: 620px; }
+      .col--cards { position: relative; width: 440px; }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        color: #7a6a57;
+      }
+
+      h1 { margin: 0; line-height: 0.98; }
+      .serif {
+        display: block;
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        font-size: 74px;
+        color: #1b2a26;
+      }
+      .script {
+        display: block;
+        margin-top: 2px;
+        font-family: Caveat, cursive;
+        font-weight: 700;
+        font-size: 92px;
+        line-height: 1;
+        color: #ab5435;
+      }
+
+      .sub {
+        margin: 18px 0 0;
+        font-family: Caveat, cursive;
+        font-size: 33px;
+        line-height: 1.25;
+        color: #5e5141;
+      }
+
+      .chips { margin-top: 22px; display: flex; gap: 9px; }
+      .chips span {
+        border: 1.5px dashed #d2b795;
+        border-radius: 999px;
+        padding: 5px 13px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #755741;
+      }
+
+      .url {
+        margin: 30px 0 0;
+        font-size: 16px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        color: #755741;
+      }
+
+      /* ── The two cards, scaled up a touch: this image gets shrunk to a
+         thumbnail in a feed, so card text that is 11px on the site is
+         unreadable here. ── */
+      .og .note { width: 392px; padding: 21px 22px 17px; }
+      /* Card A owns the mascot, which hangs into the gap below it — so it has
+         to paint above card B, which comes later in the DOM. */
+      .card-a { margin-left: 24px; transform: rotate(-2.3deg); z-index: 2; }
+      .card-b { margin: 28px 0 0 0; transform: rotate(1.7deg); }
+
+      .rank {
+        display: block;
+        font-family: Caveat, cursive;
+        font-size: 23px;
+        font-weight: 700;
+        line-height: 1;
+        color: #d2694a;
+      }
+      .title {
+        display: block;
+        margin: 3px 0 4px;
+        font-family: "Playfair Display", serif;
+        font-size: 29px;
+        font-weight: 700;
+        line-height: 1.1;
+        color: #1b2a26;
+      }
+      .meta {
+        display: block;
+        margin-bottom: 9px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #7a6a57;
+      }
+      .blurb {
+        display: block;
+        font-family: Caveat, cursive;
+        font-size: 23px;
+        line-height: 1.3;
+        color: #3a3024;
+      }
+      .tags { margin-top: 11px; display: flex; gap: 6px; }
+      .tags span {
+        border: 1px dashed #d2b795;
+        border-radius: 999px;
+        padding: 3px 9px;
+        font-size: 11px;
+        font-weight: 700;
+        color: #755741;
+      }
+      .score {
+        margin-top: 13px;
+        padding-top: 10px;
+        border-top: 1.5px dashed #d2b795;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .score .star { color: #c2731b; font-size: 19px; }
+      .score .n {
+        font-family: Caveat, cursive;
+        font-size: 30px;
+        font-weight: 700;
+        line-height: 1;
+        color: #1b2a26;
+      }
+      .score .reviews { font-size: 13px; font-weight: 600; color: #7a6a57; }
+
+      .og .badge-pin { font-size: 11px; padding: 6px 11px; }
+      /* Far enough left and high enough to clear the "no.02" under it — the
+         mascot should lean on the next card, not sit on its label. */
+      .og .sticker { width: 96px; height: 96px; bottom: -30px; left: -74px; }
+    </style>
+  </head>
+
+  <body>
+    <div class="og paper">
+      <div class="col col--text">
+        <p class="eyebrow">PASTED UP OVER 44,717 REVIEWS</p>
+        <h1>
+          <span class="serif">Jaipur,</span>
+          <span class="script">a café scrapbook</span>
+        </h1>
+        <p class="sub">
+          45 places worth your afternoon — ranked by real reviews, annotated,
+          argued over.
+        </p>
+        <div class="chips">
+          <span>C Scheme</span>
+          <span>Highly Rated</span>
+          <span>Pure Veg</span>
+          <span>₹₹</span>
+        </div>
+        <p class="url">cafe-scrapbook.vercel.app</p>
+      </div>
+
+      <div class="col col--cards">
+        <div class="note card-a">
+          <span class="tape tape--kraft tape--left"></span>
+          <span class="badge-pin" style="background: #c0392b">★ No.1</span>
+          <img class="sticker" src="/src/assets/barista-yay.png" alt="" />
+          <span class="rank">no.01</span>
+          <span class="title"><span class="marker">Tapri Central</span></span>
+          <span class="meta">C Scheme · ₹₹</span>
+          <span class="blurb">
+            The chai-and-Maggi institution of Jaipur — 3,000+ reviews don't lie.
+          </span>
+          <div class="tags"><span>Fast Food</span><span>Street Food</span><span>Pure Veg</span></div>
+          <div class="score">
+            <span class="star">★</span><span class="n">4.9</span>
+            <span class="reviews">3,123 reviews</span>
+          </div>
+        </div>
+
+        <div class="note note--tintB card-b">
+          <span class="tape tape--kraft tape--tone-b tape--right"></span>
+          <span class="rank">no.02</span>
+          <span class="title"><span class="marker marker--mint">Zolocrust</span></span>
+          <span class="meta">Malviya Nagar · ₹₹</span>
+          <span class="blurb">
+            A near-perfect 4.9 inside Clarks Amer — pillowy bakes, good pasta.
+          </span>
+          <div class="tags"><span>Italian</span><span>Beverages</span><span>Asian</span></div>
+          <div class="score">
+            <span class="star">★</span><span class="n">4.9</span>
+            <span class="reviews">1,362 reviews</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
