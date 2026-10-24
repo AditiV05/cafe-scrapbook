@@ -27,7 +27,7 @@ export default {
         // Accents
         honey: "#F0AD33",
         "honey-deep": "#D9901A",
-        terracotta: "#D2694A",
+        terracotta: "#AB5435",
         // Lines
         edge: "#E2CDB4",
         "edge-strong": "#D2B795",
