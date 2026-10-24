@@ -14,7 +14,7 @@
  * Usage:  node scripts/eval_search_offline.js
  */
 import { readFileSync } from "node:fs";
-import { parseQueryLocally, runSearch } from "../src/lib/search.js";
+import { matchQuery, parseQueryLocally, runSearch } from "../src/lib/search.js";
 
 const cafes = JSON.parse(
   readFileSync(new URL("../src/data/cafes.json", import.meta.url), "utf8"),
@@ -46,6 +46,17 @@ const QUERIES = [
   "north indian",
   "somewhere for a date",
   "rooftop vibes",
+  // The words that returned nothing before the typed path was scored.
+  "breakfast",
+  "sandwich",
+  "momos",
+  "somewhere to work",
+  "ice cream",
+  "biryani",
+  "late night snacks",
+  "briyani",
+  "deserts",
+  "a cheap place for pizza",
 ];
 
 // What the old behaviour did: AND the filters, show nothing if empty.
@@ -64,30 +75,37 @@ function strictCount(intent) {
 let strictZero = 0;
 let relaxedZero = 0;
 
+let typedZero = 0;
+
 console.log(
-  `${"query".padEnd(34)}${"strict".padEnd(8)}${"now".padEnd(6)}relaxed`,
+  `${"query".padEnd(26)}${"strict".padEnd(8)}${"typed".padEnd(7)}${"ask".padEnd(6)}top match`,
 );
 for (const q of QUERIES) {
   const intent = parseQueryLocally(q, vocab);
   const strict = strictCount(intent);
-  const { results, droppedLabels } = runSearch(cafes, intent);
+  const { results } = runSearch(cafes, intent);
+  // What the box does as you type it, with no filters and no network.
+  const typed = matchQuery(cafes, q);
   if (strict === 0) strictZero++;
   if (results.length === 0) relaxedZero++;
+  if (typed.results.length === 0) typedZero++;
   console.log(
-    `${q.padEnd(34)}${String(strict).padEnd(8)}${String(results.length).padEnd(6)}${
-      droppedLabels.join(", ") || "—"
-    }`,
+    `${q.padEnd(26)}${String(strict).padEnd(8)}${String(typed.results.length).padEnd(7)}${String(
+      results.length,
+    ).padEnd(6)}${typed.results[0]?.name || "—"}`,
   );
 }
 
 const pct = (n) => `${Math.round((100 * n) / QUERIES.length)}%`;
 console.log(
-  `\nDead ends — before: ${strictZero}/${QUERIES.length} (${pct(strictZero)})` +
-    `   after: ${relaxedZero}/${QUERIES.length} (${pct(relaxedZero)})`,
+  `\nDead ends — hard filters: ${strictZero}/${QUERIES.length} (${pct(strictZero)})` +
+    `   typing: ${typedZero}/${QUERIES.length} (${pct(typedZero)})` +
+    `   ask: ${relaxedZero}/${QUERIES.length} (${pct(relaxedZero)})`,
 );
 
-if (relaxedZero > 0) {
-  console.error(`\nFAIL: ${relaxedZero} queries returned nothing.`);
+const dead = relaxedZero + typedZero;
+if (dead > 0) {
+  console.error(`\nFAIL: ${dead} query/path pairs returned nothing.`);
   process.exit(1);
 }
-console.log("PASS: every query returns at least one café.");
+console.log("PASS: every query returns at least one café on both paths.");
