@@ -19,9 +19,20 @@ import sleep from "../assets/barista-sleep.png";
 import sad from "../assets/barista-sad.png";
 
 const STICKERS = [yay, wave, think1, point, chaos, idle, think2, caught, sleep, sad];
-const TAPES = ["tape--a", "tape--b", "tape--c"];
+const TAPE_POS = ["tape--left", "tape--right", "tape--mid"];
+const WASHI = ["tape--washi-a", "tape--washi-b", "tape--washi-c"];
 const MARKERS = ["marker", "marker marker--mint", "marker marker--rose"];
 const TINTS = ["", "", "note--tintA", "", "note--tintB", "", "note--tintC"];
+
+// Kraft by default. Washi goes on the cards that are already singled out —
+// the badged ones — plus a sparse scattering, so the colour reinforces what
+// the eye is drawn to instead of competing with it. Roughly one card in five.
+function tapeFor(index, rank) {
+  const pos = TAPE_POS[index % TAPE_POS.length];
+  const special = rank === 1 || rank === 3 || index % 7 === 4;
+  const skin = special ? WASHI[index % WASHI.length] : "tape--kraft";
+  return `${skin} ${pos}`;
+}
 
 export function decorate(index, rank) {
   const early = index < 12; // roughly the first screenful on a laptop
@@ -36,7 +47,7 @@ export function decorate(index, rank) {
   return {
     tilt: early ? `tilt-${(index % 4) + 1}` : "tilt-0",
     tint: TINTS[index % TINTS.length],
-    tape: TAPES[index % TAPES.length],
+    tape: tapeFor(index, rank),
     marker: MARKERS[index % MARKERS.length],
     // never a clip and a ring on the same card — together they read as one
     // muddled blue-grey shape instead of two different annotations

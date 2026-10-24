@@ -524,7 +524,16 @@ body {
 }
 .note--flash { animation: note-flash 1.5s ease-out; }
 
-/* ── Washi tape ── */
+/* ── Tape ──
+   Brown gummed kraft is the default, because that is the tape that is
+   actually on the desk. When every card wore washi the colour stopped
+   meaning anything — the same mistake the pastel cards made. Washi is now
+   the exception, and it lands where attention already is.
+
+   Kraft is built from three layers: lengthwise paper fibres, a faint
+   cross-weave, and the tan base. It is slightly translucent so the card
+   tint shows through, and matte rather than glossy — gummed paper tape,
+   not plastic parcel tape. */
 .tape {
   position: absolute;
   top: -12px;
@@ -533,26 +542,76 @@ body {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
   pointer-events: none;
 }
-.tape--a {
-  left: 22px;
-  transform: rotate(-3deg);
-  background: repeating-linear-gradient(45deg,
-    rgba(226, 160, 120, 0.55) 0 6px, rgba(240, 196, 150, 0.55) 6px 12px);
+
+/* Translucent sepia tape, the sticker-pack kind: you read the card and the
+   paper grid straight through it, the ends are torn rather than cut, and a
+   diagonal sheen sits on top. Opaque kraft was the wrong reference — it hid
+   what it was holding down. */
+.tape--kraft {
+  background:
+    /* gloss */
+    linear-gradient(104deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.42) 18%,
+      rgba(255, 255, 255, 0.06) 30%,
+      rgba(255, 255, 255, 0) 46%,
+      rgba(255, 255, 255, 0.16) 72%,
+      rgba(255, 255, 255, 0) 88%),
+    /* a few lengthwise crease lines */
+    repeating-linear-gradient(0deg,
+      rgba(120, 78, 36, 0.07) 0 1px, transparent 1px 6px),
+    /* the sepia body — low alpha, so the card shows through */
+    linear-gradient(180deg,
+      rgba(166, 115, 60, 0.56) 0%,
+      rgba(142, 94, 44, 0.62) 52%,
+      rgba(160, 112, 58, 0.54) 100%);
+  box-shadow:
+    0 1px 2px rgba(90, 60, 25, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  /* torn ends */
+  clip-path: polygon(
+    0% 0%, 100% 0%,
+    98.2% 11%, 100% 24%, 97.4% 39%, 99.6% 56%, 97.8% 72%, 100% 86%, 98.6% 100%,
+    1.6% 100%,
+    0.3% 88%, 2.8% 73%, 0.8% 57%, 2.4% 41%, 0% 26%, 1.9% 12%
+  );
 }
-.tape--b {
-  right: 18px;
-  transform: rotate(4deg);
-  background: repeating-linear-gradient(45deg,
-    rgba(150, 196, 170, 0.5) 0 6px, rgba(196, 226, 206, 0.5) 6px 12px);
+/* Three tear profiles so no two strips are ripped the same way. */
+.tape--left.tape--kraft {
+  clip-path: polygon(
+    0% 0%, 100% 0%,
+    97.6% 9%, 99.8% 25%, 98% 42%, 100% 58%, 97.2% 74%, 99.4% 89%, 98% 100%,
+    1.2% 100%,
+    2.6% 84%, 0.4% 69%, 2.2% 52%, 0.2% 36%, 2.9% 21%, 0.6% 8%
+  );
 }
-.tape--c {
-  left: 50%;
-  width: 62px;
-  margin-left: -31px;
-  transform: rotate(1.5deg);
-  background: repeating-linear-gradient(45deg,
-    rgba(196, 170, 214, 0.45) 0 6px, rgba(222, 206, 236, 0.45) 6px 12px);
+.tape--mid.tape--kraft {
+  clip-path: polygon(
+    0% 0%, 100% 0%,
+    98.8% 13%, 96.9% 29%, 99.5% 45%, 97.6% 62%, 99.9% 78%, 97.9% 93%, 99.2% 100%,
+    1.8% 100%,
+    0.2% 86%, 2.1% 70%, 0.6% 54%, 3.1% 38%, 0.9% 23%, 2.4% 9%
+  );
 }
+
+/* Washi, kept for the cards that have earned a second look. */
+.tape--washi-a {
+  background: repeating-linear-gradient(45deg,
+    rgba(226, 160, 120, 0.6) 0 6px, rgba(240, 196, 150, 0.6) 6px 12px);
+}
+.tape--washi-b {
+  background: repeating-linear-gradient(45deg,
+    rgba(150, 196, 170, 0.55) 0 6px, rgba(196, 226, 206, 0.55) 6px 12px);
+}
+.tape--washi-c {
+  background: repeating-linear-gradient(45deg,
+    rgba(196, 170, 214, 0.5) 0 6px, rgba(222, 206, 236, 0.5) 6px 12px);
+}
+
+/* Where the strip sits, independent of what it is made of. */
+.tape--left { left: 22px; transform: rotate(-3deg); }
+.tape--right { right: 18px; transform: rotate(4deg); }
+.tape--mid { left: 50%; width: 62px; margin-left: -31px; transform: rotate(1.5deg); }
 
 /* ── Paper clip ── */
 .clip {
