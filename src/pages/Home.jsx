@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import cafes from "../data/cafes.json";
 import ScrapHeader from "../components/ScrapHeader";
 import ScrapNote from "../components/ScrapNote";
@@ -8,6 +8,35 @@ import PixelMascot from "../components/PixelMascot";
 import { matchQuery, parseQueryLocally, runSearch } from "../lib/search";
 
 const TOTAL = cafes.length;
+
+const reducedMotion = () =>
+  window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+
+/**
+ * Runs `done` once the page has stopped scrolling, and returns a cancel.
+ *
+ * `scrollend` would be the right event, but Safari only shipped it in 18, so
+ * this watches the position settle instead. The frame cap stops it hanging
+ * forever if a scroll never lands.
+ */
+function whenScrollSettles(done) {
+  let id = 0;
+  let last = window.scrollY;
+  let still = 0;
+  let frames = 0;
+  const tick = () => {
+    const y = window.scrollY;
+    still = y === last ? still + 1 : 0;
+    last = y;
+    if (still >= 3 || ++frames > 180) {
+      done();
+      return;
+    }
+    id = requestAnimationFrame(tick);
+  };
+  id = requestAnimationFrame(tick);
+  return () => cancelAnimationFrame(id);
+}
 
 export default function Home() {
   const [selected, setSelected] = useState({ area: "", type: "", budget: "" });
@@ -19,6 +48,17 @@ export default function Home() {
   const [baristaReply, setBaristaReply] = useState("");
   const [aiLoading, setAiLoading] = useState(false);
   const [highlightedId, setHighlightedId] = useState("");
+  const flashTimer = useRef(0);
+  const cancelSettle = useRef(null);
+  const lastPick = useRef("");
+
+  useEffect(
+    () => () => {
+      clearTimeout(flashTimer.current);
+      cancelSettle.current?.();
+    },
+    [],
+  );
 
   // 45 rows filter instantly, so typing filters as you type.
   useEffect(() => {
@@ -147,13 +187,37 @@ export default function Home() {
   };
 
   const surprise = () => {
-    const pool = results.length ? results : cafes;
-    const pick = pool[Math.floor(Math.random() * pool.length)];
-    setHighlightedId(pick.id);
-    document
-      .getElementById(pick.id)
-      ?.scrollIntoView({ behavior: "smooth", block: "center" });
-    setTimeout(() => setHighlightedId(""), 1600);
+    // Rolling with an empty board would pick a café that isn't rendered, so
+    // the scroll and the flash both go nowhere. Let the whole list back in.
+    const empty = results.length === 0;
+    const pool = empty ? cafes : results;
+    const choices =
+      pool.length > 1 ? pool.filter((c) => c.id !== lastPick.current) : pool;
+    const pick = choices[Math.floor(Math.random() * choices.length)];
+    lastPick.current = pick.id;
+    if (empty) reset();
+
+    // A second roll must not inherit the first one's timers: the old code let
+    // the previous 1.6s timeout wipe the new highlight mid-animation.
+    clearTimeout(flashTimer.current);
+    cancelSettle.current?.();
+    setHighlightedId("");
+
+    requestAnimationFrame(() => {
+      const el = document.getElementById(pick.id);
+      if (!el) return;
+      el.scrollIntoView({
+        behavior: reducedMotion() ? "auto" : "smooth",
+        block: "center",
+      });
+      // Light the card on arrival, not on departure. A roll to the bottom of
+      // the board takes ~1.4s to land and the flash only ran for 1.5s, so
+      // half the time you got there to find nothing marked.
+      cancelSettle.current = whenScrollSettles(() => {
+        setHighlightedId(pick.id);
+        flashTimer.current = setTimeout(() => setHighlightedId(""), 2300);
+      });
+    });
   };
 
   return (
@@ -187,11 +251,12 @@ export default function Home() {
               </button>
               <button
                 onClick={surprise}
-                title="Pin a random café"
-                aria-label="Pin a random café"
-                className="btn-ghost shrink-0 rounded-full px-3 py-2 text-sm"
+                title="Pick a café at random"
+                className="btn-ghost shrink-0 rounded-full px-3 py-2 text-xs font-bold"
               >
-                🎲
+                <span aria-hidden="true" className="text-sm">🎲</span>
+                <span className="ml-1.5 hidden sm:inline">Surprise me</span>
+                <span className="sr-only sm:hidden">Surprise me</span>
               </button>
             </div>
 
