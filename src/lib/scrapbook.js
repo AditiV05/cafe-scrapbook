@@ -27,11 +27,15 @@ const TINTS = ["", "", "note--tintA", "", "note--tintB", "", "note--tintC"];
 // Kraft by default. Washi goes on the cards that are already singled out —
 // the badged ones — plus a sparse scattering, so the colour reinforces what
 // the eye is drawn to instead of competing with it. Roughly one card in five.
+const TONES = ["", "tape--tone-b", "tape--tone-c", "tape--tone-d"];
+
 function tapeFor(index, rank) {
   const pos = TAPE_POS[index % TAPE_POS.length];
   const special = rank === 1 || rank === 3 || index % 7 === 4;
-  const skin = special ? WASHI[index % WASHI.length] : "tape--kraft";
-  return `${skin} ${pos}`;
+  if (special) return `${WASHI[index % WASHI.length]} ${pos}`;
+  // Columns are dealt round-robin, so index % 4 against 3 columns walks the
+  // tones down each column rather than repeating one shade.
+  return `tape--kraft ${TONES[index % TONES.length]} ${pos}`;
 }
 
 export function decorate(index, rank) {

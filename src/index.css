@@ -560,11 +560,12 @@ body {
     /* a few lengthwise crease lines */
     repeating-linear-gradient(0deg,
       rgba(120, 78, 36, 0.07) 0 1px, transparent 1px 6px),
-    /* the sepia body — low alpha, so the card shows through */
+    /* the sepia body — low alpha, so the card shows through. The tone comes
+       from custom properties so one gradient serves every shade. */
     linear-gradient(180deg,
-      rgba(166, 115, 60, 0.56) 0%,
-      rgba(142, 94, 44, 0.62) 52%,
-      rgba(160, 112, 58, 0.54) 100%);
+      var(--tape-top) 0%,
+      var(--tape-mid) 52%,
+      var(--tape-bot) 100%);
   box-shadow:
     0 1px 2px rgba(90, 60, 25, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.28);
@@ -592,6 +593,30 @@ body {
     1.8% 100%,
     0.2% 86%, 2.1% 70%, 0.6% 54%, 3.1% 38%, 0.9% 23%, 2.4% 9%
   );
+}
+
+/* Four tones so a column of strips does not look stamped from one die.
+   All four sit on the warm side of brown — the previous single tone read
+   grey once it was 56% transparent over a cream card. */
+.tape--kraft {
+  --tape-top: rgba(178, 112, 52, 0.58);
+  --tape-mid: rgba(152, 88, 36, 0.64);
+  --tape-bot: rgba(170, 106, 48, 0.56);
+}
+.tape--tone-b {
+  --tape-top: rgba(170, 98, 46, 0.62);
+  --tape-mid: rgba(144, 76, 32, 0.68);
+  --tape-bot: rgba(162, 92, 42, 0.6);
+}
+.tape--tone-c {
+  --tape-top: rgba(194, 142, 84, 0.5);
+  --tape-mid: rgba(172, 118, 62, 0.56);
+  --tape-bot: rgba(188, 136, 78, 0.48);
+}
+.tape--tone-d {
+  --tape-top: rgba(150, 92, 40, 0.66);
+  --tape-mid: rgba(124, 70, 26, 0.72);
+  --tape-bot: rgba(142, 86, 36, 0.64);
 }
 
 /* Washi, kept for the cards that have earned a second look. */
