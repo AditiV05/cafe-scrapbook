@@ -524,11 +524,20 @@ body {
    neighbours; hover still beats it at 3. */
 .note--deco { z-index: 2; }
 
+/* The "surprise me" marker. It fired as a single fade before, which read as a
+   flicker at the end of a long scroll — now it snaps on, pulses once and
+   holds a beat before letting go. Only box-shadow animates: the card is also
+   carrying a .tilt-* rotation, and a transform here would fight it. */
 @keyframes note-flash {
-  0% { box-shadow: 0 0 0 5px rgba(240, 173, 51, 0.9), 0 12px 26px -12px rgba(90, 60, 25, 0.55); }
+  0%   { box-shadow: 0 0 0 0 rgba(240, 173, 51, 0), 0 12px 26px -12px rgba(90, 60, 25, 0.55); }
+  8%   { box-shadow: 0 0 0 8px rgba(240, 173, 51, 0.95), 0 12px 26px -12px rgba(90, 60, 25, 0.55); }
+  30%  { box-shadow: 0 0 0 3px rgba(240, 173, 51, 0.95), 0 12px 26px -12px rgba(90, 60, 25, 0.55); }
+  48%  { box-shadow: 0 0 0 8px rgba(240, 173, 51, 0.95), 0 12px 26px -12px rgba(90, 60, 25, 0.55); }
+  75%  { box-shadow: 0 0 0 5px rgba(240, 173, 51, 0.85), 0 12px 26px -12px rgba(90, 60, 25, 0.55); }
   100% { box-shadow: 0 0 0 0 rgba(240, 173, 51, 0), 0 12px 26px -12px rgba(90, 60, 25, 0.55); }
 }
-.note--flash { animation: note-flash 1.5s ease-out; }
+/* Above hover (3), so the ring is never half-covered by the card next to it. */
+.note--flash { animation: note-flash 2.2s ease-out; z-index: 4; }
 
 /* ── Tape ──
    Brown gummed kraft is the default, because that is the tape that is
