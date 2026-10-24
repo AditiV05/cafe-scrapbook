@@ -385,7 +385,7 @@ export default function Home() {
         </section>
 
         {/* Examples, so it is obvious what the search understands. */}
-        <section className="-mt-2 flex flex-wrap items-center gap-2">
+        <section className="mx-auto -mt-2 flex max-w-4xl flex-wrap items-center gap-2">
           <span className="text-xs font-bold uppercase tracking-wider text-faint">
             Try
           </span>
