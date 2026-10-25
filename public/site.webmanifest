@@ -1,0 +1,27 @@
+{
+  "name": "Jaipur, a café scrapbook",
+  "short_name": "Café scrapbook",
+  "description": "45 Jaipur cafés ranked by real reviews, annotated and argued over.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F4E8DA",
+  "theme_color": "#F4E8DA",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

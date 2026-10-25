@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>icon</title>
+    <style>
+      html, body { margin: 0; padding: 0; background: transparent; }
+      #icon { position: relative; overflow: hidden; background: #8e4e20; }
+      #icon img {
+        position: absolute;
+        width: 256px;
+        height: 256px;
+        transform-origin: 0 0;
+        image-rendering: pixelated;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="icon"><img src="/src/assets/barista.png" alt="" /></div>
+    <script type="module">
+      // The head, cropped out of the 256px counter sprite. One source of
+      // truth: every size below is this same box, scaled.
+      const BOX = { x: 58, y: 12, w: 144, h: 113 };
+
+      const q = new URLSearchParams(location.search);
+      const size = Number(q.get("size") || 512);
+      // iOS masks the apple-touch icon itself, so that one is square — rounded
+      // corners inside rounded corners look like a mistake.
+      const radius = q.get("square") ? 0 : size * 0.19;
+      const pad = size * 0.085;
+
+      const el = document.getElementById("icon");
+      el.style.width = el.style.height = `${size}px`;
+      el.style.borderRadius = `${radius}px`;
+
+      const img = el.querySelector("img");
+      const inner = size - pad * 2;
+      const scale = inner / Math.max(BOX.w, BOX.h);
+      // Downscaling pixel art to 16px with nearest-neighbour drops whole rows
+      // of the face; let the browser resample instead.
+      if (size <= 64) img.style.imageRendering = "auto";
+      img.style.transform =
+        `translate(${pad + (inner - BOX.w * scale) / 2}px, ` +
+        `${pad + (inner - BOX.h * scale) / 2}px) ` +
+        `scale(${scale}) translate(${-BOX.x}px, ${-BOX.y}px)`;
+
+      document.fonts.ready.then(() => img.decode()).then(
+        () => document.documentElement.setAttribute("data-ready", "1"),
+        () => document.documentElement.setAttribute("data-ready", "1"),
+      );
+    </script>
+  </body>
+</html>
