@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const hasTag = (cafe, tag) =>
   (cafe.vibe_tags || []).some(
@@ -10,6 +10,49 @@ const MATCH = {
   type: hasTag,
   budget: (c, v) => c.price_band === v,
 };
+
+/**
+ * A chip row that says when there is more of it off-screen.
+ *
+ * Under 768px the rows scroll sideways, and they were simply cut at the edge
+ * — at 360 that hid "Vaishali Nagar", "Durgapura" and "Gopalpura" behind a
+ * clean vertical crop that looks like the end of the list. The fades are the
+ * only thing telling you to swipe.
+ */
+function ChipRail({ children }) {
+  const ref = useRef(null);
+  const [edge, setEdge] = useState({ left: false, right: false });
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const read = () =>
+      setEdge({
+        left: el.scrollLeft > 4,
+        right: el.scrollLeft + el.clientWidth < el.scrollWidth - 4,
+      });
+    read();
+    el.addEventListener("scroll", read, { passive: true });
+    const ro = new ResizeObserver(read);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener("scroll", read);
+      ro.disconnect();
+    };
+  }, [children]);
+
+  return (
+    <div
+      className={`chip-rail ${edge.left ? "chip-rail--l" : ""} ${
+        edge.right ? "chip-rail--r" : ""
+      }`}
+    >
+      <div ref={ref} className="chip-row flex gap-1.5 overflow-x-auto pb-0.5">
+        {children}
+      </div>
+    </div>
+  );
+}
 
 /**
  * One-tap filters that carry their own counts.
@@ -48,11 +91,13 @@ export default function FilterChips({ cafes, selected, onChange }) {
   return (
     <div className="flex flex-col gap-2">
       {groups.map((g) => (
-        <div key={g.key} className="flex items-center gap-2">
-          <span className="w-11 shrink-0 text-[9.5px] font-extrabold uppercase tracking-[0.12em] text-faint">
+        /* items-start, not items-center: when a group wraps to two rows the
+           centred label floated between them instead of beside the first. */
+        <div key={g.key} className="flex items-start gap-2">
+          <span className="w-11 shrink-0 pt-[0.5rem] text-[10.5px] font-extrabold uppercase tracking-[0.1em] text-faint">
             {g.label}
           </span>
-          <div className="chip-row flex gap-1.5 overflow-x-auto pb-0.5">
+          <ChipRail>
             <button
               onClick={() => onChange(g.key, "")}
               aria-pressed={!selected[g.key]}
@@ -74,7 +119,7 @@ export default function FilterChips({ cafes, selected, onChange }) {
                 </button>
               );
             })}
-          </div>
+          </ChipRail>
         </div>
       ))}
     </div>

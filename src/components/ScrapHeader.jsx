@@ -5,7 +5,7 @@
 export default function ScrapHeader({ count, reviews }) {
   return (
     <header className="mb-5">
-      <p className="text-[10px] font-extrabold uppercase tracking-[0.24em] text-cocoa">
+      <p className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-cocoa">
         Pasted up over {reviews.toLocaleString()} reviews
       </p>
       <h1 className="mt-1.5 font-display text-[clamp(1.9rem,6vw,2.75rem)] font-bold leading-[1.04] text-deep">

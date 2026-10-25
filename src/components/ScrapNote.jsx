@@ -70,7 +70,7 @@ export default function ScrapNote({ cafe, index, isHighlighted }) {
         {(cafe.vibe_tags || []).slice(0, 3).map((t) => (
           <span
             key={t}
-            className="rounded-full border border-dashed border-edge-strong px-2 py-[2px] text-[9.5px] font-bold text-cocoa"
+            className="rounded-full border border-dashed border-edge-strong px-2 py-[3px] text-[10.5px] font-bold text-cocoa"
           >
             {t}
           </span>

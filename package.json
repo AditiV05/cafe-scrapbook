@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "og": "node scripts/make_og.js",
     "eval:search": "node scripts/eval_search_offline.js",
+    "audit:layout": "node scripts/audit_responsive.js",
     "preview": "vite preview"
   },
   "dependencies": {
