@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "og": "node scripts/make_og.js",
+    "icons": "node scripts/make_icons.js",
     "eval:search": "node scripts/eval_search_offline.js",
     "audit:layout": "node scripts/audit_responsive.js",
     "preview": "vite preview"
