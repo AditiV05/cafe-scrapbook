@@ -221,14 +221,17 @@ export default function Home() {
   };
 
   return (
-    <main className="paper paper--full min-h-screen px-[clamp(1rem,3vw,1.9rem)] pb-11 pt-[clamp(1.25rem,3vw,1.9rem)]">
-      <div className="mx-auto max-w-[1120px]">
+    <main className="paper paper--full min-h-screen px-[clamp(1.25rem,3vw,1.9rem)] pb-11 pt-[clamp(1.25rem,3vw,1.9rem)]">
+      <div className="mx-auto max-w-[1120px] min-[1600px]:max-w-[1500px]">
         <div className="pl-[clamp(1.4rem,2.6vw,2.5rem)]">
           <ScrapHeader count={TOTAL} reviews={totalReviews} />
 
           {/* Tools */}
           <section className="mb-6 flex flex-col gap-3">
-            <div className="flex items-end gap-2">
+            {/* Below 480 the input, Ask and Surprise me shared one row and the
+                input got ~190px of it — the placeholder was cut mid-word. The
+                input takes its own line there and the buttons split the next. */}
+            <div className="flex flex-wrap items-end gap-2">
               <label className="sr-only" htmlFor="search">
                 Look for a café
               </label>
@@ -240,23 +243,22 @@ export default function Home() {
                   if (e.key === "Enter" && text.trim()) askAi();
                 }}
                 placeholder="try breakfast, pasta, somewhere to work…"
-                className="handwritten min-w-0 flex-1 border-0 border-b-2 border-dashed border-edge-strong bg-transparent px-1 py-1.5 text-[19px] text-deep placeholder:text-[#A8977F] focus:outline-none focus-visible:border-honey-deep"
+                className="handwritten min-w-0 basis-full border-0 border-b-2 border-dashed border-edge-strong bg-transparent px-1 py-2 text-[19px] text-deep placeholder:text-[#A8977F] focus:outline-none focus-visible:border-honey-deep min-[480px]:basis-0 min-[480px]:flex-1 min-[1280px]:max-w-[44rem]"
               />
               <button
                 onClick={askAi}
                 disabled={aiLoading || !text.trim()}
-                className="btn-primary shrink-0 rounded-full px-4 py-2 text-xs font-bold"
+                className="btn-primary flex-1 rounded-full px-4 py-2.5 text-xs font-bold min-[480px]:flex-none"
               >
                 {aiLoading ? "…" : "✨ Ask"}
               </button>
               <button
                 onClick={surprise}
                 title="Pick a café at random"
-                className="btn-ghost shrink-0 rounded-full px-3 py-2 text-xs font-bold"
+                className="btn-ghost flex-1 rounded-full px-3 py-2.5 text-xs font-bold min-[480px]:flex-none"
               >
                 <span aria-hidden="true" className="text-sm">🎲</span>
-                <span className="ml-1.5 hidden sm:inline">Surprise me</span>
-                <span className="sr-only sm:hidden">Surprise me</span>
+                <span className="ml-1.5">Surprise me</span>
               </button>
             </div>
 

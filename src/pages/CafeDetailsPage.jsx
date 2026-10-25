@@ -31,7 +31,7 @@ function useRelated(cafe) {
 function Stat({ label, children, hint }) {
   return (
     <div className="flex flex-col gap-0.5 px-1">
-      <dt className="text-[10px] font-extrabold uppercase tracking-[0.14em] text-faint">
+      <dt className="text-[11px] font-extrabold uppercase tracking-[0.12em] text-faint">
         {label}
       </dt>
       <dd className="font-display text-xl font-bold leading-none text-deep">
@@ -78,7 +78,7 @@ export default function CafeDetailsPage() {
       <div className="mx-auto max-w-5xl space-y-[clamp(1.5rem,3.4vw,2rem)] pb-10">
         <button
           onClick={() => navigate(-1)}
-          className="ml-[clamp(1rem,2.4vw,2rem)] text-sm font-semibold text-muted transition hover:text-deep"
+          className="-my-1 ml-[clamp(1rem,2.4vw,2rem)] inline-flex min-h-[40px] items-center self-start rounded-full pr-2 text-sm font-semibold text-muted transition hover:text-deep"
         >
           ← Back to results
         </button>
@@ -120,7 +120,7 @@ export default function CafeDetailsPage() {
                     {cafe.vibe_tags.map((v) => (
                       <span
                         key={v}
-                        className="rounded-full border border-edge px-2.5 py-[3px] text-[10.5px] font-bold tracking-wide text-cocoa"
+                        className="rounded-full border border-edge px-2.5 py-[4px] text-[11px] font-bold tracking-wide text-cocoa"
                       >
                         {v}
                       </span>
@@ -128,13 +128,16 @@ export default function CafeDetailsPage() {
                   </div>
                 )}
 
-                <div className="grid grid-cols-2 gap-2 pt-3 sm:flex sm:flex-wrap sm:items-center">
+                {/* Stacked and full width on a phone: side by side they were
+                    128px each and "View on Zomato →" wrapped to two lines
+                    next to a one-line "Directions". */}
+                <div className="flex flex-col gap-2 pt-3 sm:flex-row sm:flex-wrap sm:items-center">
                   {cafe.url && (
                     <a
                       href={cafe.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-primary inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-bold"
+                      className="btn-primary inline-flex min-h-[42px] w-full items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-bold sm:w-auto"
                     >
                       View on Zomato →
                     </a>
@@ -143,7 +146,7 @@ export default function CafeDetailsPage() {
                     href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-ghost inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold"
+                    className="btn-ghost inline-flex min-h-[42px] w-full items-center justify-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold sm:w-auto"
                   >
                     📍 Directions
                   </a>
@@ -244,7 +247,7 @@ export default function CafeDetailsPage() {
                 href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary inline-flex items-center justify-center rounded-full px-3.5 py-1.5 text-xs font-bold"
+                className="btn-primary inline-flex min-h-[40px] items-center justify-center rounded-full px-4 py-2 text-xs font-bold"
               >
                 Open in Google Maps →
               </a>
@@ -262,7 +265,7 @@ export default function CafeDetailsPage() {
               </h2>
               <Link
                 to="/"
-                className="shrink-0 text-sm font-semibold text-muted transition hover:text-deep"
+                className="-my-2 inline-flex min-h-[40px] shrink-0 items-center text-sm font-semibold text-muted transition hover:text-deep"
               >
                 See all {TOTAL} →
               </Link>

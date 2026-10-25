@@ -21,7 +21,11 @@ function useColumnCount() {
   return n;
 }
 
-const columnsFor = (w) => (w >= 1024 ? 3 : w >= 640 ? 2 : 1);
+// 640 was too late for the second column: a single 600px-wide card is a
+// column of its own with nothing beside it. 1600 gets a fourth, because the
+// board was pinned at 1120px on a 1920 screen with 400px of empty desk
+// either side.
+const columnsFor = (w) => (w >= 1600 ? 4 : w >= 1024 ? 3 : w >= 560 ? 2 : 1);
 
 export default function Board({ items, renderItem }) {
   const count = useColumnCount();

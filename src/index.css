@@ -687,7 +687,7 @@ body {
   transform: rotate(8deg);
   border-radius: 3px;
   padding: 5px 9px;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.1em;
   color: #fff3e2;
@@ -717,8 +717,16 @@ body {
    top-to-bottom, so a ranked list reads 1, 14, 28 across the first row.
    Flex columns fed round-robin keep rank order reading left to right while
    still letting the cards stagger. */
-.board { display: flex; gap: 34px; align-items: flex-start; }
-.board__col { display: flex; min-width: 0; flex: 1 1 0; flex-direction: column; gap: 30px; }
+/* Fluid gutters: a fixed 34px between two columns at 560px wide ate an
+   eighth of the board. */
+.board { display: flex; gap: clamp(18px, 2.4vw, 34px); align-items: flex-start; }
+.board__col {
+  display: flex;
+  min-width: 0;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: clamp(20px, 2.2vw, 30px);
+}
 
 /* Rotation is the whole charm, but 45 tilted cards is seasickness. Only
    the first dozen tilt, and less as you go. */
@@ -741,7 +749,8 @@ body {
   border: 1.5px solid var(--border-strong);
   border-radius: 999px;
   background: #fffdf6;
-  padding: 0.28rem 0.7rem;
+  /* 29px tall was a desktop-only size: too small to hit with a thumb. */
+  padding: 0.42rem 0.8rem;
   font-size: 12px;
   font-weight: 700;
   color: #6b5a45;
@@ -754,15 +763,52 @@ body {
   border-color: #2c241a;
   color: #fff8e7;
 }
-.chip__n { font-size: 10px; font-weight: 800; color: #9a8569; }
+.chip__n { font-size: 10.5px; font-weight: 800; color: #9a8569; }
+
+/* Touch screens get a full-size target; a mouse does not need one. */
+@media (pointer: coarse) {
+  .chip { min-height: 40px; padding-block: 0.58rem; }
+  .btn-primary,
+  .btn-ghost { min-height: 44px; }
+}
 .chip--on .chip__n { color: #d9c08e; }
 
 /* Chips scroll sideways on a phone, wrap from tablet up — a chip clipped by
    a desktop window reads as broken rather than as scrollable. */
 .chip-row { scrollbar-width: none; -ms-overflow-style: none; }
 .chip-row::-webkit-scrollbar { display: none; }
+
+/* …and while they do scroll, the edges fade so the crop reads as "more this
+   way" rather than as the end of the row. Toggled by ChipRail, so the fade is
+   never on at an end you have already reached. */
+.chip-rail { position: relative; min-width: 0; flex: 1; }
+.chip-rail::before,
+.chip-rail::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 30px;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+.chip-rail::before {
+  left: 0;
+  background: linear-gradient(90deg, #fdfbf3 12%, rgba(253, 251, 243, 0));
+}
+.chip-rail::after {
+  right: 0;
+  background: linear-gradient(270deg, #fdfbf3 12%, rgba(253, 251, 243, 0));
+}
+.chip-rail--l::before,
+.chip-rail--r::after { opacity: 1; }
+
 @media (min-width: 48rem) {
   .chip-row { flex-wrap: wrap; overflow-x: visible; }
+  .chip-rail::before,
+  .chip-rail::after { content: none; }
 }
 
 /* Pixel art helper */
