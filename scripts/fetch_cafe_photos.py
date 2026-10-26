@@ -1,15 +1,15 @@
 """
 fetch_cafe_photos.py — give every café on the details page its own photo.
 
-For each café in src/data/cafes.json, reads the cover photo (og:image) from
-its Zomato page, saves it to public/cafes/<id>.jpg, and sets that café's
+For each café in src/data/cafes.json, finds the cover photo on its Zomato
+page, saves it to public/cafes/<id>.jpg, and sets that café's
 "images" to ["/cafes/<id>.jpg"]. The photos are self-hosted so the page
 doesn't depend on hotlinking Zomato's CDN.
 
 Cafés that already have a photo file are skipped, so re-running only fills
 gaps. Pass --force to download them all again.
 
-Usage:  python scripts/fetch_cafe_photos.py [--force]
+Usage:  python3 scripts/fetch_cafe_photos.py [--force]
 """
 
 import json
@@ -29,11 +29,16 @@ HEADERS = {
     ),
     "Accept-Language": "en-US,en;q=0.9",
 }
-OG_IMAGE = re.compile(
-    r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']'
-    r'|<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image["\']',
+# Restaurant photos live on Zomato's CDN. The page's og:image tag can't be
+# trusted (it often holds the page's own path), so take the first CDN photo
+# anywhere in the page, which is the cover photo at the top.
+CDN_PHOTO = re.compile(
+    r"https://b\.zmtcdn\.com/data/(?:pictures|reviews_photos)/"
+    r"[^\s\"'<>?]+?\.(?:jpe?g|png|webp)",
     re.I,
 )
+# Magic bytes of JPEG, PNG and WebP, so an error page is never saved as a photo.
+IMAGE_MAGIC = (b"\xff\xd8\xff", b"\x89PNG", b"RIFF")
 
 
 def get(url):
@@ -44,12 +49,22 @@ def get(url):
 
 def cover_photo_url(page_url):
     html = get(page_url).decode("utf-8", errors="replace")
-    m = OG_IMAGE.search(html)
-    if not m:
-        return None
-    url = (m.group(1) or m.group(2)).replace("&amp;", "&")
-    # Zomato's og:image is a small crop; ask the CDN for a wider one.
-    return re.sub(r"\?.*$", "", url) + "?fit=around|1200:675&crop=1200:675;*,*"
+    # Photo URLs in the page's embedded JSON have their slashes escaped.
+    html = html.replace("\\u002F", "/").replace("\\/", "/")
+    m = CDN_PHOTO.search(html)
+    return m.group(0) if m else None
+
+
+def download_photo(url):
+    # Ask the CDN for a 1200x675 crop first; the original can be several MB.
+    for candidate in (url + "?fit=around%7C1200:675&crop=1200:675;*,*", url):
+        try:
+            data = get(candidate)
+        except Exception:
+            continue
+        if data.startswith(IMAGE_MAGIC):
+            return data
+    raise ValueError(f"couldn't download an image from {url}")
 
 
 def main():
@@ -67,8 +82,8 @@ def main():
         try:
             photo = cover_photo_url(cafe["url"]) if cafe.get("url") else None
             if not photo:
-                raise ValueError("no og:image on page")
-            out.write_bytes(get(photo))
+                raise ValueError("no photo found on the Zomato page")
+            out.write_bytes(download_photo(photo))
             cafe["images"] = [f"/cafes/{out.name}"]
             found += 1
             print(f"  ok   {cafe['name']}")
