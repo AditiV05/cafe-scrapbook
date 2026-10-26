@@ -25,7 +25,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/tapri-central-c-scheme.jpg"
+  ]
  },
  {
   "id": "zolocrust-malviya-nagar",
@@ -54,7 +56,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/zolocrust-malviya-nagar.jpg"
+  ]
  },
  {
   "id": "cafe-bae-bais-godam",
@@ -82,7 +86,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/cafe-bae-bais-godam.jpg"
+  ]
  },
  {
   "id": "chool-c-scheme",
@@ -111,7 +117,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/chool-c-scheme.jpg"
+  ]
  },
  {
   "id": "curious-life-coffee-roasters-sarojini-marg-c-scheme",
@@ -133,7 +141,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/curious-life-coffee-roasters-sarojini-marg-c-scheme.jpg"
+  ]
  },
  {
   "id": "on-the-house-c-scheme",
@@ -162,7 +172,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/on-the-house-c-scheme.jpg"
+  ]
  },
  {
   "id": "sultanat-malviya-nagar",
@@ -193,7 +205,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/sultanat-malviya-nagar.jpg"
+  ]
  },
  {
   "id": "cafe-lazymojo-malviya-nagar",
@@ -220,7 +234,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/cafe-lazymojo-malviya-nagar.jpg"
+  ]
  },
  {
   "id": "nibs-experia-c-scheme",
@@ -247,7 +263,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/nibs-experia-c-scheme.jpg"
+  ]
  },
  {
   "id": "anokhi-cafe-c-scheme",
@@ -274,7 +292,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/anokhi-cafe-c-scheme.jpg"
+  ]
  },
  {
   "id": "coffee-sutra-malviya-nagar",
@@ -303,7 +323,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/coffee-sutra-malviya-nagar.jpg"
+  ]
  },
  {
   "id": "the-johri-pink-city",
@@ -332,7 +354,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/the-johri-pink-city.jpg"
+  ]
  },
  {
   "id": "the-eclectica-sodala",
@@ -363,7 +387,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/the-eclectica-sodala.jpg"
+  ]
  },
  {
   "id": "decked-up-by-garden-cafe-vaishali-nagar",
@@ -394,7 +420,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/decked-up-by-garden-cafe-vaishali-nagar.jpg"
+  ]
  },
  {
   "id": "stepout-cafe-c-scheme",
@@ -426,7 +454,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/stepout-cafe-c-scheme.jpg"
+  ]
  },
  {
   "id": "brown-sugar-restaurant-cafe-bakery-c-scheme",
@@ -455,7 +485,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/brown-sugar-restaurant-cafe-bakery-c-scheme.jpg"
+  ]
  },
  {
   "id": "brown-sugar-restaurant-cafe-bakery-vaishali-nagar",
@@ -485,7 +517,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/brown-sugar-restaurant-cafe-bakery-vaishali-nagar.jpg"
+  ]
  },
  {
   "id": "quyu-s-cafe-vaishali-nagar",
@@ -515,7 +549,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/quyu-s-cafe-vaishali-nagar.jpg"
+  ]
  },
  {
   "id": "nibs-cafe-and-chocolataria-bais-godam",
@@ -545,7 +581,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/nibs-cafe-and-chocolataria-bais-godam.jpg"
+  ]
  },
  {
   "id": "tapri-pratham-lal-kothi",
@@ -574,7 +612,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/tapri-pratham-lal-kothi.jpg"
+  ]
  },
  {
   "id": "chaisa-lal-kothi",
@@ -602,7 +642,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/chaisa-lal-kothi.jpg"
+  ]
  },
  {
   "id": "tapri-ashram-durgapura",
@@ -631,7 +673,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/tapri-ashram-durgapura.jpg"
+  ]
  },
  {
   "id": "nothing-before-coffee-durgapura",
@@ -656,7 +700,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/nothing-before-coffee-durgapura.jpg"
+  ]
  },
  {
   "id": "crazy-coffee-c-scheme",
@@ -681,7 +727,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/crazy-coffee-c-scheme.jpg"
+  ]
  },
  {
   "id": "cafe-quaint-bapu-nagar",
@@ -707,7 +755,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/cafe-quaint-bapu-nagar.jpg"
+  ]
  },
  {
   "id": "bombaye-house-malviya-nagar",
@@ -738,7 +788,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/bombaye-house-malviya-nagar.jpg"
+  ]
  },
  {
   "id": "dzurt-patisserie-and-cafe-civil-lines",
@@ -762,7 +814,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/dzurt-patisserie-and-cafe-civil-lines.jpg"
+  ]
  },
  {
   "id": "home-cafe-by-mr-beans-c-scheme",
@@ -788,7 +842,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/home-cafe-by-mr-beans-c-scheme.jpg"
+  ]
  },
  {
   "id": "la-palma-cafe-and-lounge-bar-c-scheme",
@@ -846,7 +902,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/tea-connect-cafe-mansarovar.jpg"
+  ]
  },
  {
   "id": "the-rustic-spot-cafe-mansarovar",
@@ -873,7 +931,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/the-rustic-spot-cafe-mansarovar.jpg"
+  ]
  },
  {
   "id": "once-upon-a-time-at-the-bagh-agra-road",
@@ -903,7 +963,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/once-upon-a-time-at-the-bagh-agra-road.jpg"
+  ]
  },
  {
   "id": "jaipur-baking-company-jaipur-marriott-hotel-durgapura",
@@ -927,7 +989,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/jaipur-baking-company-jaipur-marriott-hotel-durgapura.jpg"
+  ]
  },
  {
   "id": "aromocha-gopalpura",
@@ -954,7 +1018,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/aromocha-gopalpura.jpg"
+  ]
  },
  {
   "id": "mr-jabs-cafe-gopalpura",
@@ -976,7 +1042,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/mr-jabs-cafe-gopalpura.jpg"
+  ]
  },
  {
   "id": "indian-coffee-house-mi-road",
@@ -1000,7 +1068,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/indian-coffee-house-mi-road.jpg"
+  ]
  },
  {
   "id": "the-messy-door-shastri-nagar",
@@ -1032,7 +1102,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/the-messy-door-shastri-nagar.jpg"
+  ]
  },
  {
   "id": "love-over-coffee-durgapura",
@@ -1054,7 +1126,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/love-over-coffee-durgapura.jpg"
+  ]
  },
  {
   "id": "gvd-soni-s-cafe-malviya-nagar",
@@ -1081,7 +1155,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/gvd-soni-s-cafe-malviya-nagar.jpg"
+  ]
  },
  {
   "id": "theka-coffee-da-vaishali-nagar",
@@ -1103,7 +1179,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/theka-coffee-da-vaishali-nagar.jpg"
+  ]
  },
  {
   "id": "corner-house-c-scheme",
@@ -1133,7 +1211,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/corner-house-c-scheme.jpg"
+  ]
  },
  {
   "id": "laziz-pizza-gopalpura",
@@ -1160,7 +1240,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/laziz-pizza-gopalpura.jpg"
+  ]
  },
  {
   "id": "ki-ka-kafe-restaurant-chitrakoot",
@@ -1187,7 +1269,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/ki-ka-kafe-restaurant-chitrakoot.jpg"
+  ]
  },
  {
   "id": "cafe-nola-malviya-nagar",
@@ -1211,7 +1295,9 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/cafe-nola-malviya-nagar.jpg"
+  ]
  },
  {
   "id": "jacobs-brew-house-malviya-nagar",
@@ -1235,6 +1321,10 @@
   "hours": "",
   "seating": [],
   "menu_highlights": [],
-  "images": []
+  "images": [
+   "/cafes/jacobs-brew-house-malviya-nagar.avif",
+   "/cafes/jacobs-brew-house-malviya-nagar-2.avif",
+   "/cafes/jacobs-brew-house-malviya-nagar-3.avif"
+  ]
  }
 ]

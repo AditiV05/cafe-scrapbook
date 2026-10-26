@@ -28,21 +28,55 @@ function useRelated(cafe) {
   }, [cafe]);
 }
 
-/** The café's own photo across the top of the hero. Renders nothing when
-    the café has no photo or the file fails to load, so the hero falls back
-    to the monogram layout it always had. */
-function CafePhoto({ src, name }) {
-  const [failed, setFailed] = useState(false);
-  if (!src || failed) return null;
+/** The café's own photos across the top of the hero: the selected one
+    large, the rest as thumbnails to switch to. Photos that fail to load
+    are dropped, and with none left it renders nothing, so the hero falls
+    back to the monogram layout it always had. */
+function CafePhotos({ photos = [], name }) {
+  const [broken, setBroken] = useState([]);
+  const [selected, setSelected] = useState(0);
+  const shown = photos.filter((src) => !broken.includes(src));
+  if (!shown.length) return null;
+  const current = shown[Math.min(selected, shown.length - 1)];
+  const drop = (src) => setBroken((b) => [...b, src]);
+
   return (
-    <figure className="mb-6 overflow-hidden rounded-xl border border-edge bg-cream">
-      <img
-        src={src}
-        alt={`Inside ${name}`}
-        onError={() => setFailed(true)}
-        className="aspect-[16/9] max-h-[380px] w-full object-cover"
-      />
-    </figure>
+    <div className="mb-6 space-y-2">
+      <figure className="overflow-hidden rounded-xl border border-edge bg-cream">
+        <img
+          src={current}
+          alt={`${name}, photo ${shown.indexOf(current) + 1} of ${shown.length}`}
+          onError={() => drop(current)}
+          className="aspect-[16/9] max-h-[380px] w-full object-cover"
+        />
+      </figure>
+      {shown.length > 1 && (
+        <div className="flex gap-2 overflow-x-auto pb-1">
+          {shown.map((src, i) => (
+            <button
+              key={src}
+              type="button"
+              onClick={() => setSelected(i)}
+              aria-label={`Show photo ${i + 1} of ${shown.length}`}
+              aria-pressed={src === current}
+              className={`h-14 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition sm:h-16 sm:w-24 ${
+                src === current
+                  ? "border-honey-deep"
+                  : "border-transparent opacity-70 hover:opacity-100"
+              }`}
+            >
+              <img
+                src={src}
+                alt=""
+                loading="lazy"
+                onError={() => drop(src)}
+                className="h-full w-full object-cover"
+              />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -107,7 +141,7 @@ export default function CafeDetailsPage() {
           className="note tilt-0 relative ml-[clamp(1rem,2.4vw,2rem)] px-[clamp(1.1rem,3.6vw,2rem)] py-[clamp(1.3rem,3.4vw,2rem)]"
         >
           <span aria-hidden="true" className="tape tape--kraft tape--left" />
-          <CafePhoto key={cafe.id} src={cafe.images?.[0]} name={cafe.name} />
+          <CafePhotos key={cafe.id} photos={cafe.images} name={cafe.name} />
           <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-start">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
               <div
