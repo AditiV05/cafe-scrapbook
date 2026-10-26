@@ -9,6 +9,11 @@ doesn't depend on hotlinking Zomato's CDN.
 Cafés that already have a photo file are skipped, so re-running only fills
 gaps. Pass --force to download them all again.
 
+Photos can also be added by hand, e.g. from a café's own website: save the
+cover as public/cafes/<id>.jpg and any extras as <id>-2.jpg, <id>-3.jpg, …
+(.jpg, .jpeg, .png or .webp). Re-running links every one of them, cover
+first, and the details page shows the extras as a strip of thumbnails.
+
 Usage:  python3 scripts/fetch_cafe_photos.py [--force]
 """
 
@@ -67,6 +72,20 @@ def download_photo(url):
     raise ValueError(f"couldn't download an image from {url}")
 
 
+PHOTO_EXTS = {".jpg", ".jpeg", ".png", ".webp"}
+
+
+def local_photos(cafe_id):
+    """Every photo saved for a café: <id>.* first, then <id>-2.*, <id>-3.*, …"""
+    numbered = re.compile(re.escape(cafe_id) + r"(?:-(\d+))?")
+    photos = []
+    for f in PHOTO_DIR.iterdir():
+        m = numbered.fullmatch(f.stem)
+        if m and f.suffix.lower() in PHOTO_EXTS:
+            photos.append((int(m.group(1) or 1), f.name))
+    return [f"/cafes/{name}" for _, name in sorted(photos)]
+
+
 def main():
     force = "--force" in sys.argv
     cafes = json.loads(DATA_PATH.read_text(encoding="utf-8"))
@@ -74,23 +93,24 @@ def main():
     found, missing = 0, []
 
     for cafe in cafes:
-        out = PHOTO_DIR / f"{cafe['id']}.jpg"
-        if out.exists() and not force:
-            cafe["images"] = [f"/cafes/{out.name}"]
+        if force or not local_photos(cafe["id"]):
+            try:
+                if not cafe.get("url"):
+                    raise ValueError("no Zomato link")
+                photo = cover_photo_url(cafe["url"])
+                if not photo:
+                    raise ValueError("no photo found on the Zomato page")
+                (PHOTO_DIR / f"{cafe['id']}.jpg").write_bytes(download_photo(photo))
+                print(f"  ok   {cafe['name']}")
+            except Exception as e:  # keep going; one bad page shouldn't stop the rest
+                print(f"  FAIL {cafe['name']}: {e}")
+            time.sleep(1)  # be polite to Zomato
+
+        cafe["images"] = local_photos(cafe["id"])
+        if cafe["images"]:
             found += 1
-            continue
-        try:
-            photo = cover_photo_url(cafe["url"]) if cafe.get("url") else None
-            if not photo:
-                raise ValueError("no photo found on the Zomato page")
-            out.write_bytes(download_photo(photo))
-            cafe["images"] = [f"/cafes/{out.name}"]
-            found += 1
-            print(f"  ok   {cafe['name']}")
-        except Exception as e:  # keep going; one bad page shouldn't stop the rest
+        else:
             missing.append(cafe["name"])
-            print(f"  FAIL {cafe['name']}: {e}")
-        time.sleep(1)  # be polite to Zomato
 
     DATA_PATH.write_text(
         json.dumps(cafes, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
