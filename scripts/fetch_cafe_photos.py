@@ -11,7 +11,7 @@ gaps. Pass --force to download them all again.
 
 Photos can also be added by hand, e.g. from a café's own website: save the
 cover as public/cafes/<id>.jpg and any extras as <id>-2.jpg, <id>-3.jpg, …
-(.jpg, .jpeg, .png or .webp). Re-running links every one of them, cover
+(.jpg, .jpeg, .png, .webp or .avif). Re-running links every one of them, cover
 first, and the details page shows the extras as a strip of thumbnails.
 
 Usage:  python3 scripts/fetch_cafe_photos.py [--force]
@@ -72,7 +72,7 @@ def download_photo(url):
     raise ValueError(f"couldn't download an image from {url}")
 
 
-PHOTO_EXTS = {".jpg", ".jpeg", ".png", ".webp"}
+PHOTO_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".avif"}
 
 
 def local_photos(cafe_id):
