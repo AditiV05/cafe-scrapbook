@@ -5,8 +5,8 @@ Photos are added by hand, e.g. from a café's own website: save the cover
 as public/cafes/<id>.jpg and any extras as <id>-2.jpg, <id>-3.jpg, …
 (.jpg, .jpeg, .png, .webp or .avif). Running this links every one of them
 into that café's "images", cover first, and the details page shows the
-extras as a strip of thumbnails. A café with no photo of its own gets the
-site's og.png as a placeholder.
+extras as a strip of thumbnails. A café with no photo of its own gets
+public/cafe-placeholder.png, the barista on brown, as a placeholder.
 
 With --zomato, cafés with no photo also get their Zomato cover photo
 downloaded to public/cafes/<id>.jpg. Off by default: many Zomato covers
@@ -70,7 +70,7 @@ def download_photo(url):
     raise ValueError(f"couldn't download an image from {url}")
 
 
-PLACEHOLDER = "/og.png"
+PLACEHOLDER = "/cafe-placeholder.png"
 PHOTO_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".avif"}
 
 
