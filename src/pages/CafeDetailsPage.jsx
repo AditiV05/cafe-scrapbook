@@ -28,27 +28,45 @@ function useRelated(cafe) {
   }, [cafe]);
 }
 
-/** The café's own photos across the top of the hero: the selected one
-    large, the rest as thumbnails to switch to. Photos that fail to load
-    are dropped, and with none left it renders nothing, so the hero falls
-    back to the monogram layout it always had. */
+const isVideo = (src) => /\.(mp4|webm)$/i.test(src);
+
+/** The café's own photos and videos across the top of the hero: the
+    selected one large, the rest as thumbnails to switch to. Anything that
+    fails to load is dropped, and with nothing left it renders nothing, so
+    the hero falls back to the monogram layout it always had. */
 function CafePhotos({ photos = [], name }) {
   const [broken, setBroken] = useState([]);
   const [selected, setSelected] = useState(0);
   const shown = photos.filter((src) => !broken.includes(src));
   if (!shown.length) return null;
   const current = shown[Math.min(selected, shown.length - 1)];
+  const label = (src) =>
+    `${isVideo(src) ? "video" : "photo"} ${shown.indexOf(src) + 1} of ${shown.length}`;
   const drop = (src) => setBroken((b) => [...b, src]);
 
   return (
     <div className="mb-6 space-y-2">
       <figure className="overflow-hidden rounded-xl border border-edge bg-cream">
-        <img
-          src={current}
-          alt={`${name}, photo ${shown.indexOf(current) + 1} of ${shown.length}`}
-          onError={() => drop(current)}
-          className="aspect-[16/9] max-h-[380px] w-full object-cover"
-        />
+        {isVideo(current) ? (
+          // Letterboxed rather than cropped: phone clips are often portrait.
+          <video
+            key={current}
+            src={current}
+            controls
+            playsInline
+            preload="metadata"
+            aria-label={`${name}, ${label(current)}`}
+            onError={() => drop(current)}
+            className="aspect-[16/9] max-h-[380px] w-full bg-black object-contain"
+          />
+        ) : (
+          <img
+            src={current}
+            alt={`${name}, ${label(current)}`}
+            onError={() => drop(current)}
+            className="aspect-[16/9] max-h-[380px] w-full object-cover"
+          />
+        )}
       </figure>
       {shown.length > 1 && (
         <div className="flex gap-2 overflow-x-auto pb-1">
@@ -57,21 +75,41 @@ function CafePhotos({ photos = [], name }) {
               key={src}
               type="button"
               onClick={() => setSelected(i)}
-              aria-label={`Show photo ${i + 1} of ${shown.length}`}
+              aria-label={`Show ${label(src)}`}
               aria-pressed={src === current}
-              className={`h-14 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition sm:h-16 sm:w-24 ${
+              className={`relative h-14 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition sm:h-16 sm:w-24 ${
                 src === current
                   ? "border-honey-deep"
                   : "border-transparent opacity-70 hover:opacity-100"
               }`}
             >
-              <img
-                src={src}
-                alt=""
-                loading="lazy"
-                onError={() => drop(src)}
-                className="h-full w-full object-cover"
-              />
+              {isVideo(src) ? (
+                <>
+                  {/* #t=0.1 makes Safari paint a first frame to show. */}
+                  <video
+                    src={`${src}#t=0.1`}
+                    muted
+                    playsInline
+                    preload="metadata"
+                    onError={() => drop(src)}
+                    className="pointer-events-none h-full w-full bg-black object-cover"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 flex items-center justify-center text-lg text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.7)]"
+                  >
+                    ▶
+                  </span>
+                </>
+              ) : (
+                <img
+                  src={src}
+                  alt=""
+                  loading="lazy"
+                  onError={() => drop(src)}
+                  className="h-full w-full object-cover"
+                />
+              )}
             </button>
           ))}
         </div>
