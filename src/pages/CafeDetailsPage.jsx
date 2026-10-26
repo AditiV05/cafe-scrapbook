@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import cafes from "../data/cafes.json";
 import CafeCard from "../components/CafeCard";
@@ -26,6 +26,24 @@ function useRelated(cafe) {
     const picked = [...sameArea, ...sameCuisine].slice(0, 3);
     return picked.length ? picked : others.sort(byRank).slice(0, 3);
   }, [cafe]);
+}
+
+/** The café's own photo across the top of the hero. Renders nothing when
+    the café has no photo or the file fails to load, so the hero falls back
+    to the monogram layout it always had. */
+function CafePhoto({ src, name }) {
+  const [failed, setFailed] = useState(false);
+  if (!src || failed) return null;
+  return (
+    <figure className="mb-6 overflow-hidden rounded-xl border border-edge bg-cream">
+      <img
+        src={src}
+        alt={`Inside ${name}`}
+        onError={() => setFailed(true)}
+        className="aspect-[16/9] max-h-[380px] w-full object-cover"
+      />
+    </figure>
+  );
 }
 
 function Stat({ label, children, hint }) {
@@ -89,6 +107,7 @@ export default function CafeDetailsPage() {
           className="note tilt-0 relative ml-[clamp(1rem,2.4vw,2rem)] px-[clamp(1.1rem,3.6vw,2rem)] py-[clamp(1.3rem,3.4vw,2rem)]"
         >
           <span aria-hidden="true" className="tape tape--kraft tape--left" />
+          <CafePhoto key={cafe.id} src={cafe.images?.[0]} name={cafe.name} />
           <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-start">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
               <div
