@@ -1,11 +1,13 @@
 """
-fetch_cafe_photos.py — give every café on the details page its own photo.
+fetch_cafe_photos.py — give every café on the details page its own photos
+and videos.
 
 Photos are added by hand, e.g. from a café's own website: save the cover
 as public/cafes/<id>.jpg and any extras as <id>-2.jpg, <id>-3.jpg, …
-(.jpg, .jpeg, .png, .webp or .avif). Running this links every one of them
-into that café's "images", cover first, and the details page shows the
-extras as a strip of thumbnails. A café with no photo of its own gets
+(.jpg, .jpeg, .png, .webp or .avif). Videos work the same way as .mp4 or
+.webm, e.g. <id>-4.mp4. Running this links every one of them into that
+café's "images", cover first, and the details page shows the extras as a
+strip of thumbnails; a video plays in the big spot when picked. A café with no photo of its own gets
 public/cafe-placeholder.png, the barista on brown, as a placeholder.
 
 With --zomato, cafés with no photo also get their Zomato cover photo
@@ -71,7 +73,7 @@ def download_photo(url):
 
 
 PLACEHOLDER = "/cafe-placeholder.png"
-PHOTO_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".avif"}
+PHOTO_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".avif", ".mp4", ".webm"}
 
 
 def local_photos(cafe_id):
