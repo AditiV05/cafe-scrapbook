@@ -1,20 +1,18 @@
 """
 fetch_cafe_photos.py — give every café on the details page its own photo.
 
-For each café in src/data/cafes.json, finds the cover photo on its Zomato
-page, saves it to public/cafes/<id>.jpg, and sets that café's
-"images" to ["/cafes/<id>.jpg"]. The photos are self-hosted so the page
-doesn't depend on hotlinking Zomato's CDN.
+Photos are added by hand, e.g. from a café's own website: save the cover
+as public/cafes/<id>.jpg and any extras as <id>-2.jpg, <id>-3.jpg, …
+(.jpg, .jpeg, .png, .webp or .avif). Running this links every one of them
+into that café's "images", cover first, and the details page shows the
+extras as a strip of thumbnails. A café with no photo of its own gets the
+site's og.png as a placeholder.
 
-Cafés that already have a photo file are skipped, so re-running only fills
-gaps. Pass --force to download them all again.
+With --zomato, cafés with no photo also get their Zomato cover photo
+downloaded to public/cafes/<id>.jpg. Off by default: many Zomato covers
+weren't good enough to show. --force (with --zomato) re-downloads them all.
 
-Photos can also be added by hand, e.g. from a café's own website: save the
-cover as public/cafes/<id>.jpg and any extras as <id>-2.jpg, <id>-3.jpg, …
-(.jpg, .jpeg, .png, .webp or .avif). Re-running links every one of them, cover
-first, and the details page shows the extras as a strip of thumbnails.
-
-Usage:  python3 scripts/fetch_cafe_photos.py [--force]
+Usage:  python3 scripts/fetch_cafe_photos.py [--zomato [--force]]
 """
 
 import json
@@ -72,6 +70,7 @@ def download_photo(url):
     raise ValueError(f"couldn't download an image from {url}")
 
 
+PLACEHOLDER = "/og.png"
 PHOTO_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".avif"}
 
 
@@ -87,13 +86,14 @@ def local_photos(cafe_id):
 
 
 def main():
-    force = "--force" in sys.argv
+    zomato = "--zomato" in sys.argv
+    force = zomato and "--force" in sys.argv
     cafes = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     PHOTO_DIR.mkdir(parents=True, exist_ok=True)
     found, missing = 0, []
 
     for cafe in cafes:
-        if force or not local_photos(cafe["id"]):
+        if zomato and (force or not local_photos(cafe["id"])):
             try:
                 if not cafe.get("url"):
                     raise ValueError("no Zomato link")
@@ -106,18 +106,19 @@ def main():
                 print(f"  FAIL {cafe['name']}: {e}")
             time.sleep(1)  # be polite to Zomato
 
-        cafe["images"] = local_photos(cafe["id"])
-        if cafe["images"]:
+        photos = local_photos(cafe["id"])
+        if photos:
             found += 1
         else:
             missing.append(cafe["name"])
+        cafe["images"] = photos or [PLACEHOLDER]
 
     DATA_PATH.write_text(
         json.dumps(cafes, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
     )
-    print(f"\n{found}/{len(cafes)} cafés have a photo.")
+    print(f"\n{found}/{len(cafes)} cafés have a photo of their own.")
     if missing:
-        print("Still missing: " + ", ".join(missing))
+        print(f"Using {PLACEHOLDER} for: " + ", ".join(missing))
 
 
 if __name__ == "__main__":
