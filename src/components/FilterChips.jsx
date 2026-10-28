@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { BUDGET_ORDER, budgetLabel } from "../lib/budget";
 
 const hasTag = (cafe, tag) =>
   (cafe.vibe_tags || []).some(
@@ -79,12 +80,23 @@ export default function FilterChips({ cafes, selected, onChange }) {
 
     const areas = [...new Set(cafes.map((c) => c.area))];
     const types = [...new Set(cafes.flatMap((c) => c.vibe_tags || []))];
-    const budgets = [...new Set(cafes.map((c) => c.price_band))].sort();
+    const budgets = [...new Set(cafes.map((c) => c.price_band))];
 
     return [
       { key: "area", label: "Area", options: options("area", areas).slice(0, 5) },
       { key: "type", label: "Type", options: options("type", types).slice(0, 6) },
-      { key: "budget", label: "Budget", options: options("budget", budgets) },
+      // Budget reads cheapest to priciest, not by count, and shows rupee
+      // ranges without counts: "₹₹ 37" read as a price of ₹37.
+      {
+        key: "budget",
+        label: "Budget",
+        hint: "for two",
+        options: options("budget", budgets).sort(
+          (a, b) => BUDGET_ORDER.indexOf(a.value) - BUDGET_ORDER.indexOf(b.value),
+        ),
+        format: budgetLabel,
+        counts: false,
+      },
     ];
   }, [cafes, selected]);
 
@@ -96,6 +108,11 @@ export default function FilterChips({ cafes, selected, onChange }) {
         <div key={g.key} className="flex items-start gap-2">
           <span className="w-11 shrink-0 pt-[0.5rem] text-[10.5px] font-extrabold uppercase tracking-[0.1em] text-faint">
             {g.label}
+            {g.hint && (
+              <span className="block text-[9.5px] font-bold normal-case tracking-normal">
+                {g.hint}
+              </span>
+            )}
           </span>
           <ChipRail>
             <button
@@ -114,8 +131,8 @@ export default function FilterChips({ cafes, selected, onChange }) {
                   aria-pressed={active}
                   className={`chip ${active ? "chip--on" : ""}`}
                 >
-                  {o.value}
-                  <span className="chip__n">{o.count}</span>
+                  {g.format ? g.format(o.value) : o.value}
+                  {g.counts !== false && <span className="chip__n">{o.count}</span>}
                 </button>
               );
             })}

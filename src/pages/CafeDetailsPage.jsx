@@ -4,6 +4,7 @@ import cafes from "../data/cafes.json";
 import CafeCard from "../components/CafeCard";
 import PixelMascot from "../components/PixelMascot";
 import { getHue } from "../lib/cuisineHues";
+import { budgetLabel } from "../lib/budget";
 
 const TOTAL = cafes.length;
 
@@ -300,8 +301,8 @@ export default function CafeDetailsPage() {
               </Stat>
             </div>
             <div className="bg-surface p-4">
-              <Stat label="Budget" hint="per head">
-                {cafe.price_band}
+              <Stat label="Budget" hint="for two">
+                {budgetLabel(cafe.price_band)}
               </Stat>
             </div>
             <div className="bg-surface p-4">
