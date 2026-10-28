@@ -1196,38 +1196,6 @@
   ]
  },
  {
-  "id": "corner-house-c-scheme",
-  "name": "Corner House",
-  "area": "C Scheme",
-  "price_band": "₹₹",
-  "veg_nonveg": "Both",
-  "cuisines": [
-   "North Indian",
-   "Chinese",
-   "Italian",
-   "Beverages",
-   "Ice Cream"
-  ],
-  "vibe_tags": [
-   "North Indian",
-   "Chinese",
-   "Italian"
-  ],
-  "rating": 4.1,
-  "review_count": 372,
-  "popularity_rank": 41,
-  "url": "https://www.zomato.com/jaipur/corner-house-c-scheme",
-  "authenticity": "Casual Dining",
-  "description": "A casual dining in C Scheme known for North Indian, Chinese, Italian, Beverages and Ice Cream. Rated 4.1/5 across 372+ dining reviews.",
-  "mascot_note": "A C Scheme all-rounder — North Indian, Chinese, Italian and ice cream. The family-dinner safe bet.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
   "id": "laziz-pizza-gopalpura",
   "name": "Laziz Pizza",
   "area": "Gopalpura",
@@ -1244,7 +1212,7 @@
   ],
   "rating": 4.1,
   "review_count": 1503,
-  "popularity_rank": 42,
+  "popularity_rank": 41,
   "url": "https://www.zomato.com/jaipur/laziz-pizza-tonk-road",
   "authenticity": "Café",
   "description": "A café in Gopalpura known for Italian and Continental. Rated 4.1/5 across 1,503+ dining reviews.",
@@ -1273,7 +1241,7 @@
   ],
   "rating": 4.0,
   "review_count": 892,
-  "popularity_rank": 43,
+  "popularity_rank": 42,
   "url": "https://www.zomato.com/jaipur/ki-ka-kafe-restaurant-chitrakoot",
   "authenticity": "Café",
   "description": "A café in Chitrakoot known for Chinese and North Indian. Rated 4.0/5 across 892+ dining reviews.",
@@ -1299,7 +1267,7 @@
   ],
   "rating": 2.9,
   "review_count": 27,
-  "popularity_rank": 44,
+  "popularity_rank": 43,
   "url": "https://www.zomato.com/jaipur/cafe-nola-malviya-nagar",
   "authenticity": "Cafe",
   "description": "A café in Malviya Nagar known for coffee and bites. Rated 2.9/5 across 27+ dining reviews.",
@@ -1327,7 +1295,7 @@
   ],
   "rating": 3.6,
   "review_count": 122,
-  "popularity_rank": 45,
+  "popularity_rank": 44,
   "url": "https://www.zomato.com/jaipur/jacobs-brew-house-malviya-nagar",
   "authenticity": "Cafe",
   "description": "A café in Malviya Nagar known for Beverages. Rated 3.6/5 across 122+ dining reviews.",

@@ -54,7 +54,7 @@
     "on-the-house-c-scheme",
     "stepout-cafe-c-scheme",
     "the-messy-door-shastri-nagar",
-    "corner-house-c-scheme"
+    "ki-ka-kafe-restaurant-chitrakoot"
    ]
   },
   {
@@ -173,10 +173,6 @@
   "indian-coffee-house-mi-road": {
    "order": "Filter coffee.",
    "skip_if": "You want polish. It's proudly old-school."
-  },
-  "corner-house-c-scheme": {
-   "go_when": "Family dinner.",
-   "order": "Save room for the ice cream."
   },
   "cafe-nola-malviya-nagar": {
    "skip_if": "You want a sure thing. It's still finding its feet."
