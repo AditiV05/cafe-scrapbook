@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { decorate } from "../lib/scrapbook";
+import { coverPhoto } from "../lib/editorial";
 
 /**
  * One café, pinned to the page.
@@ -9,6 +10,7 @@ import { decorate } from "../lib/scrapbook";
  */
 export default function ScrapNote({ cafe, index, isHighlighted }) {
   const d = decorate(index, cafe.popularity_rank);
+  const photo = coverPhoto(cafe);
 
   return (
     <Link
@@ -39,6 +41,12 @@ export default function ScrapNote({ cafe, index, isHighlighted }) {
           width="76"
           height="76"
         />
+      )}
+
+      {photo && (
+        <span className="polaroid">
+          <img src={photo} alt="" loading="lazy" />
+        </span>
       )}
 
       <span className="handwritten block text-[19px] font-bold leading-none text-terracotta">

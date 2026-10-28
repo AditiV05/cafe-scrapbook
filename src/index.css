@@ -728,6 +728,47 @@ body {
   gap: clamp(20px, 2.2vw, 30px);
 }
 
+/* ── Mood spreads ──
+   A sideways rail on a phone, a grid from tablet up. A scrolling box clips
+   on both axes, so the rail is padded to leave room for each card's tape
+   above and shadow below, and pulled back by the same amount so the
+   padding doesn't push the layout around. */
+.mood-row {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin: -16px -4px -20px;
+  padding: 16px 4px 20px;
+  scrollbar-width: none;
+}
+.mood-row::-webkit-scrollbar { display: none; }
+.mood {
+  flex: 0 0 min(72vw, 240px);
+  scroll-snap-align: start;
+  text-align: left;
+}
+@media (min-width: 640px) {
+  .mood-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(16px, 2vw, 26px);
+    overflow: visible;
+  }
+}
+.mood--on { box-shadow: 0 0 0 3px var(--accent-yellow-deep), 0 12px 26px -12px rgba(90, 60, 25, 0.55); }
+
+/* A café's own photo on its home-page note, as a taped-in polaroid. */
+.polaroid {
+  display: block;
+  margin: 2px 0 12px;
+  background: #fff;
+  padding: 6px 6px 18px;
+  box-shadow: 0 1px 3px rgba(90, 60, 25, 0.25);
+  transform: rotate(-1.2deg);
+}
+.polaroid img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
 /* Rotation is the whole charm, but 45 tilted cards is seasickness. Only
    the first dozen tilt, and less as you go. */
 .tilt-1 { transform: rotate(-1.05deg); }

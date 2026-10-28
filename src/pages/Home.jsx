@@ -1,10 +1,13 @@
 import { useMemo, useState, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import cafes from "../data/cafes.json";
 import ScrapHeader from "../components/ScrapHeader";
 import ScrapNote from "../components/ScrapNote";
 import Board from "../components/Board";
 import FilterChips from "../components/FilterChips";
 import PixelMascot from "../components/PixelMascot";
+import MoodPicker from "../components/MoodPicker";
+import { moodById } from "../lib/editorial";
 import { matchQuery, parseQueryLocally, runSearch } from "../lib/search";
 
 const TOTAL = cafes.length;
@@ -51,6 +54,11 @@ export default function Home() {
   const flashTimer = useRef(0);
   const cancelSettle = useRef(null);
   const lastPick = useRef("");
+  // The open mood spread lives in the URL, so it can be shared and the back
+  // button closes it.
+  const [params, setParams] = useSearchParams();
+  const mood = moodById(params.get("mood"));
+  const pickMood = (id) => setParams(id ? { mood: id } : {});
 
   useEffect(
     () => () => {
@@ -226,106 +234,131 @@ export default function Home() {
         <div className="pl-[clamp(1.4rem,2.6vw,2.5rem)]">
           <ScrapHeader count={TOTAL} reviews={totalReviews} />
 
-          {/* Tools */}
-          <section className="mb-6 flex flex-col gap-3">
-            {/* Below 480 the input, Ask and Surprise me shared one row and the
-                input got ~190px of it — the placeholder was cut mid-word. The
-                input takes its own line there and the buttons split the next. */}
-            <div className="flex flex-wrap items-end gap-2">
-              <label className="sr-only" htmlFor="search">
-                Look for a café
-              </label>
-              <input
-                id="search"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && text.trim()) askAi();
-                }}
-                placeholder="try breakfast, pasta, somewhere to work…"
-                className="handwritten min-w-0 basis-full border-0 border-b-2 border-dashed border-edge-strong bg-transparent px-1 py-2 text-[19px] text-deep placeholder:text-[#A8977F] focus:outline-none focus-visible:border-honey-deep min-[480px]:basis-0 min-[480px]:flex-1 min-[1280px]:max-w-[44rem]"
+          <MoodPicker active={mood?.id} onPick={pickMood} />
+
+          {mood ? (
+            <>
+              <section className="mb-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h2 className="font-display text-[clamp(1.3rem,3vw,1.7rem)] font-bold text-deep">
+                  <span aria-hidden="true">{mood.emoji} </span>
+                  {mood.title}
+                </h2>
+                <button
+                  onClick={() => pickMood("")}
+                  className="text-xs font-bold text-cocoa underline underline-offset-2 hover:text-deep"
+                >
+                  ← back to all {TOTAL}
+                </button>
+              </section>
+              <Board
+                items={mood.cafes}
+                renderItem={(c, i) => <ScrapNote key={c.id} cafe={c} index={i} />}
               />
-              <button
-                onClick={askAi}
-                disabled={aiLoading || !text.trim()}
-                className="btn-primary flex-1 rounded-full px-4 py-2.5 text-xs font-bold min-[480px]:flex-none"
-              >
-                {aiLoading ? "…" : "✨ Ask"}
-              </button>
-              <button
-                onClick={surprise}
-                title="Pick a café at random"
-                className="btn-ghost flex-1 rounded-full px-3 py-2.5 text-xs font-bold min-[480px]:flex-none"
-              >
-                <span aria-hidden="true" className="text-sm">🎲</span>
-                <span className="ml-1.5">Surprise me</span>
-              </button>
-            </div>
-
-            <FilterChips
-              cafes={cafes}
-              selected={selected}
-              onChange={(group, value) =>
-                setSelected((s) => ({ ...s, [group]: value }))
-              }
-            />
-          </section>
-
-          {/* What's on the page */}
-          <section className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <p className="handwritten text-[18px] text-[#5E5141]">
-              {results.length === TOTAL
-                ? `all ${TOTAL} pinned up`
-                : `${results.length} of ${TOTAL} pinned up`}
-              {lastSearch && <> for “{lastSearch}”</>}
-            </p>
-            {filtering && (
-              <button
-                onClick={reset}
-                className="text-xs font-bold text-cocoa underline underline-offset-2 hover:text-deep"
-              >
-                clear
-              </button>
-            )}
-            {(relaxNote || searchNote) && (
-              <p className="basis-full text-xs font-semibold text-cocoa">
-                {relaxNote || searchNote}
-              </p>
-            )}
-          </section>
-
-          {baristaReply && (
-            <div className="mb-5 flex justify-center">
-              <PixelMascot subtitle={baristaReply} mood="playful" wide />
-            </div>
-          )}
-
-          {/* The board */}
-          {results.length > 0 ? (
-            <Board
-              items={results}
-              renderItem={(c, i) => (
-                <ScrapNote
-                  key={c.id}
-                  cafe={c}
-                  index={i}
-                  isHighlighted={highlightedId === c.id}
-                />
-              )}
-            />
+            </>
           ) : (
-            <div className="note tilt-0 mx-auto max-w-sm text-center">
-              <span aria-hidden="true" className="tape tape--washi-c tape--mid" />
-              <p className="handwritten text-[22px] text-[#3A3024]">
-                nothing matches that…
-              </p>
-              <button
-                onClick={reset}
-                className="btn-primary mt-3 rounded-full px-4 py-2 text-xs font-bold"
-              >
-                show all {TOTAL}
-              </button>
-            </div>
+            <>
+              {/* Tools */}
+              <section className="mb-6 flex flex-col gap-3">
+                {/* Below 480 the input, Ask and Surprise me shared one row and the
+                    input got ~190px of it — the placeholder was cut mid-word. The
+                    input takes its own line there and the buttons split the next. */}
+                <div className="flex flex-wrap items-end gap-2">
+                  <label className="sr-only" htmlFor="search">
+                    Look for a café
+                  </label>
+                  <input
+                    id="search"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && text.trim()) askAi();
+                    }}
+                    placeholder="try breakfast, pasta, somewhere to work…"
+                    className="handwritten min-w-0 basis-full border-0 border-b-2 border-dashed border-edge-strong bg-transparent px-1 py-2 text-[19px] text-deep placeholder:text-[#A8977F] focus:outline-none focus-visible:border-honey-deep min-[480px]:basis-0 min-[480px]:flex-1 min-[1280px]:max-w-[44rem]"
+                  />
+                  <button
+                    onClick={askAi}
+                    disabled={aiLoading || !text.trim()}
+                    className="btn-primary flex-1 rounded-full px-4 py-2.5 text-xs font-bold min-[480px]:flex-none"
+                  >
+                    {aiLoading ? "…" : "✨ Ask"}
+                  </button>
+                  <button
+                    onClick={surprise}
+                    title="Pick a café at random"
+                    className="btn-ghost flex-1 rounded-full px-3 py-2.5 text-xs font-bold min-[480px]:flex-none"
+                  >
+                    <span aria-hidden="true" className="text-sm">🎲</span>
+                    <span className="ml-1.5">Surprise me</span>
+                  </button>
+                </div>
+
+                <FilterChips
+                  cafes={cafes}
+                  selected={selected}
+                  onChange={(group, value) =>
+                    setSelected((s) => ({ ...s, [group]: value }))
+                  }
+                />
+              </section>
+
+              {/* What's on the page */}
+              <section className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <p className="handwritten text-[18px] text-[#5E5141]">
+                  {results.length === TOTAL
+                    ? `all ${TOTAL} pinned up`
+                    : `${results.length} of ${TOTAL} pinned up`}
+                  {lastSearch && <> for “{lastSearch}”</>}
+                </p>
+                {filtering && (
+                  <button
+                    onClick={reset}
+                    className="text-xs font-bold text-cocoa underline underline-offset-2 hover:text-deep"
+                  >
+                    clear
+                  </button>
+                )}
+                {(relaxNote || searchNote) && (
+                  <p className="basis-full text-xs font-semibold text-cocoa">
+                    {relaxNote || searchNote}
+                  </p>
+                )}
+              </section>
+
+              {baristaReply && (
+                <div className="mb-5 flex justify-center">
+                  <PixelMascot subtitle={baristaReply} mood="playful" wide />
+                </div>
+              )}
+
+              {/* The board */}
+              {results.length > 0 ? (
+                <Board
+                  items={results}
+                  renderItem={(c, i) => (
+                    <ScrapNote
+                      key={c.id}
+                      cafe={c}
+                      index={i}
+                      isHighlighted={highlightedId === c.id}
+                    />
+                  )}
+                />
+              ) : (
+                <div className="note tilt-0 mx-auto max-w-sm text-center">
+                  <span aria-hidden="true" className="tape tape--washi-c tape--mid" />
+                  <p className="handwritten text-[22px] text-[#3A3024]">
+                    nothing matches that…
+                  </p>
+                  <button
+                    onClick={reset}
+                    className="btn-primary mt-3 rounded-full px-4 py-2 text-xs font-bold"
+                  >
+                    show all {TOTAL}
+                  </button>
+                </div>
+              )}
+            </>
           )}
 
           <footer className="mt-10 text-center text-[11px] text-faint">
