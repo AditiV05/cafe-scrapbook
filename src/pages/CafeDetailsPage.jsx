@@ -203,7 +203,7 @@ export default function CafeDetailsPage() {
                 </h1>
 
                 <p className="text-sm font-semibold text-faint md:text-base">
-                  {cafe.area} · {cafe.price_band}
+                  {cafe.area} · {budgetLabel(cafe.price_band)} for two
                   {cafe.veg_nonveg ? ` · ${cafe.veg_nonveg}` : ""}
                 </p>
 
