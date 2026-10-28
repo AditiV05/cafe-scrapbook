@@ -88,6 +88,7 @@ cafes = cafes.sort_values("din_count", ascending=False).drop_duplicates("id")
 EXCLUDED = {
     "corner-house-c-scheme",   # permanently closed
     "laziz-pizza-gopalpura",   # not good enough for the scrapbook
+    "gvd-soni-s-cafe-malviya-nagar",  # not good enough for the scrapbook
 }
 cafes = cafes[~cafes["id"].isin(EXCLUDED)]
 
