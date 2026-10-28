@@ -1143,35 +1143,6 @@
   ]
  },
  {
-  "id": "gvd-soni-s-cafe-malviya-nagar",
-  "name": "GVD Soni's Cafe",
-  "area": "Malviya Nagar",
-  "price_band": "₹₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [
-   "Fast Food",
-   "Beverages"
-  ],
-  "vibe_tags": [
-   "Fast Food",
-   "Beverages",
-   "Pure Veg"
-  ],
-  "rating": 4.2,
-  "review_count": 1918,
-  "popularity_rank": 39,
-  "url": "https://www.zomato.com/jaipur/gvd-sonis-cafe-malviya-nagar",
-  "authenticity": "Café",
-  "description": "A café in Malviya Nagar known for Fast Food and Beverages. Rated 4.2/5 across 1,918+ dining reviews.",
-  "mascot_note": "Nearly 2,000 reviews for a reason — quick bites and beverages the Malviya Nagar regulars swear by.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
   "id": "theka-coffee-da-vaishali-nagar",
   "name": "Theka Coffee Da",
   "area": "Vaishali Nagar",
@@ -1183,7 +1154,7 @@
   ],
   "rating": 4.1,
   "review_count": 370,
-  "popularity_rank": 40,
+  "popularity_rank": 39,
   "url": "https://www.zomato.com/jaipur/theka-coffee-da-2-vaishali-nagar",
   "authenticity": "Café",
   "description": "A café in Vaishali Nagar known for coffee and bites. Rated 4.1/5 across 370+ dining reviews.",
@@ -1212,7 +1183,7 @@
   ],
   "rating": 4.0,
   "review_count": 892,
-  "popularity_rank": 41,
+  "popularity_rank": 40,
   "url": "https://www.zomato.com/jaipur/ki-ka-kafe-restaurant-chitrakoot",
   "authenticity": "Café",
   "description": "A café in Chitrakoot known for Chinese and North Indian. Rated 4.0/5 across 892+ dining reviews.",
@@ -1238,7 +1209,7 @@
   ],
   "rating": 2.9,
   "review_count": 27,
-  "popularity_rank": 42,
+  "popularity_rank": 41,
   "url": "https://www.zomato.com/jaipur/cafe-nola-malviya-nagar",
   "authenticity": "Cafe",
   "description": "A café in Malviya Nagar known for coffee and bites. Rated 2.9/5 across 27+ dining reviews.",
@@ -1266,7 +1237,7 @@
   ],
   "rating": 3.6,
   "review_count": 122,
-  "popularity_rank": 43,
+  "popularity_rank": 42,
   "url": "https://www.zomato.com/jaipur/jacobs-brew-house-malviya-nagar",
   "authenticity": "Cafe",
   "description": "A café in Malviya Nagar known for Beverages. Rated 3.6/5 across 122+ dining reviews.",
