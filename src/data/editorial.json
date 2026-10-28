@@ -1,0 +1,189 @@
+{
+ "about": "Hand-written content. 'moods' are the home-page spreads: picks are café ids, in the order shown. 'takes' are the Order this / Go when / Skip if notes on each details page; leave a field out and it isn't shown. First drafts are built only from the barista notes and hard facts (pure-veg, price): rewrite them in your own words.",
+ "moods": [
+  {
+   "id": "chai",
+   "emoji": "🍵",
+   "title": "Chai & a long adda",
+   "note": "Cutting chai, something fried, and nowhere to be. Pull up a chair.",
+   "picks": [
+    "tapri-central-c-scheme",
+    "tapri-pratham-lal-kothi",
+    "tapri-ashram-durgapura",
+    "tea-connect-cafe-mansarovar",
+    "indian-coffee-house-mi-road",
+    "chaisa-lal-kothi"
+   ]
+  },
+  {
+   "id": "coffee",
+   "emoji": "☕",
+   "title": "Serious coffee",
+   "note": "For when the coffee is the point, not the side.",
+   "picks": [
+    "curious-life-coffee-roasters-sarojini-marg-c-scheme",
+    "anokhi-cafe-c-scheme",
+    "nothing-before-coffee-durgapura",
+    "love-over-coffee-durgapura",
+    "aromocha-gopalpura",
+    "theka-coffee-da-vaishali-nagar"
+   ]
+  },
+  {
+   "id": "date",
+   "emoji": "💐",
+   "title": "Dress up for it",
+   "note": "Birthdays, anniversaries, first dates you want to go well.",
+   "picks": [
+    "the-johri-pink-city",
+    "once-upon-a-time-at-the-bagh-agra-road",
+    "zolocrust-malviya-nagar",
+    "nibs-experia-c-scheme",
+    "cafe-bae-bais-godam",
+    "la-palma-cafe-and-lounge-bar-c-scheme"
+   ]
+  },
+  {
+   "id": "group",
+   "emoji": "👯",
+   "title": "Big table, no arguments",
+   "note": "Six people, six cravings. These menus have something for all of them.",
+   "picks": [
+    "sultanat-malviya-nagar",
+    "the-eclectica-sodala",
+    "on-the-house-c-scheme",
+    "stepout-cafe-c-scheme",
+    "the-messy-door-shastri-nagar",
+    "corner-house-c-scheme"
+   ]
+  },
+  {
+   "id": "sweet",
+   "emoji": "🍰",
+   "title": "Sweet tooth",
+   "note": "Skip the mains. Nobody's judging.",
+   "picks": [
+    "dzurt-patisserie-and-cafe-civil-lines",
+    "quyu-s-cafe-vaishali-nagar",
+    "nibs-cafe-and-chocolataria-bais-godam",
+    "jaipur-baking-company-jaipur-marriott-hotel-durgapura",
+    "brown-sugar-restaurant-cafe-bakery-c-scheme",
+    "coffee-sutra-malviya-nagar"
+   ]
+  },
+  {
+   "id": "slow",
+   "emoji": "🌿",
+   "title": "Slow afternoons",
+   "note": "Quiet corners for a long brunch, a book, or a catch-up that runs over.",
+   "picks": [
+    "anokhi-cafe-c-scheme",
+    "decked-up-by-garden-cafe-vaishali-nagar",
+    "cafe-lazymojo-malviya-nagar",
+    "cafe-quaint-bapu-nagar",
+    "home-cafe-by-mr-beans-c-scheme",
+    "love-over-coffee-durgapura"
+   ]
+  }
+ ],
+ "takes": {
+  "tapri-central-c-scheme": {
+   "order": "Cutting chai and a plate of Maggi.",
+   "go_when": "Evenings, when it's buzzing.",
+   "skip_if": "You want somewhere quiet."
+  },
+  "zolocrust-malviya-nagar": {
+   "order": "Something from the bakery, then the pasta.",
+   "go_when": "Late, when the city's slowing down and you're still hungry."
+  },
+  "cafe-bae-bais-godam": {
+   "go_when": "A long, lazy evening.",
+   "order": "Something Thai, and a drink from the bar."
+  },
+  "curious-life-coffee-roasters-sarojini-marg-c-scheme": {
+   "order": "A black coffee, at least once.",
+   "skip_if": "You're after a sugary frappé."
+  },
+  "on-the-house-c-scheme": {
+   "go_when": "With a group that can't pick a cuisine."
+  },
+  "sultanat-malviya-nagar": {
+   "go_when": "When the table can't agree.",
+   "skip_if": "You want meat. It's all pure-veg."
+  },
+  "cafe-lazymojo-malviya-nagar": {
+   "go_when": "A slow afternoon with friends."
+  },
+  "nibs-experia-c-scheme": {
+   "go_when": "A date, or a catch-up you've been putting off."
+  },
+  "anokhi-cafe-c-scheme": {
+   "order": "Fresh bakes and an honest coffee.",
+   "go_when": "A calm afternoon."
+  },
+  "the-johri-pink-city": {
+   "go_when": "A special occasion. Dress up.",
+   "skip_if": "You're on a tight budget. It's ₹800+ for two."
+  },
+  "the-eclectica-sodala": {
+   "go_when": "With an indecisive table.",
+   "skip_if": "You want meat. It's all pure-veg."
+  },
+  "decked-up-by-garden-cafe-vaishali-nagar": {
+   "go_when": "A long weekend brunch."
+  },
+  "stepout-cafe-c-scheme": {
+   "order": "A wood-fired pizza.",
+   "go_when": "When you're properly hungry."
+  },
+  "brown-sugar-restaurant-cafe-bakery-c-scheme": {
+   "order": "A slice of cake on the way out."
+  },
+  "quyu-s-cafe-vaishali-nagar": {
+   "order": "Dessert. Save real room for it."
+  },
+  "nibs-cafe-and-chocolataria-bais-godam": {
+   "order": "Anything chocolate.",
+   "go_when": "You want to treat yourself."
+  },
+  "tapri-pratham-lal-kothi": {
+   "order": "Chai and street snacks.",
+   "go_when": "An unhurried evening."
+  },
+  "tapri-ashram-durgapura": {
+   "order": "Cutting chai.",
+   "go_when": "For a long conversation."
+  },
+  "nothing-before-coffee-durgapura": {
+   "go_when": "You need a quick caffeine fix."
+  },
+  "dzurt-patisserie-and-cafe-civil-lines": {
+   "order": "Pastries, and a box to take home."
+  },
+  "la-palma-cafe-and-lounge-bar-c-scheme": {
+   "go_when": "When the evening runs late."
+  },
+  "once-upon-a-time-at-the-bagh-agra-road": {
+   "go_when": "A special occasion. Dress up.",
+   "skip_if": "You're on a tight budget. It's ₹800+ for two."
+  },
+  "jaipur-baking-company-jaipur-marriott-hotel-durgapura": {
+   "order": "Pastries and fresh bread."
+  },
+  "indian-coffee-house-mi-road": {
+   "order": "Filter coffee.",
+   "skip_if": "You want polish. It's proudly old-school."
+  },
+  "corner-house-c-scheme": {
+   "go_when": "Family dinner.",
+   "order": "Save room for the ice cream."
+  },
+  "cafe-nola-malviya-nagar": {
+   "skip_if": "You want a sure thing. It's still finding its feet."
+  },
+  "jacobs-brew-house-malviya-nagar": {
+   "go_when": "For the look: it's a retro, record-store space.",
+   "skip_if": "You go by reviews. They're mixed."
+  }
+ }
+}

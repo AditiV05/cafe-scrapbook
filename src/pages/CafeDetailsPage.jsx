@@ -5,6 +5,10 @@ import CafeCard from "../components/CafeCard";
 import PixelMascot from "../components/PixelMascot";
 import { getHue } from "../lib/cuisineHues";
 import { budgetLabel } from "../lib/budget";
+import { takesFor } from "../lib/editorial";
+
+const TAKE_TAPES = ["tape--kraft tape--left", "tape--kraft tape--tone-b tape--right", "tape--kraft tape--tone-c tape--mid"];
+const TAKE_TILTS = ["tilt-1", "tilt-4", "tilt-3"];
 
 const TOTAL = cafes.length;
 
@@ -138,6 +142,7 @@ export default function CafeDetailsPage() {
   const navigate = useNavigate();
   const cafe = cafes.find((c) => c.id === id);
   const related = useRelated(cafe);
+  const takes = cafe ? takesFor(cafe.id) : [];
 
   if (!cafe) {
     return (
@@ -267,17 +272,35 @@ export default function CafeDetailsPage() {
           </div>
         </section>
 
-        {/* ── THE BARISTA'S NOTE ──
-            Hand-written per café, and the only non-generated prose in the
-            dataset. It used to sit at the very bottom of the page. */}
-        {cafe.mascot_note && (
-          <section className="ml-[clamp(1rem,2.4vw,2rem)] flex justify-center md:justify-start">
-            <div className="note tilt-2 max-w-2xl">
-              <span aria-hidden="true" className="tape tape--washi-c tape--mid" />
-              <p className="handwritten text-[clamp(1.15rem,2.6vw,1.45rem)] leading-snug text-[#3A3024]">
-                {cafe.mascot_note}
-              </p>
-            </div>
+        {/* ── THE BARISTA'S TAKE ──
+            The note plus Order this / Go when / Skip if from editorial.json:
+            the hand-written opinion is the reason to read this page over
+            the Zomato listing, so it comes straight after the hero. */}
+        {(cafe.mascot_note || takes.length > 0) && (
+          <section className="ml-[clamp(1rem,2.4vw,2rem)] grid items-start gap-6 md:grid-cols-[minmax(0,1fr)_16rem]">
+            {cafe.mascot_note && (
+              <div className="note tilt-2 max-w-2xl">
+                <span aria-hidden="true" className="tape tape--washi-c tape--mid" />
+                <p className="handwritten text-[clamp(1.15rem,2.6vw,1.45rem)] leading-snug text-[#3A3024]">
+                  {cafe.mascot_note}
+                </p>
+              </div>
+            )}
+            {takes.length > 0 && (
+              <dl className="grid gap-5 sm:grid-cols-3 md:grid-cols-1">
+                {takes.map(([label, text], i) => (
+                  <div key={label} className={`note ${TAKE_TILTS[i]} !py-3`}>
+                    <span aria-hidden="true" className={`tape ${TAKE_TAPES[i]}`} />
+                    <dt className="text-[10.5px] font-extrabold uppercase tracking-[0.12em] text-terracotta">
+                      {label}
+                    </dt>
+                    <dd className="handwritten mt-0.5 text-[18px] leading-snug text-[#3A3024]">
+                      {text}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            )}
           </section>
         )}
 
