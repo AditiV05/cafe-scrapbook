@@ -96,92 +96,6 @@
   ]
  },
  {
-  "id": "chool-c-scheme",
-  "name": "Chool",
-  "area": "C Scheme",
-  "price_band": "₹₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [
-   "North Indian",
-   "Fast Food",
-   "South Indian"
-  ],
-  "vibe_tags": [
-   "North Indian",
-   "Fast Food",
-   "South Indian",
-   "Pure Veg"
-  ],
-  "rating": 4.7,
-  "review_count": 1230,
-  "popularity_rank": 4,
-  "url": "https://www.zomato.com/jaipur/chool-c-scheme",
-  "authenticity": "Café",
-  "description": "A café in C Scheme known for North Indian, Fast Food and South Indian. Rated 4.7/5 across 1,230+ dining reviews.",
-  "mascot_note": "Pure-veg done with flair — North Indian, dosas and quick bites in C Scheme. Reliable crowd-pleaser.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "curious-life-coffee-roasters-sarojini-marg-c-scheme",
-  "name": "Curious Life Coffee Roasters- Sarojini Marg",
-  "area": "C Scheme",
-  "price_band": "₹₹",
-  "veg_nonveg": "Both",
-  "cuisines": [],
-  "vibe_tags": [
-   "Highly Rated"
-  ],
-  "rating": 4.7,
-  "review_count": 879,
-  "popularity_rank": 5,
-  "url": "https://www.zomato.com/jaipur/curious-life-coffee-roasters-sarojini-marg-c-scheme",
-  "authenticity": "Café",
-  "description": "A café in C Scheme known for coffee and bites. Rated 4.7/5 across 879+ dining reviews.",
-  "mascot_note": "Serious coffee for serious coffee people — roasters who actually care about the bean. Order it black at least once.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "on-the-house-c-scheme",
-  "name": "On The House",
-  "area": "C Scheme",
-  "price_band": "₹₹",
-  "veg_nonveg": "Both",
-  "cuisines": [
-   "Italian",
-   "Continental",
-   "Mexican"
-  ],
-  "vibe_tags": [
-   "Italian",
-   "Continental",
-   "Mexican",
-   "Highly Rated"
-  ],
-  "rating": 4.6,
-  "review_count": 1573,
-  "popularity_rank": 6,
-  "url": "https://www.zomato.com/jaipur/on-the-house-c-scheme",
-  "authenticity": "Casual Dining",
-  "description": "A casual dining in C Scheme known for Italian, Continental and Mexican. Rated 4.6/5 across 1,573+ dining reviews.",
-  "mascot_note": "Italian, Continental and Mexican under one roof, and the C Scheme regulars keep coming back. Easy group pick.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
   "id": "sultanat-malviya-nagar",
   "name": "Sultanat",
   "area": "Malviya Nagar",
@@ -202,98 +116,11 @@
   ],
   "rating": 4.5,
   "review_count": 2525,
-  "popularity_rank": 7,
+  "popularity_rank": 4,
   "url": "https://www.zomato.com/jaipur/sultanat-malviya-nagar",
   "authenticity": "Café",
   "description": "A café in Malviya Nagar known for North Indian, Chinese, Italian, Mexican and Lebanese. Rated 4.5/5 across 2,525+ dining reviews.",
   "mascot_note": "Five cuisines, 2,500+ reviews, all pure-veg — when the table can't agree, Sultanat ends the argument.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "cafe-lazymojo-malviya-nagar",
-  "name": "Cafe LazyMojo",
-  "area": "Malviya Nagar",
-  "price_band": "₹₹",
-  "veg_nonveg": "Both",
-  "cuisines": [
-   "Italian",
-   "Continental"
-  ],
-  "vibe_tags": [
-   "Italian",
-   "Continental",
-   "Highly Rated"
-  ],
-  "rating": 4.5,
-  "review_count": 2068,
-  "popularity_rank": 8,
-  "url": "https://www.zomato.com/jaipur/cafe-lazymojo-malviya-nagar",
-  "authenticity": "Café",
-  "description": "A café in Malviya Nagar known for Italian and Continental. Rated 4.5/5 across 2,068+ dining reviews.",
-  "mascot_note": "Comfort Italian and Continental with a relaxed, take-your-time feel. Good for a slow afternoon with friends.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "nibs-experia-c-scheme",
-  "name": "Nibs Experia",
-  "area": "C Scheme",
-  "price_band": "₹₹",
-  "veg_nonveg": "Both",
-  "cuisines": [
-   "Italian",
-   "Continental"
-  ],
-  "vibe_tags": [
-   "Italian",
-   "Continental",
-   "Highly Rated"
-  ],
-  "rating": 4.5,
-  "review_count": 1329,
-  "popularity_rank": 9,
-  "url": "https://www.zomato.com/jaipur/nibs-experia-c-scheme",
-  "authenticity": "Café",
-  "description": "A café in C Scheme known for Italian and Continental. Rated 4.5/5 across 1,329+ dining reviews.",
-  "mascot_note": "Italian and Continental plates in C Scheme, consistently well-loved. A dependable date or catch-up spot.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "anokhi-cafe-c-scheme",
-  "name": "Anokhi Cafe",
-  "area": "C Scheme",
-  "price_band": "₹₹",
-  "veg_nonveg": "Both",
-  "cuisines": [
-   "Beverages",
-   "Bakery"
-  ],
-  "vibe_tags": [
-   "Beverages",
-   "Bakery",
-   "Highly Rated"
-  ],
-  "rating": 4.5,
-  "review_count": 684,
-  "popularity_rank": 10,
-  "url": "https://www.zomato.com/jaipur/anokhi-cafe-c-scheme",
-  "authenticity": "Beverage Shop",
-  "description": "A beverage shop in C Scheme known for Beverages and Bakery. Rated 4.5/5 across 684+ dining reviews.",
-  "mascot_note": "The classic Anokhi café — fresh bakes, honest coffee, a calm courtyard mood. Old-Jaipur charm done right.",
   "hours": "",
   "seating": [],
   "menu_highlights": [],
@@ -320,7 +147,7 @@
   ],
   "rating": 4.5,
   "review_count": 144,
-  "popularity_rank": 11,
+  "popularity_rank": 5,
   "url": "https://www.zomato.com/jaipur/coffee-sutra-1-malviya-nagar",
   "authenticity": "Cafe",
   "description": "A café in Malviya Nagar known for Continental, Fast Food and Desserts. Rated 4.5/5 across 144+ dining reviews.",
@@ -352,7 +179,7 @@
   ],
   "rating": 4.5,
   "review_count": 140,
-  "popularity_rank": 12,
+  "popularity_rank": 6,
   "url": "https://www.zomato.com/jaipur/the-johri-pink-city",
   "authenticity": "Fine Dining",
   "description": "A fine-dining spot in Pink City known for North Indian, Biryani and North Eastern. Rated 4.5/5 across 140+ dining reviews.",
@@ -364,39 +191,6 @@
    "/cafes/the-johri-pink-city.jpg",
    "/cafes/the-johri-pink-city-2.jpg",
    "/cafes/the-johri-pink-city-3.jpg"
-  ]
- },
- {
-  "id": "the-eclectica-sodala",
-  "name": "The Eclectica",
-  "area": "Sodala",
-  "price_band": "₹₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [
-   "North Indian",
-   "Italian",
-   "Continental",
-   "Chinese",
-   "Mexican"
-  ],
-  "vibe_tags": [
-   "North Indian",
-   "Italian",
-   "Continental",
-   "Pure Veg"
-  ],
-  "rating": 4.4,
-  "review_count": 1957,
-  "popularity_rank": 13,
-  "url": "https://www.zomato.com/jaipur/the-eclectica-sodala",
-  "authenticity": "Café",
-  "description": "A café in Sodala known for North Indian, Italian, Continental, Chinese and Mexican. Rated 4.4/5 across 1,957+ dining reviews.",
-  "mascot_note": "Big multi-cuisine menu in Sodala — pure-veg and built for indecisive tables. Something for everyone here.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
   ]
  },
  {
@@ -420,108 +214,11 @@
   ],
   "rating": 4.4,
   "review_count": 1526,
-  "popularity_rank": 14,
+  "popularity_rank": 7,
   "url": "https://www.zomato.com/jaipur/decked-up-by-garden-cafe-vaishali-nagar",
   "authenticity": "Café",
   "description": "A café in Vaishali Nagar known for Fast Food, North Indian, South Indian, Italian and Continental. Rated 4.4/5 across 1,526+ dining reviews.",
   "mascot_note": "A leafy garden-café vibe in Vaishali Nagar with a sprawling veg menu. Pretty spot for a long brunch.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "stepout-cafe-c-scheme",
-  "name": "Stepout Cafe",
-  "area": "C Scheme",
-  "price_band": "₹₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [
-   "Italian",
-   "Lebanese",
-   "Mexican",
-   "Continental",
-   "Pizza",
-   "Street Food"
-  ],
-  "vibe_tags": [
-   "Italian",
-   "Lebanese",
-   "Mexican",
-   "Pure Veg"
-  ],
-  "rating": 4.4,
-  "review_count": 1450,
-  "popularity_rank": 15,
-  "url": "https://www.zomato.com/jaipur/stepout-cafe-c-scheme",
-  "authenticity": "Café",
-  "description": "A café in C Scheme known for Italian, Lebanese, Mexican, Continental, Pizza and Street Food. Rated 4.4/5 across 1,450+ dining reviews.",
-  "mascot_note": "Wood-fired pizzas, Lebanese and Mexican — a pure-veg crowd favourite to actually step out for. Bring an appetite.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "brown-sugar-restaurant-cafe-bakery-c-scheme",
-  "name": "Brown Sugar - Restaurant Cafe Bakery",
-  "area": "C Scheme",
-  "price_band": "₹₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [
-   "Italian",
-   "Fast Food",
-   "Beverages"
-  ],
-  "vibe_tags": [
-   "Italian",
-   "Fast Food",
-   "Beverages",
-   "Pure Veg"
-  ],
-  "rating": 4.4,
-  "review_count": 1261,
-  "popularity_rank": 16,
-  "url": "https://www.zomato.com/jaipur/brown-sugar-restaurant-cafe-bakery-c-scheme",
-  "authenticity": "Café",
-  "description": "A café in C Scheme known for Italian, Fast Food and Beverages. Rated 4.4/5 across 1,261+ dining reviews.",
-  "mascot_note": "Bakery-café in C Scheme with Italian and quick bites. Grab a slice of cake on the way out, trust me.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "brown-sugar-restaurant-cafe-bakery-vaishali-nagar",
-  "name": "Brown Sugar - Restaurant, Cafe, Bakery",
-  "area": "Vaishali Nagar",
-  "price_band": "₹₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [
-   "Continental",
-   "North Indian",
-   "Italian",
-   "Beverages"
-  ],
-  "vibe_tags": [
-   "Continental",
-   "North Indian",
-   "Italian",
-   "Pure Veg"
-  ],
-  "rating": 4.4,
-  "review_count": 1017,
-  "popularity_rank": 17,
-  "url": "https://www.zomato.com/jaipur/brown-sugar-restaurant-cafe-bakery-vaishali-nagar",
-  "authenticity": "Café",
-  "description": "A café in Vaishali Nagar known for Continental, North Indian, Italian and Beverages. Rated 4.4/5 across 1,017+ dining reviews.",
-  "mascot_note": "The Vaishali Nagar Brown Sugar — same bakery comfort, Continental and North Indian. Cosy neighbourhood pick.",
   "hours": "",
   "seating": [],
   "menu_highlights": [],
@@ -549,43 +246,11 @@
   ],
   "rating": 4.4,
   "review_count": 757,
-  "popularity_rank": 18,
+  "popularity_rank": 8,
   "url": "https://www.zomato.com/jaipur/quyus-cafe-vaishali-nagar",
   "authenticity": "Café",
   "description": "A café in Vaishali Nagar known for Italian, Continental, Desserts and Beverages. Rated 4.4/5 across 757+ dining reviews.",
   "mascot_note": "Dessert-forward Italian-Continental café in Vaishali Nagar. Save real room for the sweet stuff.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "nibs-cafe-and-chocolataria-bais-godam",
-  "name": "Nibs Cafe and Chocolataria",
-  "area": "Bais Godam",
-  "price_band": "₹₹₹",
-  "veg_nonveg": "Both",
-  "cuisines": [
-   "Continental",
-   "Mexican",
-   "Italian",
-   "Desserts",
-   "Beverages"
-  ],
-  "vibe_tags": [
-   "Continental",
-   "Mexican",
-   "Italian"
-  ],
-  "rating": 4.4,
-  "review_count": 744,
-  "popularity_rank": 19,
-  "url": "https://www.zomato.com/jaipur/nibs-cafe-and-chocolataria-bais-godam",
-  "authenticity": "Café",
-  "description": "A café in Bais Godam known for Continental, Mexican, Italian, Desserts and Beverages. Rated 4.4/5 across 744+ dining reviews.",
-  "mascot_note": "A chocolate-lover's café — desserts, Continental and Italian, a touch more premium. Treat-yourself energy.",
   "hours": "",
   "seating": [],
   "menu_highlights": [],
@@ -612,99 +277,11 @@
   ],
   "rating": 4.4,
   "review_count": 707,
-  "popularity_rank": 20,
+  "popularity_rank": 9,
   "url": "https://www.zomato.com/jaipur/tapri-pratham-lal-kothi",
   "authenticity": "Café",
   "description": "A café in Lal Kothi known for Fast Food, Street Food and Beverages. Rated 4.4/5 across 707+ dining reviews.",
   "mascot_note": "Tapri's Lal Kothi outpost — chai, street snacks and that easy adda feel. Perfect for an unhurried evening.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "chaisa-lal-kothi",
-  "name": "Chaisa",
-  "area": "Lal Kothi",
-  "price_band": "₹₹",
-  "veg_nonveg": "Both",
-  "cuisines": [
-   "Fast Food",
-   "Italian",
-   "Beverages"
-  ],
-  "vibe_tags": [
-   "Fast Food",
-   "Italian",
-   "Beverages"
-  ],
-  "rating": 4.4,
-  "review_count": 690,
-  "popularity_rank": 21,
-  "url": "https://www.zomato.com/jaipur/chaisa-lal-kothi",
-  "authenticity": "Café",
-  "description": "A café in Lal Kothi known for Fast Food, Italian and Beverages. Rated 4.4/5 across 690+ dining reviews.",
-  "mascot_note": "Chai, quick bites and a bit of Italian in Lal Kothi. Casual, friendly, no-fuss hangout.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "tapri-ashram-durgapura",
-  "name": "Tapri Ashram",
-  "area": "Durgapura",
-  "price_band": "₹₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [
-   "Fast Food",
-   "Street Food",
-   "Beverages"
-  ],
-  "vibe_tags": [
-   "Fast Food",
-   "Street Food",
-   "Beverages",
-   "Pure Veg"
-  ],
-  "rating": 4.4,
-  "review_count": 623,
-  "popularity_rank": 22,
-  "url": "https://www.zomato.com/jaipur/tapri-ashram-1-tonk-road",
-  "authenticity": "Café",
-  "description": "A café in Durgapura known for Fast Food, Street Food and Beverages. Rated 4.4/5 across 623+ dining reviews.",
-  "mascot_note": "The Durgapura Tapri — cutting chai and street food, made for long conversations. Pull up a chair.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "nothing-before-coffee-durgapura",
-  "name": "Nothing Before Coffee",
-  "area": "Durgapura",
-  "price_band": "₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [
-   "Fast Food"
-  ],
-  "vibe_tags": [
-   "Fast Food",
-   "Pure Veg"
-  ],
-  "rating": 4.4,
-  "review_count": 601,
-  "popularity_rank": 23,
-  "url": "https://www.zomato.com/jaipur/nothing-before-coffee-tonk-road",
-  "authenticity": "Café",
-  "description": "A café in Durgapura known for Fast Food. Rated 4.4/5 across 601+ dining reviews.",
-  "mascot_note": "NBC — budget-friendly, coffee-first, and built for the young Jaipur crowd. Quick caffeine fix sorted.",
   "hours": "",
   "seating": [],
   "menu_highlights": [],
@@ -727,39 +304,11 @@
   ],
   "rating": 4.4,
   "review_count": 397,
-  "popularity_rank": 24,
+  "popularity_rank": 10,
   "url": "https://www.zomato.com/jaipur/crazy-coffee-c-scheme",
   "authenticity": "Café",
   "description": "A café in C Scheme known for Fast Food. Rated 4.4/5 across 397+ dining reviews.",
   "mascot_note": "Cheap, cheerful and caffeine-forward in C Scheme. The grab-a-coffee-and-go kind of place.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "cafe-quaint-bapu-nagar",
-  "name": "Cafe Quaint",
-  "area": "Bapu Nagar",
-  "price_band": "₹₹",
-  "veg_nonveg": "Both",
-  "cuisines": [
-   "European",
-   "Beverages"
-  ],
-  "vibe_tags": [
-   "European",
-   "Beverages"
-  ],
-  "rating": 4.4,
-  "review_count": 375,
-  "popularity_rank": 25,
-  "url": "https://www.zomato.com/jaipur/cafe-quaint-bapu-nagar",
-  "authenticity": "Café",
-  "description": "A café in Bapu Nagar known for European and Beverages. Rated 4.4/5 across 375+ dining reviews.",
-  "mascot_note": "Exactly as the name promises — a quaint little European-style café in Bapu Nagar. Quiet and charming.",
   "hours": "",
   "seating": [],
   "menu_highlights": [],
@@ -788,7 +337,7 @@
   ],
   "rating": 4.3,
   "review_count": 356,
-  "popularity_rank": 26,
+  "popularity_rank": 11,
   "url": "https://www.zomato.com/jaipur/bombaye-house-malviya-nagar",
   "authenticity": "Café",
   "description": "A café in Malviya Nagar known for Chinese, Street Food, Momos, South Indian and Beverages. Rated 4.3/5 across 356+ dining reviews.",
@@ -814,39 +363,11 @@
   ],
   "rating": 4.3,
   "review_count": 431,
-  "popularity_rank": 27,
+  "popularity_rank": 12,
   "url": "https://www.zomato.com/jaipur/dzurt-patisserie-and-cafe-civil-lines",
   "authenticity": "Café",
   "description": "A café in Civil Lines known for Bakery. Rated 4.3/5 across 431+ dining reviews.",
   "mascot_note": "A proper patisserie in Civil Lines — come for the pastries, leave with a box. Dessert-first, always.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "home-cafe-by-mr-beans-c-scheme",
-  "name": "Home CAFÉ by Mr Beans",
-  "area": "C Scheme",
-  "price_band": "₹₹",
-  "veg_nonveg": "Both",
-  "cuisines": [
-   "Continental",
-   "Fast Food"
-  ],
-  "vibe_tags": [
-   "Continental",
-   "Fast Food"
-  ],
-  "rating": 4.3,
-  "review_count": 540,
-  "popularity_rank": 28,
-  "url": "https://www.zomato.com/jaipur/home-caf%C3%A9-by-mr-beans-c-scheme",
-  "authenticity": "Café",
-  "description": "A café in C Scheme known for Continental and Fast Food. Rated 4.3/5 across 540+ dining reviews.",
-  "mascot_note": "Homey Continental comfort in C Scheme — unfussy, warm, and easy on the wallet. Like eating at a friend's.",
   "hours": "",
   "seating": [],
   "menu_highlights": [],
@@ -873,71 +394,11 @@
   ],
   "rating": 4.3,
   "review_count": 829,
-  "popularity_rank": 29,
+  "popularity_rank": 13,
   "url": "https://www.zomato.com/jaipur/la-palma-cafe-and-lounge-bar-c-scheme",
   "authenticity": "Café",
   "description": "A café in C Scheme known for Italian, European and Continental. Rated 4.3/5 across 829+ dining reviews.",
   "mascot_note": "Café by day, lounge bar by night — Italian and European in C Scheme. Good for when the evening runs late.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "tea-connect-cafe-mansarovar",
-  "name": "Tea Connect Cafe",
-  "area": "Mansarovar",
-  "price_band": "₹₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [
-   "Fast Food",
-   "Street Food",
-   "Beverages"
-  ],
-  "vibe_tags": [
-   "Fast Food",
-   "Street Food",
-   "Beverages",
-   "Pure Veg"
-  ],
-  "rating": 4.3,
-  "review_count": 971,
-  "popularity_rank": 30,
-  "url": "https://www.zomato.com/jaipur/tea-connect-cafe-mansarovar",
-  "authenticity": "Café",
-  "description": "A café in Mansarovar known for Fast Food, Street Food and Beverages. Rated 4.3/5 across 971+ dining reviews.",
-  "mascot_note": "Tea, street snacks and good company in Mansarovar. A proper everyday chai-stop.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "the-rustic-spot-cafe-mansarovar",
-  "name": "The Rustic Spot Cafe",
-  "area": "Mansarovar",
-  "price_band": "₹₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [
-   "North Indian",
-   "Italian"
-  ],
-  "vibe_tags": [
-   "North Indian",
-   "Italian",
-   "Pure Veg"
-  ],
-  "rating": 4.3,
-  "review_count": 984,
-  "popularity_rank": 31,
-  "url": "https://www.zomato.com/jaipur/the-rustic-spot-cafe-mansarovar",
-  "authenticity": "Café",
-  "description": "A café in Mansarovar known for North Indian and Italian. Rated 4.3/5 across 984+ dining reviews.",
-  "mascot_note": "A rustic, homey corner of Mansarovar with North Indian and Italian comfort food. Easy and unpretentious.",
   "hours": "",
   "seating": [],
   "menu_highlights": [],
@@ -965,7 +426,7 @@
   ],
   "rating": 4.3,
   "review_count": 3988,
-  "popularity_rank": 32,
+  "popularity_rank": 14,
   "url": "https://www.zomato.com/jaipur/once-upon-a-time-at-the-bagh-agra-road",
   "authenticity": "Fine Dining",
   "description": "A fine-dining spot on Agra Road known for North Indian, Mughlai and global plates. Rated 4.3/5 across 3,988+ dining reviews.",
@@ -993,66 +454,11 @@
   ],
   "rating": 4.2,
   "review_count": 289,
-  "popularity_rank": 33,
+  "popularity_rank": 15,
   "url": "https://www.zomato.com/jaipur/jaipur-baking-company-jaipur-marriott-hotel-tonk-road",
   "authenticity": "Café",
   "description": "A café in Durgapura known for Bakery. Rated 4.2/5 across 289+ dining reviews.",
   "mascot_note": "The Marriott's bakery — premium pastries and breads done properly. Worth it for a polished treat.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "aromocha-gopalpura",
-  "name": "Aromocha",
-  "area": "Gopalpura",
-  "price_band": "₹₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [
-   "Fast Food",
-   "Coffee"
-  ],
-  "vibe_tags": [
-   "Fast Food",
-   "Coffee",
-   "Pure Veg"
-  ],
-  "rating": 4.2,
-  "review_count": 313,
-  "popularity_rank": 34,
-  "url": "https://www.zomato.com/jaipur/aromocha-tonk-road",
-  "authenticity": "Café",
-  "description": "A café in Gopalpura known for Fast Food and Coffee. Rated 4.2/5 across 313+ dining reviews.",
-  "mascot_note": "Coffee and quick bites in Gopalpura with a cosy feel. A neat little neighbourhood find.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "indian-coffee-house-mi-road",
-  "name": "Indian Coffee House",
-  "area": "MI Road",
-  "price_band": "₹",
-  "veg_nonveg": "Both",
-  "cuisines": [
-   "Fast Food"
-  ],
-  "vibe_tags": [
-   "Fast Food"
-  ],
-  "rating": 4.2,
-  "review_count": 501,
-  "popularity_rank": 35,
-  "url": "https://www.zomato.com/jaipur/indian-coffee-house-mi-road",
-  "authenticity": "Quick Bites",
-  "description": "A quick bites in MI Road known for Fast Food. Rated 4.2/5 across 501+ dining reviews.",
-  "mascot_note": "An old-school institution on MI Road — filter coffee and nostalgia at unbeatable prices. A piece of history.",
   "hours": "",
   "seating": [],
   "menu_highlights": [],
@@ -1082,7 +488,7 @@
   ],
   "rating": 4.2,
   "review_count": 617,
-  "popularity_rank": 36,
+  "popularity_rank": 16,
   "url": "https://www.zomato.com/jaipur/the-messy-door-shastri-nagar",
   "authenticity": "Casual Dining",
   "description": "A casual dining in Shastri Nagar known for Fast Food, Pizza, Italian, Chinese, Desserts and Beverages. Rated 4.2/5 across 617+ dining reviews.",
@@ -1106,35 +512,11 @@
   ],
   "rating": 4.2,
   "review_count": 638,
-  "popularity_rank": 37,
+  "popularity_rank": 17,
   "url": "https://www.zomato.com/jaipur/love-over-coffee-6-tonk-road",
   "authenticity": "Café",
   "description": "A café in Durgapura known for coffee and bites. Rated 4.2/5 across 638+ dining reviews.",
   "mascot_note": "Cosy coffee corner in Durgapura with a sweet name to match. Made for slow chats over a brew.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
-  "id": "theka-coffee-da-vaishali-nagar",
-  "name": "Theka Coffee Da",
-  "area": "Vaishali Nagar",
-  "price_band": "₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [],
-  "vibe_tags": [
-   "Pure Veg"
-  ],
-  "rating": 4.1,
-  "review_count": 370,
-  "popularity_rank": 38,
-  "url": "https://www.zomato.com/jaipur/theka-coffee-da-2-vaishali-nagar",
-  "authenticity": "Café",
-  "description": "A café in Vaishali Nagar known for coffee and bites. Rated 4.1/5 across 370+ dining reviews.",
-  "mascot_note": "Quirky name, cheap coffee, Vaishali Nagar staple. The everyday cup, no pretense.",
   "hours": "",
   "seating": [],
   "menu_highlights": [],
@@ -1156,7 +538,7 @@
   ],
   "rating": 2.9,
   "review_count": 27,
-  "popularity_rank": 39,
+  "popularity_rank": 18,
   "url": "https://www.zomato.com/jaipur/cafe-nola-malviya-nagar",
   "authenticity": "Cafe",
   "description": "A café in Malviya Nagar known for coffee and bites. Rated 2.9/5 across 27+ dining reviews.",
@@ -1184,7 +566,7 @@
   ],
   "rating": 3.6,
   "review_count": 122,
-  "popularity_rank": 40,
+  "popularity_rank": 19,
   "url": "https://www.zomato.com/jaipur/jacobs-brew-house-malviya-nagar",
   "authenticity": "Cafe",
   "description": "A café in Malviya Nagar known for Beverages. Rated 3.6/5 across 122+ dining reviews.",
