@@ -91,6 +91,27 @@ EXCLUDED = {
     "gvd-soni-s-cafe-malviya-nagar",  # not good enough for the scrapbook
     "ki-ka-kafe-restaurant-chitrakoot",  # not good enough for the scrapbook
     "mr-jabs-cafe-gopalpura",  # not good enough for the scrapbook
+    "theka-coffee-da-vaishali-nagar",  # not good enough for the scrapbook
+    "indian-coffee-house-mi-road",  # not good enough for the scrapbook
+    "aromocha-gopalpura",  # not good enough for the scrapbook
+    "tea-connect-cafe-mansarovar",  # not good enough for the scrapbook
+    "the-rustic-spot-cafe-mansarovar",  # not good enough for the scrapbook
+    "home-cafe-by-mr-beans-c-scheme",  # permanently closed
+    "nothing-before-coffee-durgapura",  # not good enough for the scrapbook
+    "cafe-quaint-bapu-nagar",  # not good enough for the scrapbook
+    "brown-sugar-restaurant-cafe-bakery-vaishali-nagar",  # not good enough for the scrapbook
+    "chaisa-lal-kothi",  # not good enough for the scrapbook
+    "tapri-ashram-durgapura",  # not good enough for the scrapbook
+    "stepout-cafe-c-scheme",  # not good enough for the scrapbook
+    "nibs-cafe-and-chocolataria-bais-godam",  # not good enough for the scrapbook
+    "brown-sugar-restaurant-cafe-bakery-c-scheme",  # not good enough for the scrapbook
+    "the-eclectica-sodala",  # not good enough for the scrapbook
+    "nibs-experia-c-scheme",  # not good enough for the scrapbook
+    "cafe-lazymojo-malviya-nagar",  # not good enough for the scrapbook
+    "anokhi-cafe-c-scheme",  # not good enough for the scrapbook
+    "on-the-house-c-scheme",  # not good enough for the scrapbook
+    "curious-life-coffee-roasters-sarojini-marg-c-scheme",  # not good enough for the scrapbook
+    "chool-c-scheme",  # not good enough for the scrapbook
 }
 cafes = cafes[~cafes["id"].isin(EXCLUDED)]
 
