@@ -1167,35 +1167,6 @@
   ]
  },
  {
-  "id": "ki-ka-kafe-restaurant-chitrakoot",
-  "name": "Ki & Ka Kafe Restaurant",
-  "area": "Chitrakoot",
-  "price_band": "₹₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [
-   "Chinese",
-   "North Indian"
-  ],
-  "vibe_tags": [
-   "Chinese",
-   "North Indian",
-   "Pure Veg"
-  ],
-  "rating": 4.0,
-  "review_count": 892,
-  "popularity_rank": 40,
-  "url": "https://www.zomato.com/jaipur/ki-ka-kafe-restaurant-chitrakoot",
-  "authenticity": "Café",
-  "description": "A café in Chitrakoot known for Chinese and North Indian. Rated 4.0/5 across 892+ dining reviews.",
-  "mascot_note": "Chinese and North Indian comfort food in Chitrakoot. Hearty, generous portions, family-friendly.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
   "id": "cafe-nola-malviya-nagar",
   "name": "Cafe Nola",
   "area": "Malviya Nagar",
@@ -1209,7 +1180,7 @@
   ],
   "rating": 2.9,
   "review_count": 27,
-  "popularity_rank": 41,
+  "popularity_rank": 40,
   "url": "https://www.zomato.com/jaipur/cafe-nola-malviya-nagar",
   "authenticity": "Cafe",
   "description": "A café in Malviya Nagar known for coffee and bites. Rated 2.9/5 across 27+ dining reviews.",
@@ -1237,7 +1208,7 @@
   ],
   "rating": 3.6,
   "review_count": 122,
-  "popularity_rank": 42,
+  "popularity_rank": 41,
   "url": "https://www.zomato.com/jaipur/jacobs-brew-house-malviya-nagar",
   "authenticity": "Cafe",
   "description": "A café in Malviya Nagar known for Beverages. Rated 3.6/5 across 122+ dining reviews.",
