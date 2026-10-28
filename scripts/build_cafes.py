@@ -84,9 +84,12 @@ cafes = cafes[
 cafes["id"] = cafes.apply(lambda r: slugify(f"{r['Name']}-{r['Location']}"), axis=1)
 cafes = cafes.sort_values("din_count", ascending=False).drop_duplicates("id")
 
-# Permanently closed since the dataset was scraped; keep them out of a rebuild.
-CLOSED = {"corner-house-c-scheme"}
-cafes = cafes[~cafes["id"].isin(CLOSED)]
+# Kept out of a rebuild: closed since the dataset was scraped, or cut by hand.
+EXCLUDED = {
+    "corner-house-c-scheme",   # permanently closed
+    "laziz-pizza-gopalpura",   # not good enough for the scrapbook
+}
+cafes = cafes[~cafes["id"].isin(EXCLUDED)]
 
 # --- popularity: Bayesian weighted rating ------------------------------------
 # score = (v/(v+m))*R + (m/(v+m))*C
