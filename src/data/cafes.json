@@ -1196,35 +1196,6 @@
   ]
  },
  {
-  "id": "laziz-pizza-gopalpura",
-  "name": "Laziz Pizza",
-  "area": "Gopalpura",
-  "price_band": "₹₹",
-  "veg_nonveg": "Veg",
-  "cuisines": [
-   "Italian",
-   "Continental"
-  ],
-  "vibe_tags": [
-   "Italian",
-   "Continental",
-   "Pure Veg"
-  ],
-  "rating": 4.1,
-  "review_count": 1503,
-  "popularity_rank": 41,
-  "url": "https://www.zomato.com/jaipur/laziz-pizza-tonk-road",
-  "authenticity": "Café",
-  "description": "A café in Gopalpura known for Italian and Continental. Rated 4.1/5 across 1,503+ dining reviews.",
-  "mascot_note": "1,500+ reviews of crowd-pleasing pizza and Continental in Gopalpura. Budget-friendly comfort food.",
-  "hours": "",
-  "seating": [],
-  "menu_highlights": [],
-  "images": [
-   "/cafe-placeholder.png"
-  ]
- },
- {
   "id": "ki-ka-kafe-restaurant-chitrakoot",
   "name": "Ki & Ka Kafe Restaurant",
   "area": "Chitrakoot",
@@ -1241,7 +1212,7 @@
   ],
   "rating": 4.0,
   "review_count": 892,
-  "popularity_rank": 42,
+  "popularity_rank": 41,
   "url": "https://www.zomato.com/jaipur/ki-ka-kafe-restaurant-chitrakoot",
   "authenticity": "Café",
   "description": "A café in Chitrakoot known for Chinese and North Indian. Rated 4.0/5 across 892+ dining reviews.",
@@ -1267,7 +1238,7 @@
   ],
   "rating": 2.9,
   "review_count": 27,
-  "popularity_rank": 43,
+  "popularity_rank": 42,
   "url": "https://www.zomato.com/jaipur/cafe-nola-malviya-nagar",
   "authenticity": "Cafe",
   "description": "A café in Malviya Nagar known for coffee and bites. Rated 2.9/5 across 27+ dining reviews.",
@@ -1295,7 +1266,7 @@
   ],
   "rating": 3.6,
   "review_count": 122,
-  "popularity_rank": 44,
+  "popularity_rank": 43,
   "url": "https://www.zomato.com/jaipur/jacobs-brew-house-malviya-nagar",
   "authenticity": "Cafe",
   "description": "A café in Malviya Nagar known for Beverages. Rated 3.6/5 across 122+ dining reviews.",
