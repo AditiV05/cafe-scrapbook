@@ -1,9 +1,9 @@
 {
- "about": "Hand-written content. 'moods' are the home-page spreads: picks are café ids, in the order shown. 'takes' are the Order this / Go when / Skip if notes on each details page; leave a field out and it isn't shown. First drafts are built only from the barista notes and hard facts (pure-veg, price): rewrite them in your own words.",
+ "about": "Hand-written content. 'moods' are the home-page spreads: picks are café ids, in the order shown; sticker is the barista pose on the card (caught, chaos, idle, point, sad, sleep, think1, think2, wave, yay). 'takes' are the Order this / Go when / Skip if notes on each details page; leave a field out and it isn't shown. First drafts are built only from the barista notes and hard facts (pure-veg, price): rewrite them in your own words.",
  "moods": [
   {
    "id": "chai",
-   "emoji": "🍵",
+   "sticker": "idle",
    "title": "Chai & street snacks",
    "note": "Cutting chai, something fried, and nowhere to be. Pull up a chair.",
    "picks": [
@@ -14,7 +14,7 @@
   },
   {
    "id": "coffee",
-   "emoji": "☕",
+   "sticker": "caught",
    "title": "Coffee first",
    "note": "For when the coffee is the point, not the side.",
    "picks": [
@@ -26,7 +26,7 @@
   },
   {
    "id": "date",
-   "emoji": "💐",
+   "sticker": "yay",
    "title": "Dress up for it",
    "note": "Birthdays, anniversaries, first dates you want to go well.",
    "picks": [
@@ -39,7 +39,7 @@
   },
   {
    "id": "group",
-   "emoji": "👯",
+   "sticker": "wave",
    "title": "Big table, no arguments",
    "note": "Six people, six cravings. These menus have something for all of them.",
    "picks": [
@@ -50,7 +50,7 @@
   },
   {
    "id": "sweet",
-   "emoji": "🍰",
+   "sticker": "chaos",
    "title": "Sweet tooth",
    "note": "Skip the mains. Nobody's judging.",
    "picks": [
@@ -62,7 +62,7 @@
   },
   {
    "id": "slow",
-   "emoji": "🌿",
+   "sticker": "sleep",
    "title": "Slow afternoons",
    "note": "Quiet corners for a long brunch, a book, or a catch-up that runs over.",
    "picks": [

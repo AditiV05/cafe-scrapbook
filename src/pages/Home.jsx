@@ -54,6 +54,7 @@ export default function Home() {
   const flashTimer = useRef(0);
   const cancelSettle = useRef(null);
   const lastPick = useRef("");
+  const [filtersOpen, setFiltersOpen] = useState(false);
   // The open mood spread lives in the URL, so it can be shared and the back
   // button closes it.
   const [params, setParams] = useSearchParams();
@@ -137,6 +138,9 @@ export default function Home() {
     setRelaxNote("");
     setBaristaReply("");
   };
+
+  const activeFilters = [selected.area, selected.type, selected.budget].filter(Boolean).length;
+  const showFilters = filtersOpen || activeFilters > 0;
 
   const filtering = !!(
     selected.area || selected.type || selected.budget || keywords.length || query
@@ -240,7 +244,12 @@ export default function Home() {
             <>
               <section className="mb-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
                 <h2 className="font-display text-[clamp(1.3rem,3vw,1.7rem)] font-bold text-deep">
-                  <span aria-hidden="true">{mood.emoji} </span>
+                  <img
+                    src={mood.sticker}
+                    alt=""
+                    aria-hidden="true"
+                    className="mr-1 inline-block h-11 w-11 align-[-0.35em]"
+                  />
                   {mood.title}
                 </h2>
                 <button
@@ -276,30 +285,52 @@ export default function Home() {
                     placeholder="try breakfast, pasta, somewhere to work…"
                     className="handwritten min-w-0 basis-full border-0 border-b-2 border-dashed border-edge-strong bg-transparent px-1 py-2 text-[19px] text-deep placeholder:text-[#A8977F] focus:outline-none focus-visible:border-honey-deep min-[480px]:basis-0 min-[480px]:flex-1 min-[1280px]:max-w-[44rem]"
                   />
+                  {/* Never disabled for an empty box: a faded button read as
+                      broken. Empty, it just puts the cursor in the box. */}
                   <button
-                    onClick={askAi}
-                    disabled={aiLoading || !text.trim()}
-                    className="btn-primary flex-1 rounded-full px-4 py-2.5 text-xs font-bold min-[480px]:flex-none"
+                    onClick={() =>
+                      text.trim() ? askAi() : document.getElementById("search")?.focus()
+                    }
+                    disabled={aiLoading}
+                    className="btn-primary flex-1 whitespace-nowrap rounded-full px-4 py-2.5 text-xs font-bold min-[480px]:flex-none"
                   >
                     {aiLoading ? "…" : "✨ Ask"}
                   </button>
                   <button
                     onClick={surprise}
                     title="Pick a café at random"
-                    className="btn-ghost flex-1 rounded-full px-3 py-2.5 text-xs font-bold min-[480px]:flex-none"
+                    className="btn-ghost flex-1 whitespace-nowrap rounded-full px-3 py-2.5 text-xs font-bold min-[480px]:flex-none"
                   >
                     <span aria-hidden="true" className="text-sm">🎲</span>
                     <span className="ml-1.5">Surprise me</span>
                   </button>
+                  <button
+                    onClick={() => setFiltersOpen((o) => !o)}
+                    aria-expanded={showFilters}
+                    aria-controls="filters"
+                    className={`btn-ghost flex-1 whitespace-nowrap rounded-full px-3 py-2.5 text-xs font-bold min-[480px]:flex-none ${
+                      activeFilters ? "!border-honey-deep" : ""
+                    }`}
+                  >
+                    filters{activeFilters ? ` · ${activeFilters}` : ""}{" "}
+                    <span aria-hidden="true">{showFilters ? "▴" : "▾"}</span>
+                  </button>
                 </div>
 
-                <FilterChips
-                  cafes={cafes}
-                  selected={selected}
-                  onChange={(group, value) =>
-                    setSelected((s) => ({ ...s, [group]: value }))
-                  }
-                />
+                {/* Folded away by default: with this few cafés the moods and
+                    the search box do most of the finding. A filter set by
+                    ✨ Ask still shows, so it can be seen and undone. */}
+                {showFilters && (
+                  <div id="filters">
+                    <FilterChips
+                      cafes={cafes}
+                      selected={selected}
+                      onChange={(group, value) =>
+                        setSelected((s) => ({ ...s, [group]: value }))
+                      }
+                    />
+                  </div>
+                )}
               </section>
 
               {/* What's on the page */}

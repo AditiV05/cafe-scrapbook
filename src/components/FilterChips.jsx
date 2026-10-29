@@ -100,9 +100,14 @@ export default function FilterChips({ cafes, selected, onChange }) {
     ];
   }, [cafes, selected]);
 
+  // Type tags are Zomato's categories ("Fast Food", "Beverages") and say
+  // little about a café, so the row only appears when ✨ Ask has set one,
+  // where it shows what was applied and lets it be cleared.
+  const shown = groups.filter((g) => g.key !== "type" || selected.type);
+
   return (
     <div className="flex flex-col gap-2">
-      {groups.map((g) => (
+      {shown.map((g) => (
         /* items-start, not items-center: when a group wraps to two rows the
            centred label floated between them instead of beside the first. */
         <div key={g.key} className="flex items-start gap-2">

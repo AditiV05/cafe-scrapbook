@@ -746,8 +746,27 @@ body {
 .mood {
   flex: 0 0 min(72vw, 240px);
   scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
   text-align: left;
 }
+.mood__sticker { width: 46px; height: 46px; flex-shrink: 0; margin: -6px 0 -4px -6px; }
+/* The picks' own photos as tiny taped-in polaroids, overlapping like a
+   handful dropped on the page. */
+.mood__snaps { display: flex; padding-left: 4px; }
+.mood__snap {
+  display: block;
+  width: 62px;
+  margin-left: -10px;
+  background: #fff;
+  padding: 3px 3px 9px;
+  box-shadow: 0 1px 3px rgba(90, 60, 25, 0.3);
+}
+.mood__snap:first-child { margin-left: 0; }
+.mood__snap:nth-child(1) { transform: rotate(-5deg); }
+.mood__snap:nth-child(2) { transform: rotate(3deg) translateY(-3px); }
+.mood__snap:nth-child(3) { transform: rotate(-2deg) translateY(1px); }
+.mood__snap img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 @media (min-width: 640px) {
   .mood-row {
     display: grid;
