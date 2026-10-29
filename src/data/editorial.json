@@ -45,7 +45,6 @@
    "picks": [
     "sultanat-malviya-nagar",
     "the-messy-door-shastri-nagar",
-    "decked-up-by-garden-cafe-vaishali-nagar",
     "cafe-bae-bais-godam"
    ]
   },
@@ -67,7 +66,6 @@
    "title": "Slow afternoons",
    "note": "Quiet corners for a long brunch, a book, or a catch-up that runs over.",
    "picks": [
-    "decked-up-by-garden-cafe-vaishali-nagar",
     "love-over-coffee-durgapura",
     "cafe-nola-malviya-nagar",
     "jacobs-brew-house-malviya-nagar"
@@ -95,9 +93,6 @@
   "the-johri-pink-city": {
    "go_when": "A special occasion. Dress up.",
    "skip_if": "You're on a tight budget. It's ₹800+ for two."
-  },
-  "decked-up-by-garden-cafe-vaishali-nagar": {
-   "go_when": "A long weekend brunch."
   },
   "quyu-s-cafe-vaishali-nagar": {
    "order": "Dessert. Save real room for it."
