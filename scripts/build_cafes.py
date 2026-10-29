@@ -112,6 +112,7 @@ EXCLUDED = {
     "on-the-house-c-scheme",  # not good enough for the scrapbook
     "curious-life-coffee-roasters-sarojini-marg-c-scheme",  # not good enough for the scrapbook
     "chool-c-scheme",  # not good enough for the scrapbook
+    "decked-up-by-garden-cafe-vaishali-nagar",  # not good enough for the scrapbook
 }
 cafes = cafes[~cafes["id"].isin(EXCLUDED)]
 
